@@ -1031,4 +1031,29 @@ checking for nl_langinfo and CODESET... yes
 checking for a traditional french locale... none
 checking for a traditional japanese locale... none
 checking for a french Unicode locale... none
-checking for a transitional chinese locale... 
+checking for a transitional chinese locale... none
+checking whether ldexp() can be used without linking with libm... yes
+checking whether imported symbols can be declared weak... yes
+checking for pthread.h... yes
+checking for pthread_kill in -lpthread... yes
+checking whether POSIX threads API is available... yes
+checking for multithread API to use... posix
+checking for a sed that does not truncate output... /usr/bin/sed
+checking whether NAN macro works... yes
+checking whether HUGE_VAL works... yes
+checking for mbstate_t... yes
+checking for mmap... yes
+checking for MAP_ANONYMOUS... yes
+checking whether memchr works... yes
+checking whether <limits.h> defines MIN and MAX... no
+checking whether <sys/param.h> defines MIN and MAX... yes
+checking whether obstack_printf is declared... yes
+checking for O_CLOEXEC... yes
+checking for promoted mode_t type... mode_t
+checking whether strerror(0) succeeds... yes
+checking for strerror_r with POSIX signature... no
+checking whether __xpg_strerror_r works... yes
+checking for library containing posix_spawn... none required
+checking for posix_spawn... yes
+checking whether posix_spawn is declared... yes
+checking whether posix_spawn works... 
