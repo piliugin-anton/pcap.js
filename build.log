@@ -1056,4 +1056,1254 @@ checking whether __xpg_strerror_r works... yes
 checking for library containing posix_spawn... none required
 checking for posix_spawn... yes
 checking whether posix_spawn is declared... yes
-checking whether posix_spawn works... 
+checking whether posix_spawn works... yes
+checking whether posix_spawn rejects scripts without shebang... yes
+checking whether posix_spawnp rejects scripts without shebang... yes
+checking whether posix_spawnattr_setschedpolicy is supported... yes
+checking whether posix_spawnattr_setschedparam is supported... yes
+checking for ptrdiff_t... yes
+checking whether C symbols are prefixed with underscore at the linker level... no
+checking for sigset_t... yes
+checking for shared library path variable... LD_LIBRARY_PATH
+checking whether to activate relocatable installation... no
+checking whether malloc (0) returns nonnull... yes
+checking whether setenv is declared... yes
+checking for sched.h... yes
+checking for struct sched_param... yes
+checking for uid_t in sys/types.h... yes
+checking for volatile sig_atomic_t... yes
+checking for sighandler_t... yes
+checking whether snprintf is declared... yes
+checking for posix_spawnattr_t... yes
+checking for posix_spawn_file_actions_t... yes
+checking whether stat file-mode macros are broken... no
+checking for nlink_t... yes
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking for good max_align_t... yes
+checking whether NULL can be used in arbitrary expressions... yes
+checking whether fcloseall is declared... yes
+checking which flavor of printf attribute matches inttypes macros... system
+checking whether ecvt is declared... yes
+checking whether fcvt is declared... yes
+checking whether gcvt is declared... yes
+checking whether stpncpy is declared... yes
+checking whether strdup is declared... yes
+checking whether strndup is declared... yes
+checking whether <sys/ioctl.h> declares ioctl... yes
+checking for struct tms... yes
+checking for struct timespec in <time.h>... yes
+checking for TIME_UTC in <time.h>... yes
+checking whether execvpe is declared... yes
+checking whether clearerr_unlocked is declared... yes
+checking whether feof_unlocked is declared... yes
+checking whether ferror_unlocked is declared... yes
+checking whether fflush_unlocked is declared... yes
+checking whether fgets_unlocked is declared... yes
+checking whether fputc_unlocked is declared... yes
+checking whether fputs_unlocked is declared... yes
+checking whether fread_unlocked is declared... yes
+checking whether fwrite_unlocked is declared... yes
+checking whether getc_unlocked is declared... yes
+checking whether getchar_unlocked is declared... yes
+checking whether putc_unlocked is declared... yes
+checking whether putchar_unlocked is declared... yes
+checking whether unsetenv is declared... yes
+checking whether vsnprintf is declared... yes
+checking whether <wchar.h> uses 'inline' correctly... yes
+checking whether wcsdup is declared... yes
+checking POSIX termios... yes
+checking whether use of TIOCGWINSZ requires termios.h... no
+checking whether fchdir is declared... yes
+checking whether getdelim is declared... yes
+checking whether getdtablesize is declared... yes
+checking whether getline is declared... yes
+checking whether setlocale (LC_ALL, NULL) is multithread-safe... yes
+checking whether setlocale (category, NULL) is multithread-safe... yes
+checking whether locale.h defines locale_t... yes
+checking whether locale.h conforms to POSIX:2001... yes
+checking whether struct lconv is properly defined... yes
+checking whether memrchr is declared... yes
+checking whether strnlen is declared... yes
+checking for alloca as a compiler built-in... yes
+checking whether to enable assertions... yes
+checking for __builtin_expect... yes
+checking whether calloc (0, n) and calloc (n, 0) return nonnull... yes
+checking for library containing clock_gettime... none required
+checking for clock_gettime... yes
+checking for clock_settime... yes
+checking whether // is distinct from /... (cached) no
+checking whether dup2 works... yes
+checking for error_at_line... yes
+checking whether fcntl handles F_DUPFD correctly... yes
+checking whether fcntl understands F_DUPFD_CLOEXEC... needs runtime check
+checking whether conversion from 'int' to 'long double' works... yes
+checking whether fopen recognizes a trailing slash... yes
+checking whether fopen supports the mode character 'x'... yes
+checking whether fopen supports the mode character 'e'... yes
+checking for __fpending... yes
+checking whether __fpending is declared... yes
+checking for ptrdiff_t... (cached) yes
+checking whether free is known to preserve errno... yes
+checking whether frexp works... yes
+checking whether frexpl is declared... yes
+checking whether frexpl() can be used without linking with libm... yes
+checking whether frexpl works... yes
+checking whether getcwd handles long file names properly... yes
+checking for getpagesize... yes
+checking whether getcwd succeeds when 4k < cwd_length < 16k... yes
+checking whether gethrtime is declared... no
+checking whether CLOCK_MONOTONIC or CLOCK_REALTIME is defined... yes
+checking whether program_invocation_name is declared... yes
+checking whether program_invocation_short_name is declared... yes
+checking whether __argv is declared... no
+checking for gettimeofday with POSIX signature... yes
+checking whether the compiler generally respects inline... yes
+checking whether isnan macro works... yes
+checking whether isnan(double) can be used without linking with libm... (cached) yes
+checking whether isnan(double) can be used without linking with libm... (cached) yes
+checking whether isnan(float) can be used without linking with libm... (cached) yes
+checking whether isnan(float) works... (cached) yes
+checking whether isnan(long double) can be used without linking with libm... (cached) yes
+checking whether isnanl works... (cached) yes
+checking whether isnan(long double) can be used without linking with libm... (cached) yes
+checking whether isnanl works... (cached) yes
+checking whether iswblank is declared... yes
+checking whether iswdigit is ISO C compliant... guessing yes
+checking whether iswxdigit is ISO C compliant... guessing yes
+checking whether ldexpl is declared... yes
+checking whether ldexpl() can be used without linking with libm... yes
+checking whether ldexpl works... yes
+checking whether the compiler supports the __inline keyword... yes
+checking for pthread_rwlock_t... yes
+checking whether pthread_rwlock_rdlock prefers a writer to a reader... no
+checking whether malloc (0) returns nonnull... (cached) yes
+checking whether mbrtowc handles incomplete characters... guessing yes
+checking whether mbrtowc works as well as mbtowc... guessing yes
+checking whether mbrtowc handles a NULL pwc argument... guessing yes
+checking whether mbrtowc handles a NULL string argument... guessing yes
+checking whether mbrtowc has a correct return value... guessing yes
+checking whether mbrtowc returns 0 when parsing a NUL character... guessing yes
+checking whether mbrtowc stores incomplete characters... guessing no
+checking whether mbrtowc works on empty input... yes
+checking whether the C locale is free of encoding errors... no
+checking whether mbrtowc handles incomplete characters... (cached) guessing yes
+checking whether mbrtowc works as well as mbtowc... (cached) guessing yes
+checking whether mbswidth is declared in <wchar.h>... no
+checking for mbstate_t... (cached) yes
+checking for mempcpy... (cached) yes
+checking for obstacks that work with any size object... no
+checking whether open recognizes a trailing slash... yes
+checking whether perror matches strerror... yes
+checking whether posix_spawn_file_actions_addclose works... yes
+checking whether posix_spawn_file_actions_adddup2 works... yes
+checking whether posix_spawn_file_actions_addopen works... yes
+checking whether frexp works... (cached) yes
+checking whether ldexp can be used without linking with libm... (cached) yes
+checking whether frexpl() can be used without linking with libm... (cached) yes
+checking whether frexpl works... (cached) yes
+checking whether frexpl is declared... (cached) yes
+checking whether ldexpl() can be used without linking with libm... (cached) yes
+checking whether ldexpl works... (cached) yes
+checking whether ldexpl is declared... (cached) yes
+checking whether program_invocation_name is declared... (cached) yes
+checking whether program_invocation_short_name is declared... (cached) yes
+checking for raise... yes
+checking for sigprocmask... yes
+checking for rawmemchr... yes
+checking for readline... no
+checking for readline/readline.h... no
+checking for readline/history.h... no
+checking whether readlink signature is correct... yes
+checking whether readlink handles trailing slash correctly... yes
+checking whether readlink truncates results correctly... yes
+checking whether realloc (0, 0) returns nonnull... yes
+checking for reallocarray... yes
+checking for getcwd... (cached) yes
+checking whether free is known to preserve errno... (cached) yes
+checking for mempcpy... (cached) yes
+checking for rawmemchr... (cached) yes
+checking for search.h... yes
+checking for tsearch... yes
+checking whether rename honors trailing slash on destination... yes
+checking whether rename honors trailing slash on source... yes
+checking whether rename manages hard links correctly... yes
+checking whether rename manages existing destinations correctly... yes
+checking for struct sigaction.sa_sigaction... yes
+checking for signbit macro... yes
+checking for signbit compiler built-ins... yes
+checking for sigprocmask... (cached) yes
+checking for stdint.h... (cached) yes
+checking for SIZE_MAX... yes
+checking for snprintf... (cached) yes
+checking whether snprintf respects a size of 1... yes
+checking whether printf supports POSIX/XSI format strings with positions... (cached) yes
+checking for snprintf... (cached) yes
+checking whether snprintf fully supports the 'n' directive... no
+checking whether snprintf respects a size of 1... (cached) yes
+checking whether vsnprintf respects a zero size as in C99... yes
+checking for ptrdiff_t... (cached) yes
+checking for ptrdiff_t... (cached) yes
+checking for ssize_t... yes
+checking whether stat handles trailing slashes on files... yes
+checking for working stdalign.h... yes
+checking for stpcpy... yes
+checking for working stpncpy... yes
+checking for working strerror function... yes
+checking for working strndup... yes
+checking whether strtod obeys C99... yes
+checking for strverscmp... yes
+checking for sys/single_threaded.h... yes
+checking whether unlink honors trailing slashes... yes
+checking whether unlink of a parent directory fails as it should... guessing yes
+checking for unsetenv... yes
+checking for unsetenv() return type... int
+checking whether unsetenv obeys POSIX... yes
+checking for ptrdiff_t... (cached) yes
+checking for vasprintf... yes
+checking for vasprintf... (cached) yes
+checking for ptrdiff_t... (cached) yes
+checking for vsnprintf... yes
+checking whether snprintf respects a size of 1... (cached) yes
+checking whether printf supports POSIX/XSI format strings with positions... (cached) yes
+checking for vsnprintf... (cached) yes
+checking whether snprintf fully supports the 'n' directive... (cached) no
+checking whether snprintf respects a size of 1... (cached) yes
+checking whether vsnprintf respects a zero size as in C99... (cached) yes
+checking for ptrdiff_t... (cached) yes
+checking for ptrdiff_t... (cached) yes
+checking for waitid... yes
+checking whether wcwidth is declared... yes
+checking whether wcwidth works reasonably in UTF-8 locales... yes
+checking whether use of TIOCGWINSZ requires sys/ioctl.h... yes
+checking whether use of TIOCGWINSZ requires termios.h... (cached) no
+checking whether use of struct winsize requires sys/ptem.h... no
+checking for stdint.h... (cached) yes
+checking whether getdtablesize works... yes
+checking whether setlocale (LC_ALL, NULL) is multithread-safe... (cached) yes
+checking whether setlocale (category, NULL) is multithread-safe... (cached) yes
+checking for ptrdiff_t... (cached) yes
+checking for getline... yes
+checking for working getline function... yes
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for CFPreferencesCopyAppValue... no
+checking for CFLocaleCopyCurrent... no
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking for valgrind... no
+checking Valgrind suppression file... 
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating src/yacc
+config.status: creating javacomp.sh
+config.status: creating javaexec.sh
+config.status: creating gnulib-po/Makefile.in
+config.status: creating runtime-po/Makefile.in
+config.status: creating etc/bench.pl
+config.status: creating tests/atlocal
+config.status: creating tests/bison
+config.status: creating Makefile
+config.status: creating po/Makefile.in
+config.status: creating doc/yacc.1
+config.status: creating lib/config.h
+config.status: linking /home/anton/Documents/pcap.js/build/bison/src/bison/GNUmakefile to GNUmakefile
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating gnulib-po/POTFILES
+config.status: creating gnulib-po/Makefile
+config.status: creating runtime-po/POTFILES
+config.status: creating runtime-po/Makefile
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+config.status: executing tests/atconfig commands
+cd /home/anton/Documents/pcap.js/build/bison/src/bison-build && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/bison-configure
+[ 38%] Performing build step for 'bison'
+cd /home/anton/Documents/pcap.js/build/bison/src/bison-build && /usr/bin/gmake
+gmake[3]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+  LEX      examples/c/reccalc/scan.stamp
+  GEN      lib/alloca.h
+  GEN      lib/configmake.h
+  GEN      lib/fcntl.h
+  GEN      lib/iconv.h
+  GEN      lib/inttypes.h
+  GEN      lib/textstyle.h
+  GEN      lib/limits.h
+  GEN      lib/locale.h
+  GEN      lib/math.h
+  GEN      lib/sched.h
+  GEN      lib/malloc/scratch_buffer.gl.h
+  GEN      lib/signal.h
+  GEN      lib/spawn.h
+  GEN      lib/stdio.h
+  GEN      lib/stdlib.h
+  GEN      lib/string.h
+  GEN      lib/sys/ioctl.h
+  GEN      lib/sys/resource.h
+  GEN      lib/sys/stat.h
+  GEN      lib/sys/time.h
+  GEN      lib/sys/times.h
+  GEN      lib/sys/types.h
+  GEN      lib/sys/wait.h
+  GEN      lib/termios.h
+  GEN      lib/time.h
+  GEN      lib/unistd.h
+  GEN      lib/unistr.h
+  GEN      lib/unitypes.h
+  GEN      lib/uniwidth.h
+  GEN      lib/wchar.h
+  GEN      lib/wctype.h
+/usr/bin/gmake  all-recursive
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+Making all in po
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/po'
+gmake[5]: Nothing to be done for 'all'.
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/po'
+Making all in runtime-po
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/runtime-po'
+gmake[5]: Nothing to be done for 'all'.
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/runtime-po'
+Making all in gnulib-po
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/gnulib-po'
+gmake[5]: Nothing to be done for 'all'.
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/gnulib-po'
+Making all in .
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+  CC       src/bison-AnnotationList.o
+  CC       src/bison-InadequacyList.o
+  CC       src/bison-Sbitset.o
+  CC       src/bison-assoc.o
+  CC       src/bison-closure.o
+  CC       src/bison-complain.o
+  CC       src/bison-conflicts.o
+  CC       src/bison-counterexample.o
+  CC       src/bison-derivation.o
+  CC       src/bison-derives.o
+  CC       src/bison-files.o
+  CC       src/bison-fixits.o
+  CC       src/bison-getargs.o
+  CC       src/bison-glyphs.o
+  CC       src/bison-gram.o
+  CC       src/bison-graphviz.o
+  CC       src/bison-ielr.o
+  CC       src/bison-lalr.o
+  CC       src/bison-location.o
+  CC       src/bison-lr0.o
+  CC       src/bison-lssi.o
+  CC       src/bison-main.o
+  CC       src/bison-muscle-tab.o
+  CC       src/bison-named-ref.o
+  CC       src/bison-nullable.o
+  CC       src/bison-output.o
+  CC       src/bison-parse-gram.o
+  CC       src/bison-parse-simulation.o
+  CC       src/bison-print-graph.o
+  CC       src/bison-print-xml.o
+  CC       src/bison-print.o
+  CC       src/bison-reader.o
+  CC       src/bison-reduce.o
+  CC       src/bison-relation.o
+  CC       src/bison-scan-code-c.o
+  CC       src/bison-scan-gram-c.o
+  CC       src/bison-scan-skel-c.o
+  CC       src/bison-state.o
+  CC       src/bison-state-item.o
+  CC       src/bison-strversion.o
+  CC       src/bison-symlist.o
+  CC       src/bison-symtab.o
+  CC       src/bison-tables.o
+  CC       src/bison-uniqstr.o
+  CC       lib/libbison_a-allocator.o
+  CC       lib/libbison_a-areadlink.o
+  CC       lib/libbison_a-argmatch.o
+  CC       lib/libbison_a-gl_array_list.o
+  CC       lib/libbison_a-basename-lgpl.o
+  CC       lib/libbison_a-binary-io.o
+  CC       lib/libbison_a-bitrotate.o
+  CC       lib/libbison_a-bitset.o
+  CC       lib/bitset/libbison_a-array.o
+  CC       lib/bitset/libbison_a-stats.o
+  CC       lib/bitset/libbison_a-table.o
+  CC       lib/bitset/libbison_a-list.o
+  CC       lib/bitset/libbison_a-vector.o
+  CC       lib/libbison_a-bitsetv.o
+  CC       lib/libbison_a-c-ctype.o
+  CC       lib/libbison_a-c-strcasecmp.o
+  CC       lib/libbison_a-c-strncasecmp.o
+  CC       lib/libbison_a-canonicalize.o
+  CC       lib/libbison_a-careadlinkat.o
+  CC       lib/libbison_a-cloexec.o
+  CC       lib/libbison_a-close-stream.o
+  CC       lib/libbison_a-closeout.o
+  CC       lib/libbison_a-concat-filename.o
+  CC       lib/libbison_a-dirname.o
+  CC       lib/libbison_a-basename.o
+  CC       lib/libbison_a-dirname-lgpl.o
+  CC       lib/libbison_a-stripslash.o
+  CC       lib/libbison_a-execute.o
+  CC       lib/libbison_a-exitfail.o
+  CC       lib/libbison_a-fatal-signal.o
+  CC       lib/libbison_a-fd-safer-flag.o
+  CC       lib/libbison_a-dup-safer-flag.o
+  CC       lib/libbison_a-file-set.o
+  CC       lib/libbison_a-findprog-in.o
+  CC       lib/libbison_a-fopen-safer.o
+  CC       lib/libbison_a-fstrcmp.o
+  CC       lib/libbison_a-gethrxtime.o
+  CC       lib/libbison_a-xtime.o
+  CC       lib/libbison_a-getprogname.o
+  CC       lib/libbison_a-gettime.o
+  CC       lib/libbison_a-hard-locale.o
+  CC       lib/libbison_a-hash.o
+  CC       lib/libbison_a-gl_hash_map.o
+  CC       lib/libbison_a-hash-pjw.o
+  CC       lib/libbison_a-hash-triple-simple.o
+  CC       lib/libbison_a-ialloc.o
+  CC       lib/libbison_a-integer_length.o
+  CC       lib/libbison_a-integer_length_l.o
+  CC       lib/libbison_a-gl_linked_list.o
+  CC       lib/libbison_a-gl_list.o
+  CC       lib/libbison_a-localcharset.o
+  CC       lib/glthread/libbison_a-lock.o
+  CC       lib/libbison_a-gl_map.o
+  CC       lib/libbison_a-math.o
+  CC       lib/libbison_a-mbchar.o
+  CC       lib/libbison_a-mbfile.o
+  CC       lib/libbison_a-mbswidth.o
+  CC       lib/libbison_a-gl_oset.o
+  CC       lib/libbison_a-pipe2.o
+  CC       lib/libbison_a-pipe2-safer.o
+  CC       lib/libbison_a-printf-frexp.o
+  CC       lib/libbison_a-printf-frexpl.o
+  CC       lib/libbison_a-progname.o
+  CC       lib/libbison_a-quotearg.o
+  CC       lib/libbison_a-gl_rbtree_oset.o
+  CC       lib/libbison_a-gl_rbtreehash_list.o
+  CC       lib/malloc/libbison_a-scratch_buffer_dupfree.o
+  CC       lib/malloc/libbison_a-scratch_buffer_grow.o
+  CC       lib/malloc/libbison_a-scratch_buffer_grow_preserve.o
+  CC       lib/malloc/libbison_a-scratch_buffer_set_array_size.o
+  CC       lib/libbison_a-setlocale_null.o
+  CC       lib/libbison_a-sig-handler.o
+  CC       lib/libbison_a-spawn-pipe.o
+  CC       lib/glthread/libbison_a-threadlib.o
+  CC       lib/libbison_a-timespec.o
+  CC       lib/libbison_a-timevar.o
+  CC       lib/glthread/libbison_a-tls.o
+  CC       lib/libbison_a-unicodeio.o
+  CC       lib/libbison_a-unistd.o
+  CC       lib/libbison_a-dup-safer.o
+  CC       lib/libbison_a-fd-safer.o
+  CC       lib/libbison_a-pipe-safer.o
+  CC       lib/unistr/libbison_a-u8-mbtoucr.o
+  CC       lib/unistr/libbison_a-u8-uctomb.o
+  CC       lib/unistr/libbison_a-u8-uctomb-aux.o
+  CC       lib/uniwidth/libbison_a-width.o
+  CC       lib/libbison_a-wait-process.o
+  CC       lib/libbison_a-wctype-h.o
+  CC       lib/libbison_a-xmalloc.o
+  CC       lib/libbison_a-xalloc-die.o
+  CC       lib/libbison_a-xconcat-filename.o
+  CC       lib/libbison_a-xhash.o
+  CC       lib/libbison_a-gl_xlist.o
+  CC       lib/libbison_a-gl_xmap.o
+  CC       lib/libbison_a-xmemdup0.o
+  CC       lib/libbison_a-xreadlink.o
+  CC       lib/libbison_a-xsize.o
+  CC       lib/libbison_a-xstrndup.o
+  CC       lib/libbison_a-get-errno.o
+  CC       lib/libbison_a-path-join.o
+  CC       lib/libbison_a-asnprintf.o
+  CC       lib/libbison_a-asprintf.o
+  CC       lib/libbison_a-fcntl.o
+  CC       lib/libbison_a-fprintf.o
+  CC       lib/libbison_a-fseterr.o
+  CC       lib/libbison_a-mbrtowc.o
+  CC       lib/libbison_a-obstack.o
+  CC       lib/libbison_a-printf.o
+  CC       lib/libbison_a-printf-args.o
+  CC       lib/libbison_a-printf-parse.o
+  CC       lib/libbison_a-readline.o
+  CC       lib/libbison_a-snprintf.o
+  CC       lib/libbison_a-spawn_faction_addchdir.o
+  CC       lib/libbison_a-sprintf.o
+  CC       lib/libbison_a-vasnprintf.o
+  CC       lib/libbison_a-vasprintf.o
+  CC       lib/libbison_a-vfprintf.o
+  CC       lib/libbison_a-vsnprintf.o
+  CC       lib/libbison_a-vsprintf.o
+  AR       lib/libbison.a
+  CCLD     src/bison
+  GEN      /home/anton/Documents/pcap.js/build/bison/src/bison/doc/bison.help
+  CC       lib/main.o
+  CC       lib/yyerror.o
+  AR       lib/liby.a
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+gmake[3]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+cd /home/anton/Documents/pcap.js/build/bison/src/bison-build && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/bison-build
+[ 41%] Performing install step for 'bison'
+cd /home/anton/Documents/pcap.js/build/bison/src/bison-build && /usr/bin/gmake install
+gmake[3]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+/usr/bin/gmake  install-recursive
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+Making install in po
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/po'
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/bg.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/bg/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/ca.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ca/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/da.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/da/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/de.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/de/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/el.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/el/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/eo.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/eo/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/es.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/es/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/et.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/et/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/fi.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/fi/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/fr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/fr/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/ga.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ga/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/hr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/hr/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/id.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/id/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/it.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/it/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/ja.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ja/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/ms.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ms/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/nb.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/nb/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/nl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/nl/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/pl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pl/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/pt.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pt/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/pt_BR.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pt_BR/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/ro.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ro/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/ru.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ru/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/sr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sr/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/sv.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sv/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/tr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/tr/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/uk.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/uk/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/vi.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/vi/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/zh_CN.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/zh_CN/LC_MESSAGES/bison.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/po/zh_TW.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/zh_TW/LC_MESSAGES/bison.mo
+if test "bison" = "gettext-tools"; then \
+  /usr/bin/mkdir -p /home/anton/Documents/pcap.js/build/install/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/po/$file \
+		    /home/anton/Documents/pcap.js/build/install/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /home/anton/Documents/pcap.js/build/install/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/po'
+Making install in runtime-po
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/runtime-po'
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/ast.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ast/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/bg.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/bg/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/ca.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ca/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/da.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/da/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/de.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/de/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/el.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/el/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/eo.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/eo/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/es.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/es/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/et.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/et/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/fi.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/fi/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/fr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/fr/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/ga.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ga/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/gl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/gl/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/hr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/hr/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/hu.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/hu/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/ia.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ia/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/id.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/id/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/it.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/it/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/ja.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ja/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/ky.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ky/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/lt.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/lt/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/lv.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/lv/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/ms.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ms/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/nb.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/nb/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/nl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/nl/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/pl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pl/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/pt.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pt/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/pt_BR.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pt_BR/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/ro.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ro/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/ru.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ru/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/sl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sl/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/sq.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sq/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/sr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sr/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/sv.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sv/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/ta.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ta/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/th.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/th/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/tr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/tr/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/uk.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/uk/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/vi.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/vi/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/zh_CN.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/zh_CN/LC_MESSAGES/bison-runtime.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/zh_TW.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/zh_TW/LC_MESSAGES/bison-runtime.mo
+if test "bison" = "gettext-tools"; then \
+  /usr/bin/mkdir -p /home/anton/Documents/pcap.js/build/install/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/runtime-po/$file \
+		    /home/anton/Documents/pcap.js/build/install/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /home/anton/Documents/pcap.js/build/install/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/runtime-po'
+Making install in gnulib-po
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/gnulib-po'
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/af.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/af/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/be.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/be/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/bg.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/bg/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/ca.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ca/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/cs.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/cs/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/da.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/da/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/de.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/de/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/el.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/el/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/eo.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/eo/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/es.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/es/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/et.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/et/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/eu.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/eu/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/fi.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/fi/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/fr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/fr/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/ga.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ga/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/gl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/gl/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/hu.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/hu/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/it.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/it/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/ja.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ja/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/ko.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ko/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/ms.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ms/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/nb.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/nb/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/nl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/nl/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/pl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pl/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/pt.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pt/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/pt_BR.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pt_BR/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/ro.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ro/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/ru.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ru/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/rw.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/rw/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/sk.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sk/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/sl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sl/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/sr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sr/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/sv.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sv/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/tr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/tr/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/uk.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/uk/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/vi.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/vi/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/zh_CN.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/zh_CN/LC_MESSAGES/bison-gnulib.mo
+installing /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/zh_TW.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/zh_TW/LC_MESSAGES/bison-gnulib.mo
+if test "bison" = "gettext-tools"; then \
+  /usr/bin/mkdir -p /home/anton/Documents/pcap.js/build/install/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/gnulib-po/$file \
+		    /home/anton/Documents/pcap.js/build/install/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /home/anton/Documents/pcap.js/build/install/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build/gnulib-po'
+Making install in .
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+  GEN      /home/anton/Documents/pcap.js/build/bison/src/bison/doc/bison.help
+gmake[6]: Entering directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/bin'
+  /usr/bin/install -c src/bison '/home/anton/Documents/pcap.js/build/install/bin'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/lib'
+ /usr/bin/install -c -m 644  lib/liby.a '/home/anton/Documents/pcap.js/build/install/lib'
+ ( cd '/home/anton/Documents/pcap.js/build/install/lib' && ranlib liby.a )
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/bin'
+ /usr/bin/install -c src/yacc '/home/anton/Documents/pcap.js/build/install/bin'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/aclocal'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/m4/bison-i18n.m4 '/home/anton/Documents/pcap.js/build/install/share/aclocal'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c++/calc++'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/calc++/driver.cc /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/calc++/driver.hh /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/calc++/scanner.ll /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/calc++/calc++.cc /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/calc++/parser.yy '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c++/calc++'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c++'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/simple.yy '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c++'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/bistromathic'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/bistromathic/parse.y /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/bistromathic/Makefile /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/bistromathic/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/bistromathic'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/calc'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/calc/calc.y /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/calc/Makefile /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/calc/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/calc'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/d/calc'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/d/calc/calc.y /home/anton/Documents/pcap.js/build/bison/src/bison/examples/d/calc/Makefile '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/d/calc'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c++/calc++'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/calc++/README.md /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/calc++/Makefile '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c++/calc++'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c++'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/README.md /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/Makefile /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/variant.yy /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c++/variant-11.yy '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c++'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/d'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/d/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/d'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/AUTHORS /home/anton/Documents/pcap.js/build/bison/src/bison/COPYING /home/anton/Documents/pcap.js/build/bison/src/bison/NEWS /home/anton/Documents/pcap.js/build/bison/src/bison/README /home/anton/Documents/pcap.js/build/bison/src/bison/THANKS /home/anton/Documents/pcap.js/build/bison/src/bison/TODO '/home/anton/Documents/pcap.js/build/install/share/doc/bison'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/glr'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/glr/c++-types.y /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/glr/Makefile /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/glr/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/glr'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/java'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/java/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/java'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/java/calc'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/java/calc/Calc.y /home/anton/Documents/pcap.js/build/bison/src/bison/examples/java/calc/Makefile '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/java/calc'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/java/simple'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/java/simple/Calc.y /home/anton/Documents/pcap.js/build/bison/src/bison/examples/java/simple/Makefile '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/java/simple'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/lexcalc'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/lexcalc/parse.y /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/lexcalc/scan.l /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/lexcalc/Makefile /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/lexcalc/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/lexcalc'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/bison/m4sugar'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/data/m4sugar/foreach.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/m4sugar/m4sugar.m4 '/home/anton/Documents/pcap.js/build/install/share/bison/m4sugar'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/mfcalc'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/mfcalc/Makefile '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/mfcalc'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/bison'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/data/README.md /home/anton/Documents/pcap.js/build/bison/src/bison/data/bison-default.css '/home/anton/Documents/pcap.js/build/install/share/bison'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/pushcalc'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/pushcalc/calc.y /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/pushcalc/Makefile /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/pushcalc/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/pushcalc'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/reccalc'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/reccalc/parse.y /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/reccalc/scan.l /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/reccalc/Makefile /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/reccalc/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/reccalc'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/rpcalc'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/rpcalc/Makefile '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/rpcalc'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/d/simple'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/d/simple/calc.y /home/anton/Documents/pcap.js/build/bison/src/bison/examples/d/simple/Makefile '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/d/simple'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/bison/skeletons'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/bison.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/c++-skel.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/c++.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/c-like.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/c-skel.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/c.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/glr.c /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/glr.cc /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/glr2.cc /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/java-skel.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/java.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/lalr1.cc /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/lalr1.java /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/location.cc /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/stack.hh /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/traceon.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/variant.hh /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/yacc.c /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/d-skel.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/d.m4 /home/anton/Documents/pcap.js/build/bison/src/bison/data/skeletons/lalr1.d '/home/anton/Documents/pcap.js/build/install/share/bison/skeletons'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/bison/xslt'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/data/xslt/bison.xsl /home/anton/Documents/pcap.js/build/bison/src/bison/data/xslt/xml2dot.xsl /home/anton/Documents/pcap.js/build/bison/src/bison/data/xslt/xml2text.xsl /home/anton/Documents/pcap.js/build/bison/src/bison/data/xslt/xml2xhtml.xsl '/home/anton/Documents/pcap.js/build/install/share/bison/xslt'
+  GEN      /home/anton/Documents/pcap.js/build/bison/src/bison/doc/bison.help
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/info'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/doc/bison.info '/home/anton/Documents/pcap.js/build/install/share/info'
+ install-info --info-dir='/home/anton/Documents/pcap.js/build/install/share/info' '/home/anton/Documents/pcap.js/build/install/share/info/bison.info'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/man/man1'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/doc/bison.1 doc/yacc.1 '/home/anton/Documents/pcap.js/build/install/share/man/man1'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/mfcalc'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/mfcalc/calc.h /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/mfcalc/mfcalc.y '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/mfcalc'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/rpcalc'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/bison/src/bison/examples/c/rpcalc/rpcalc.y '/home/anton/Documents/pcap.js/build/install/share/doc/bison/examples/c/rpcalc'
+gmake[6]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+gmake[3]: Leaving directory '/home/anton/Documents/pcap.js/build/bison/src/bison-build'
+cd /home/anton/Documents/pcap.js/build/bison/src/bison-build && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/bison-install
+[ 44%] Completed 'bison'
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/CMakeFiles
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/CMakeFiles/bison-complete
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/bison-done
+gmake[2]: Leaving directory '/home/anton/Documents/pcap.js/build'
+[ 44%] Built target bison
+/usr/bin/gmake  -f CMakeFiles/libnl.dir/build.make CMakeFiles/libnl.dir/depend
+gmake[2]: Entering directory '/home/anton/Documents/pcap.js/build'
+cd /home/anton/Documents/pcap.js/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/anton/Documents/pcap.js /home/anton/Documents/pcap.js /home/anton/Documents/pcap.js/build /home/anton/Documents/pcap.js/build /home/anton/Documents/pcap.js/build/CMakeFiles/libnl.dir/DependInfo.cmake --color=
+gmake[2]: Leaving directory '/home/anton/Documents/pcap.js/build'
+/usr/bin/gmake  -f CMakeFiles/libnl.dir/build.make CMakeFiles/libnl.dir/build
+gmake[2]: Entering directory '/home/anton/Documents/pcap.js/build'
+[ 47%] Creating directories for 'libnl'
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/libnl/src/libnl
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/libnl/src/libnl-build
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/libnl
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/libnl/tmp
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/libnl/src/libnl-stamp
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/libnl/src
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/libnl/src/libnl-stamp
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/libnl/src/libnl-stamp/libnl-mkdir
+[ 50%] Performing download step (download, verify and extract) for 'libnl'
+cd /home/anton/Documents/pcap.js/build/libnl/src && /usr/bin/cmake -P /home/anton/Documents/pcap.js/build/libnl/src/libnl-stamp/download-libnl.cmake
+-- Downloading...
+   dst='/home/anton/Documents/pcap.js/build/libnl/src/libnl-3.7.0.tar.gz'
+   timeout='none'
+   inactivity timeout='none'
+-- Using src='https://github.com/thom311/libnl/releases/download/libnl3_7_0/libnl-3.7.0.tar.gz'
+-- [download 0% complete]
+-- [download 1% complete]
+-- [download 2% complete]
+-- [download 4% complete]
+-- [download 5% complete]
+-- [download 6% complete]
+-- [download 7% complete]
+-- [download 8% complete]
+-- [download 10% complete]
+-- [download 11% complete]
+-- [download 13% complete]
+-- [download 15% complete]
+-- [download 16% complete]
+-- [download 18% complete]
+-- [download 20% complete]
+-- [download 21% complete]
+-- [download 23% complete]
+-- [download 24% complete]
+-- [download 26% complete]
+-- [download 28% complete]
+-- [download 29% complete]
+-- [download 31% complete]
+-- [download 33% complete]
+-- [download 34% complete]
+-- [download 36% complete]
+-- [download 38% complete]
+-- [download 39% complete]
+-- [download 41% complete]
+-- [download 42% complete]
+-- [download 44% complete]
+-- [download 46% complete]
+-- [download 47% complete]
+-- [download 48% complete]
+-- [download 50% complete]
+-- [download 51% complete]
+-- [download 53% complete]
+-- [download 55% complete]
+-- [download 56% complete]
+-- [download 58% complete]
+-- [download 59% complete]
+-- [download 61% complete]
+-- [download 63% complete]
+-- [download 64% complete]
+-- [download 66% complete]
+-- [download 68% complete]
+-- [download 69% complete]
+-- [download 71% complete]
+-- [download 73% complete]
+-- [download 74% complete]
+-- [download 76% complete]
+-- [download 77% complete]
+-- [download 79% complete]
+-- [download 81% complete]
+-- [download 82% complete]
+-- [download 84% complete]
+-- [download 86% complete]
+-- [download 87% complete]
+-- [download 89% complete]
+-- [download 91% complete]
+-- [download 92% complete]
+-- [download 94% complete]
+-- [download 96% complete]
+-- [download 97% complete]
+-- [download 99% complete]
+-- [download 100% complete]
+-- verifying file...
+       file='/home/anton/Documents/pcap.js/build/libnl/src/libnl-3.7.0.tar.gz'
+-- Downloading... done
+cd /home/anton/Documents/pcap.js/build/libnl/src && /usr/bin/cmake -P /home/anton/Documents/pcap.js/build/libnl/src/libnl-stamp/verify-libnl.cmake
+cd /home/anton/Documents/pcap.js/build/libnl/src && /usr/bin/cmake -P /home/anton/Documents/pcap.js/build/libnl/src/libnl-stamp/extract-libnl.cmake
+-- extracting...
+     src='/home/anton/Documents/pcap.js/build/libnl/src/libnl-3.7.0.tar.gz'
+     dst='/home/anton/Documents/pcap.js/build/libnl/src/libnl'
+-- extracting... [tar xfz]
+-- extracting... [analysis]
+-- extracting... [rename]
+-- extracting... [clean up]
+-- extracting... done
+cd /home/anton/Documents/pcap.js/build/libnl/src && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/libnl/src/libnl-stamp/libnl-download
+[ 52%] No update step for 'libnl'
+/usr/bin/cmake -E echo_append
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/libnl/src/libnl-stamp/libnl-update
+[ 55%] Performing patch step for 'libnl'
+cd /home/anton/Documents/pcap.js/build/libnl/src/libnl && patch --ignore-whitespace < /home/anton/Documents/pcap.js/patches/libnl.patch
+patching file configure.ac
+cd /home/anton/Documents/pcap.js/build/libnl/src/libnl && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/libnl/src/libnl-stamp/libnl-patch
+[ 58%] Performing configure step for 'libnl'
+cd /home/anton/Documents/pcap.js/build/libnl/src/libnl-build && /usr/bin/cmake -E env PATH=/home/anton/Documents/pcap.js/build/install/bin:/home/anton/.nvm/versions/node/v14.15.0/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/anton/Documents/pcap.js/node_modules/.bin:/home/anton/miniconda3/bin:/home/anton/miniconda3/condabin:/home/anton/.local/bin:/home/anton/.bun/bin:/home/anton/.nvm/versions/node/v14.15.0/bin:/home/anton/Documents/emsdk:/home/anton/Documents/emsdk/upstream/emscripten:/home/anton/Documents/emsdk/node/14.18.2_64bit/bin:/home/anton/.cargo/bin:/home/anton/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/cuda-11.8/bin:/home/anton/Documents/Geo/OTB/install/bin /home/anton/Documents/pcap.js/build/libnl/src/libnl/configure --prefix=/home/anton/Documents/pcap.js/build/install
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking whether make supports the include directive... yes (GNU style)
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking dependency style of gcc... gcc3
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking for gcc... (cached) gcc
+checking whether the compiler supports GNU C... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to enable C11 features... (cached) none needed
+checking whether gcc understands -c and -o together... (cached) yes
+checking dependency style of gcc... (cached) gcc3
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for flex... flex
+checking for bison... bison -y
+checking for an ANSI C-conforming const... yes
+checking for inline... inline
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for CHECK... no
+checking for dlfcn.h... (cached) yes
+checking for pthread_mutex_lock in -lpthread... yes
+checking for strerror_l... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating libnl-3.0.pc
+config.status: creating libnl-route-3.0.pc
+config.status: creating libnl-genl-3.0.pc
+config.status: creating libnl-nf-3.0.pc
+config.status: creating libnl-cli-3.0.pc
+config.status: creating libnl-xfrm-3.0.pc
+config.status: creating libnl-idiag-3.0.pc
+config.status: creating python/setup.py
+config.status: creating include/netlink/version.h
+config.status: creating lib/defs.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+-------------------------------------------------------------------------------
+                                  NOTE
+
+ There have been some changes starting with 3.2 regarding where and how libnl
+ is being installed on the system in order to allow multiple libnl versions
+ to be installed in parallel:
+
+    - Headers will be installed in ${prefix}/include/libnl3, therefore
+      you will need to add "-I/usr/include/libnl3" to CFLAGS
+
+    - The library basename was renamed to libnl-3, i.e. the SO names become
+      libnl-3.so., libnl-route-3.so, etc.
+
+    - libtool versioning was assumed, to ease detection of compatible library
+      versions.
+
+ If you are using pkg-config for detecting and linking against the library 
+ things will continue magically as if nothing every happened. If you are 
+ linking manually you need to adapt your Makefiles or switch to using 
+ pkg-config files.
+
+-------------------------------------------------------------------------------
+cd /home/anton/Documents/pcap.js/build/libnl/src/libnl-build && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/libnl/src/libnl-stamp/libnl-configure
+[ 61%] Performing build step for 'libnl'
+cd /home/anton/Documents/pcap.js/build/libnl/src/libnl-build && /usr/bin/cmake -E env PATH=/home/anton/Documents/pcap.js/build/install/bin:/home/anton/.nvm/versions/node/v14.15.0/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/anton/Documents/pcap.js/node_modules/.bin:/home/anton/miniconda3/bin:/home/anton/miniconda3/condabin:/home/anton/.local/bin:/home/anton/.bun/bin:/home/anton/.nvm/versions/node/v14.15.0/bin:/home/anton/Documents/emsdk:/home/anton/Documents/emsdk/upstream/emscripten:/home/anton/Documents/emsdk/node/14.18.2_64bit/bin:/home/anton/.cargo/bin:/home/anton/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/cuda-11.8/bin:/home/anton/Documents/Geo/OTB/install/bin /usr/bin/gmake
+gmake[3]: Entering directory '/home/anton/Documents/pcap.js/build/libnl/src/libnl-build'
+CDPATH="${ZSH_VERSION+.}:" && cd /home/anton/Documents/pcap.js/build/libnl/src/libnl && /bin/bash '/home/anton/Documents/pcap.js/build/libnl/src/libnl/build-aux/missing' aclocal-1.16 -I m4
+ cd /home/anton/Documents/pcap.js/build/libnl/src/libnl && /bin/bash /home/anton/Documents/pcap.js/build/libnl/src/libnl/build-aux/missing automake-1.16 --foreign
+CDPATH="${ZSH_VERSION+.}:" && cd /home/anton/Documents/pcap.js/build/libnl/src/libnl && /bin/bash '/home/anton/Documents/pcap.js/build/libnl/src/libnl/build-aux/missing' autoconf
+/bin/bash ./config.status --recheck
+running CONFIG_SHELL=/bin/bash /bin/bash /home/anton/Documents/pcap.js/build/libnl/src/libnl/configure --prefix=/home/anton/Documents/pcap.js/build/install --no-create --no-recursion
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking whether make supports the include directive... yes (GNU style)
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking dependency style of gcc... gcc3
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking for gcc... (cached) gcc
+checking whether the compiler supports GNU C... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to enable C11 features... (cached) none needed
+checking whether gcc understands -c and -o together... (cached) yes
+checking dependency style of gcc... (cached) gcc3
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for file... file
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for flex... /home/anton/Documents/pcap.js/build/install/bin/flex
+checking for bison... /home/anton/Documents/pcap.js/build/install/bin/bison
+checking for an ANSI C-conforming const... yes
+checking for inline... inline
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for check >= 0.9.0... no
+checking for dlfcn.h... (cached) yes
+checking for pthread_mutex_lock in -lpthread... yes
+checking for strerror_l... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+-------------------------------------------------------------------------------
+                                  NOTE
+
+ There have been some changes starting with 3.2 regarding where and how libnl
+ is being installed on the system in order to allow multiple libnl versions
+ to be installed in parallel:
+
+    - Headers will be installed in ${prefix}/include/libnl3, therefore
+      you will need to add "-I/usr/include/libnl3" to CFLAGS
+
+    - The library basename was renamed to libnl-3, i.e. the SO names become
+      libnl-3.so., libnl-route-3.so, etc.
+
+    - libtool versioning was assumed, to ease detection of compatible library
+      versions.
+
+ If you are using pkg-config for detecting and linking against the library 
+ things will continue magically as if nothing every happened. If you are 
+ linking manually you need to adapt your Makefiles or switch to using 
+ pkg-config files.
+
+-------------------------------------------------------------------------------
+ /bin/bash ./config.status
+config.status: creating Makefile
+config.status: creating libnl-3.0.pc
+config.status: creating libnl-route-3.0.pc
+config.status: creating libnl-genl-3.0.pc
+config.status: creating libnl-nf-3.0.pc
+config.status: creating libnl-cli-3.0.pc
+config.status: creating libnl-xfrm-3.0.pc
+config.status: creating libnl-idiag-3.0.pc
+config.status: creating python/setup.py
+config.status: creating include/netlink/version.h
+config.status: creating lib/defs.h
+config.status: lib/defs.h is unchanged
+config.status: executing depfiles commands
+config.status: executing libtool commands
+  CC       src/genl_ctrl_list-genl-ctrl-list.o
+  CC       src/lib/libnl_cli_3_la-addr.lo
+  CC       src/lib/libnl_cli_3_la-class.lo
+  CC       src/lib/libnl_cli_3_la-cls.lo
+  CC       src/lib/libnl_cli_3_la-ct.lo
+  CC       src/lib/libnl_cli_3_la-exp.lo
+  CC       src/lib/libnl_cli_3_la-link.lo
+  CC       src/lib/libnl_cli_3_la-neigh.lo
+  CC       src/lib/libnl_cli_3_la-qdisc.lo
+  CC       src/lib/libnl_cli_3_la-route.lo
+  CC       src/lib/libnl_cli_3_la-rule.lo
+  CC       src/lib/libnl_cli_3_la-tc.lo
+  CC       src/lib/libnl_cli_3_la-utils.lo
+  CC       lib/libnl_3_la-addr.lo
+  CC       lib/libnl_3_la-attr.lo
+  CC       lib/libnl_3_la-cache.lo
+  CC       lib/libnl_3_la-cache_mngr.lo
+  CC       lib/libnl_3_la-cache_mngt.lo
+  CC       lib/libnl_3_la-data.lo
+  CC       lib/libnl_3_la-error.lo
+  CC       lib/libnl_3_la-handlers.lo
+  CC       lib/libnl_3_la-hash.lo
+  CC       lib/libnl_3_la-hashtable.lo
+  CC       lib/libnl_3_la-mpls.lo
+  CC       lib/libnl_3_la-msg.lo
+  CC       lib/libnl_3_la-nl.lo
+  CC       lib/libnl_3_la-object.lo
+  CC       lib/libnl_3_la-socket.lo
+  CC       lib/libnl_3_la-utils.lo
+  CC       lib/libnl_3_la-version.lo
+  CCLD     lib/libnl-3.la
+  GEN      lib/route/cls/ematch_grammar.c
+  GEN      lib/route/cls/ematch_syntax.c
+  GEN      lib/route/pktloc_grammar.c
+  GEN      lib/route/pktloc_syntax.c
+  CC       lib/fib_lookup/libnl_route_3_la-lookup.lo
+  CC       lib/fib_lookup/libnl_route_3_la-request.lo
+  CC       lib/route/libnl_route_3_la-act.lo
+  CC       lib/route/act/libnl_route_3_la-gact.lo
+  CC       lib/route/act/libnl_route_3_la-mirred.lo
+  CC       lib/route/act/libnl_route_3_la-nat.lo
+  CC       lib/route/act/libnl_route_3_la-skbedit.lo
+  CC       lib/route/act/libnl_route_3_la-vlan.lo
+  CC       lib/route/libnl_route_3_la-addr.lo
+  CC       lib/route/libnl_route_3_la-class.lo
+  CC       lib/route/libnl_route_3_la-classid.lo
+  CC       lib/route/libnl_route_3_la-cls.lo
+  CC       lib/route/cls/libnl_route_3_la-basic.lo
+  CC       lib/route/cls/libnl_route_3_la-cgroup.lo
+  CC       lib/route/cls/libnl_route_3_la-ematch.lo
+  CC       lib/route/cls/ematch/libnl_route_3_la-cmp.lo
+  CC       lib/route/cls/ematch/libnl_route_3_la-container.lo
+  CC       lib/route/cls/ematch/libnl_route_3_la-meta.lo
+  CC       lib/route/cls/ematch/libnl_route_3_la-nbyte.lo
+  CC       lib/route/cls/ematch/libnl_route_3_la-text.lo
+  CC       lib/route/cls/libnl_route_3_la-flower.lo
+  CC       lib/route/cls/libnl_route_3_la-fw.lo
+  CC       lib/route/cls/libnl_route_3_la-mall.lo
+  CC       lib/route/cls/libnl_route_3_la-police.lo
+  CC       lib/route/cls/libnl_route_3_la-u32.lo
+  CC       lib/route/libnl_route_3_la-link.lo
+  CC       lib/route/link/libnl_route_3_la-api.lo
+  CC       lib/route/link/libnl_route_3_la-bonding.lo
+  CC       lib/route/link/libnl_route_3_la-bridge.lo
+  CC       lib/route/link/libnl_route_3_la-can.lo
+  CC       lib/route/link/libnl_route_3_la-dummy.lo
+  CC       lib/route/link/libnl_route_3_la-geneve.lo
+  CC       lib/route/link/libnl_route_3_la-ifb.lo
+  CC       lib/route/link/libnl_route_3_la-inet.lo
+  CC       lib/route/link/libnl_route_3_la-inet6.lo
+  CC       lib/route/link/libnl_route_3_la-ip6gre.lo
+  CC       lib/route/link/libnl_route_3_la-ip6tnl.lo
+  CC       lib/route/link/libnl_route_3_la-ip6vti.lo
+  CC       lib/route/link/libnl_route_3_la-ipgre.lo
+  CC       lib/route/link/libnl_route_3_la-ipip.lo
+  CC       lib/route/link/libnl_route_3_la-ipvlan.lo
+  CC       lib/route/link/libnl_route_3_la-ipvti.lo
+  CC       lib/route/link/libnl_route_3_la-macsec.lo
+  CC       lib/route/link/libnl_route_3_la-macvlan.lo
+  CC       lib/route/link/libnl_route_3_la-ppp.lo
+  CC       lib/route/link/libnl_route_3_la-sit.lo
+  CC       lib/route/link/libnl_route_3_la-sriov.lo
+  CC       lib/route/link/libnl_route_3_la-team.lo
+  CC       lib/route/link/libnl_route_3_la-veth.lo
+  CC       lib/route/link/libnl_route_3_la-vlan.lo
+  CC       lib/route/link/libnl_route_3_la-vrf.lo
+  CC       lib/route/link/libnl_route_3_la-vxlan.lo
+  CC       lib/route/link/libnl_route_3_la-xfrmi.lo
+  CC       lib/route/libnl_route_3_la-mdb.lo
+  CC       lib/route/libnl_route_3_la-neigh.lo
+  CC       lib/route/libnl_route_3_la-neightbl.lo
+  CC       lib/route/libnl_route_3_la-netconf.lo
+  CC       lib/route/libnl_route_3_la-nexthop.lo
+  CC       lib/route/libnl_route_3_la-nexthop_encap.lo
+  CC       lib/route/libnl_route_3_la-nh_encap_mpls.lo
+  CC       lib/route/libnl_route_3_la-pktloc.lo
+  CC       lib/route/libnl_route_3_la-qdisc.lo
+  CC       lib/route/qdisc/libnl_route_3_la-blackhole.lo
+  CC       lib/route/qdisc/libnl_route_3_la-cbq.lo
+  CC       lib/route/qdisc/libnl_route_3_la-dsmark.lo
+  CC       lib/route/qdisc/libnl_route_3_la-fifo.lo
+  CC       lib/route/qdisc/libnl_route_3_la-fq_codel.lo
+  CC       lib/route/qdisc/libnl_route_3_la-hfsc.lo
+  CC       lib/route/qdisc/libnl_route_3_la-htb.lo
+  CC       lib/route/qdisc/libnl_route_3_la-ingress.lo
+  CC       lib/route/qdisc/libnl_route_3_la-mqprio.lo
+  CC       lib/route/qdisc/libnl_route_3_la-netem.lo
+  CC       lib/route/qdisc/libnl_route_3_la-plug.lo
+  CC       lib/route/qdisc/libnl_route_3_la-prio.lo
+  CC       lib/route/qdisc/libnl_route_3_la-red.lo
+  CC       lib/route/qdisc/libnl_route_3_la-sfq.lo
+  CC       lib/route/qdisc/libnl_route_3_la-tbf.lo
+  CC       lib/route/libnl_route_3_la-route.lo
+  CC       lib/route/libnl_route_3_la-route_obj.lo
+  CC       lib/route/libnl_route_3_la-route_utils.lo
+  CC       lib/route/libnl_route_3_la-rtnl.lo
+  CC       lib/route/libnl_route_3_la-rule.lo
+  CC       lib/route/libnl_route_3_la-tc.lo
+  CC       lib/route/cls/libnl_route_3_la-ematch_grammar.lo
+  CC       lib/route/cls/libnl_route_3_la-ematch_syntax.lo
+  CC       lib/route/libnl_route_3_la-pktloc_grammar.lo
+  CC       lib/route/libnl_route_3_la-pktloc_syntax.lo
+  CCLD     lib/libnl-route-3.la
+copying selected object files to avoid basename conflicts...
+  CC       lib/netfilter/libnl_nf_3_la-ct.lo
+  CC       lib/netfilter/libnl_nf_3_la-ct_obj.lo
+  CC       lib/netfilter/libnl_nf_3_la-exp.lo
+  CC       lib/netfilter/libnl_nf_3_la-exp_obj.lo
+  CC       lib/netfilter/libnl_nf_3_la-log.lo
+  CC       lib/netfilter/libnl_nf_3_la-log_msg.lo
+  CC       lib/netfilter/libnl_nf_3_la-log_msg_obj.lo
+  CC       lib/netfilter/libnl_nf_3_la-log_obj.lo
+  CC       lib/netfilter/libnl_nf_3_la-netfilter.lo
+  CC       lib/netfilter/libnl_nf_3_la-nfnl.lo
+  CC       lib/netfilter/libnl_nf_3_la-queue.lo
+  CC       lib/netfilter/libnl_nf_3_la-queue_msg.lo
+  CC       lib/netfilter/libnl_nf_3_la-queue_msg_obj.lo
