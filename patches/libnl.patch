@@ -1,0 +1,22 @@
+--- configure.ac
++++ configure.ac
+@@ -66,8 +66,8 @@
+ AC_PROG_INSTALL
+ AM_PROG_LIBTOOL
+ AC_PROG_MKDIR_P
+-AC_CHECK_PROGS(FLEX, 'flex')
+-AC_CHECK_PROGS(YACC, 'bison -y')
++AC_PATH_PROG(FLEX, 'flex', , [$BIN_PATH])
++AC_PATH_PROG(YACC, 'bison', , [$BIN_PATH])
+ 
+ AC_C_CONST
+ AC_C_INLINE
+@@ -137,6 +137,8 @@
+ if test -z "$YACC"; then
+     AC_MSG_WARN(bison not found. Please install before continuing.)
+     ac_errcount=$((ac_errcount + 1))
++else
++    $YACC="${YACC} -y"
+ fi
+ if test -z "$FLEX"; then
+     AC_MSG_WARN(flex not found. Please install before continuing.)
