@@ -31,15 +31,16 @@ ExternalProject_Add(libnl
 	URL https://github.com/thom311/libnl/releases/download/libnl3_7_0/libnl-3.7.0.tar.gz
 	URL_MD5 b381405afd14e466e35d29a112480333
 	PATCH_COMMAND patch --ignore-whitespace < ${LIBNL_PATCH_FILENAME}
-	CONFIGURE_COMMAND ${CMAKE_COMMAND} -E env BIN_PATH=${DEPS_BIN} <SOURCE_DIR>/configure --prefix=${DEPS_INSTALL_DIR}
-	BUILD_COMMAND ${CMAKE_COMMAND} -E env BIN_PATH=${DEPS_BIN} $(MAKE)
+	CONFIGURE_COMMAND ${CMAKE_COMMAND} -E env PATH=${DEPS_BIN}:$ENV{PATH} <SOURCE_DIR>/configure --prefix=${DEPS_INSTALL_DIR}
+	BUILD_COMMAND ${CMAKE_COMMAND} -E env PATH=${DEPS_BIN}:$ENV{PATH} $(MAKE)
 )
 ExternalProject_Add_StepDependencies(libnl install flex bison)
 ExternalProject_Add(libpcap
     PREFIX libpcap
 	URL https://github.com/the-tcpdump-group/libpcap/archive/refs/tags/libpcap-1.10.2.tar.gz
 	URL_MD5 248498d9f46deae82ed14315d3e2922e
-    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${DEPS_INSTALL_DIR} --with-libnl=yes "LDFLAGS=-Wl,-rpath,${DEPS_LIBS}" "PKG_CONFIG_PATH=${DEPS_LIBS}/pkgconfig"
+    CONFIGURE_COMMAND ${CMAKE_COMMAND} -E env PATH=${DEPS_BIN}:$ENV{PATH} <SOURCE_DIR>/configure --prefix=${DEPS_INSTALL_DIR} --with-libnl=yes "LDFLAGS=-Wl,-rpath,${DEPS_LIBS}" "PKG_CONFIG_PATH=${DEPS_LIBS}/pkgconfig"
+	BUILD_COMMAND ${CMAKE_COMMAND} -E env PATH=${DEPS_BIN}:$ENV{PATH} $(MAKE)
 )
 ExternalProject_Add_StepDependencies(libpcap install libnl)
 set(LIBPCAP_LIBRARY ${DEPS_LIBS}/libpcap.so)
@@ -47,7 +48,7 @@ set(LIBPCAP_LIBRARY ${DEPS_LIBS}/libpcap.so)
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
-target_compile_options(${PROJECT_NAME} PRIVATE -fno-exceptions PRIVATE -fvisibility=hidden)
+#target_compile_options(${PROJECT_NAME} PRIVATE -fno-exceptions PRIVATE -fvisibility=hidden)
 target_compile_definitions(${PROJECT_NAME} PRIVATE NAPI_DISABLE_CPP_EXCEPTIONS PRIVATE NODE_ADDON_API_ENABLE_MAYBE PRIVATE NODE_ADDON_API_DISABLE_DEPRECATED)
 
 execute_process(COMMAND node -p "require('node-addon-api').include" WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} OUTPUT_VARIABLE NODE_ADDON_API_DIR)

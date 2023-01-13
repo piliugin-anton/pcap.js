@@ -1,0 +1,1034 @@
+
+> pcap.js@1.0.0 install /home/anton/Documents/pcap.js
+> cmake-js compile
+
+Not searching for unused variables given on the command line.
+Re-run cmake no build system arguments
+-- The C compiler identification is GNU 11.3.0
+-- The CXX compiler identification is GNU 11.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/anton/Documents/pcap.js/build
+/usr/bin/cmake -S/home/anton/Documents/pcap.js -B/home/anton/Documents/pcap.js/build --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /home/anton/Documents/pcap.js/build/CMakeFiles /home/anton/Documents/pcap.js/build//CMakeFiles/progress.marks
+/usr/bin/gmake  -f CMakeFiles/Makefile2 all
+gmake[1]: Entering directory '/home/anton/Documents/pcap.js/build'
+/usr/bin/gmake  -f CMakeFiles/flex.dir/build.make CMakeFiles/flex.dir/depend
+gmake[2]: Entering directory '/home/anton/Documents/pcap.js/build'
+cd /home/anton/Documents/pcap.js/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/anton/Documents/pcap.js /home/anton/Documents/pcap.js /home/anton/Documents/pcap.js/build /home/anton/Documents/pcap.js/build /home/anton/Documents/pcap.js/build/CMakeFiles/flex.dir/DependInfo.cmake --color=
+gmake[2]: Leaving directory '/home/anton/Documents/pcap.js/build'
+/usr/bin/gmake  -f CMakeFiles/flex.dir/build.make CMakeFiles/flex.dir/build
+gmake[2]: Entering directory '/home/anton/Documents/pcap.js/build'
+[  2%] Creating directories for 'flex'
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/flex/src/flex
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/flex/src/flex-build
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/flex
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/flex/tmp
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/flex/src/flex-stamp
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/flex/src
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/flex/src/flex-stamp
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/flex-mkdir
+[  5%] Performing download step (download, verify and extract) for 'flex'
+cd /home/anton/Documents/pcap.js/build/flex/src && /usr/bin/cmake -P /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/download-flex.cmake
+-- Downloading...
+   dst='/home/anton/Documents/pcap.js/build/flex/src/flex-2.6.4.tar.gz'
+   timeout='none'
+   inactivity timeout='none'
+-- Using src='https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz'
+-- [download 0% complete]
+-- [download 1% complete]
+-- [download 2% complete]
+-- [download 3% complete]
+-- [download 4% complete]
+-- [download 5% complete]
+-- [download 6% complete]
+-- [download 7% complete]
+-- [download 8% complete]
+-- [download 9% complete]
+-- [download 10% complete]
+-- [download 11% complete]
+-- [download 13% complete]
+-- [download 14% complete]
+-- [download 15% complete]
+-- [download 16% complete]
+-- [download 17% complete]
+-- [download 18% complete]
+-- [download 20% complete]
+-- [download 21% complete]
+-- [download 22% complete]
+-- [download 23% complete]
+-- [download 24% complete]
+-- [download 25% complete]
+-- [download 26% complete]
+-- [download 28% complete]
+-- [download 29% complete]
+-- [download 30% complete]
+-- [download 31% complete]
+-- [download 32% complete]
+-- [download 33% complete]
+-- [download 35% complete]
+-- [download 36% complete]
+-- [download 37% complete]
+-- [download 38% complete]
+-- [download 39% complete]
+-- [download 40% complete]
+-- [download 41% complete]
+-- [download 43% complete]
+-- [download 44% complete]
+-- [download 45% complete]
+-- [download 46% complete]
+-- [download 48% complete]
+-- [download 49% complete]
+-- [download 50% complete]
+-- [download 51% complete]
+-- [download 52% complete]
+-- [download 53% complete]
+-- [download 55% complete]
+-- [download 56% complete]
+-- [download 57% complete]
+-- [download 58% complete]
+-- [download 59% complete]
+-- [download 60% complete]
+-- [download 61% complete]
+-- [download 63% complete]
+-- [download 64% complete]
+-- [download 65% complete]
+-- [download 66% complete]
+-- [download 67% complete]
+-- [download 68% complete]
+-- [download 100% complete]
+-- verifying file...
+       file='/home/anton/Documents/pcap.js/build/flex/src/flex-2.6.4.tar.gz'
+-- Downloading... done
+cd /home/anton/Documents/pcap.js/build/flex/src && /usr/bin/cmake -P /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/verify-flex.cmake
+cd /home/anton/Documents/pcap.js/build/flex/src && /usr/bin/cmake -P /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/extract-flex.cmake
+-- extracting...
+     src='/home/anton/Documents/pcap.js/build/flex/src/flex-2.6.4.tar.gz'
+     dst='/home/anton/Documents/pcap.js/build/flex/src/flex'
+-- extracting... [tar xfz]
+-- extracting... [analysis]
+-- extracting... [rename]
+-- extracting... [clean up]
+-- extracting... done
+cd /home/anton/Documents/pcap.js/build/flex/src && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/flex-download
+[  8%] No update step for 'flex'
+/usr/bin/cmake -E echo_append
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/flex-update
+[ 11%] No patch step for 'flex'
+/usr/bin/cmake -E echo_append
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/flex-patch
+[ 13%] Performing configure step for 'flex'
+cd /home/anton/Documents/pcap.js/build/flex/src/flex-build && /home/anton/Documents/pcap.js/build/flex/src/flex/configure --prefix=/home/anton/Documents/pcap.js/build/install
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to print strings... printf
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for fgrep... /usr/bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking for gawk... no
+checking for mawk... mawk
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for sysroot... no
+checking for a working dd... /usr/bin/dd
+checking how to truncate binary pipes... /usr/bin/dd bs=4096 count=1
+checking for mt... mt
+checking if mt is a manifest tool... no
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking whether make sets $(MAKE)... yes
+checking for style of include used by make... GNU
+checking whether make supports nested variables... yes
+checking dependency style of gcc... gcc3
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for ld used by GCC... /usr/bin/ld -m elf_x86_64
+checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
+checking for shared library run path origin... done
+checking for CFPreferencesCopyAppValue... no
+checking for CFLocaleCopyCurrent... no
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking for bison... bison -y
+checking for flex... flex
+checking lex output file root... lex.yy
+checking lex library... -lfl
+checking whether yytext is a pointer... yes
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking whether gcc understands -c and -o together... (cached) yes
+checking for gcc... gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking whether gcc understands -c and -o together... (cached) yes
+checking how to run the C preprocessor... gcc -E
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking how to run the C++ preprocessor... g++ -E
+checking for ld used by g++... /usr/bin/ld -m elf_x86_64
+checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
+checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking for g++ option to produce PIC... -fPIC -DPIC
+checking if g++ PIC flag -fPIC -DPIC works... yes
+checking if g++ static flag -static works... yes
+checking if g++ supports -c -o file.o... yes
+checking if g++ supports -c -o file.o... (cached) yes
+checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking dynamic linker characteristics... (cached) GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking dependency style of g++... gcc3
+checking whether ln -s works... yes
+checking for gawk... (cached) mawk
+checking for help2man... ${top_srcdir}/build-aux/missing help2man
+checking for gtexi2dvi... no
+checking for texi2dvi... no
+checking for m4 that supports -P... /usr/bin/m4
+checking for indent... ${top_srcdir}/build-aux/missing indent
+checking if ${top_srcdir}/build-aux/missing indent is GNU indent... no
+checking regex.h usability... yes
+checking regex.h presence... yes
+checking for regex.h... yes
+checking for strings.h... (cached) yes
+checking for sys/stat.h... (cached) yes
+checking sys/wait.h usability... yes
+checking sys/wait.h presence... yes
+checking for sys/wait.h... yes
+checking for unistd.h... (cached) yes
+checking for inttypes.h... (cached) yes
+checking libintl.h usability... yes
+checking libintl.h presence... yes
+checking for libintl.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking malloc.h usability... yes
+checking malloc.h presence... yes
+checking for malloc.h... yes
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking for pthread_mutex_lock in -lpthread... yes
+checking pthread.h usability... yes
+checking pthread.h presence... yes
+checking for pthread.h... yes
+checking for log10 in -lm... yes
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking for an ANSI C-conforming const... yes
+checking for size_t... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for pid_t... yes
+checking vfork.h usability... no
+checking vfork.h presence... no
+checking for vfork.h... no
+checking for fork... yes
+checking for vfork... yes
+checking for working fork... yes
+checking for working vfork... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible realloc... yes
+checking for dup2... yes
+checking for memset... yes
+checking for regcomp... yes
+checking for strcasecmp... yes
+checking for strchr... yes
+checking for strdup... yes
+checking for strtol... yes
+checking for pow... yes
+checking for setlocale... yes
+checking for reallocarray... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating doc/Makefile
+config.status: creating examples/Makefile
+config.status: creating examples/fastwc/Makefile
+config.status: creating examples/manual/Makefile
+config.status: creating po/Makefile.in
+config.status: creating src/Makefile
+config.status: creating tools/Makefile
+config.status: creating tests/Makefile
+config.status: creating src/config.h
+config.status: executing libtool commands
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+cd /home/anton/Documents/pcap.js/build/flex/src/flex-build && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/flex-configure
+[ 16%] Performing build step for 'flex'
+cd /home/anton/Documents/pcap.js/build/flex/src/flex-build && /usr/bin/gmake
+gmake[3]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+Making all in src
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/src'
+/usr/bin/gmake  all-am
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/src'
+depbase=`echo libmain.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+/bin/bash ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT libmain.lo -MD -MP -MF $depbase.Tpo -c -o libmain.lo /home/anton/Documents/pcap.js/build/flex/src/flex/src/libmain.c &&\
+mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\" -g -O2 -MT libmain.lo -MD -MP -MF .deps/libmain.Tpo -c /home/anton/Documents/pcap.js/build/flex/src/flex/src/libmain.c  -fPIC -DPIC -o .libs/libmain.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\" -g -O2 -MT libmain.lo -MD -MP -MF .deps/libmain.Tpo -c /home/anton/Documents/pcap.js/build/flex/src/flex/src/libmain.c -o libmain.o >/dev/null 2>&1
+depbase=`echo libyywrap.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+/bin/bash ../libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT libyywrap.lo -MD -MP -MF $depbase.Tpo -c -o libyywrap.lo /home/anton/Documents/pcap.js/build/flex/src/flex/src/libyywrap.c &&\
+mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\" -g -O2 -MT libyywrap.lo -MD -MP -MF .deps/libyywrap.Tpo -c /home/anton/Documents/pcap.js/build/flex/src/flex/src/libyywrap.c  -fPIC -DPIC -o .libs/libyywrap.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\" -g -O2 -MT libyywrap.lo -MD -MP -MF .deps/libyywrap.Tpo -c /home/anton/Documents/pcap.js/build/flex/src/flex/src/libyywrap.c -o libyywrap.o >/dev/null 2>&1
+/bin/bash ../libtool  --tag=CC   --mode=link gcc  -g -O2 -version-info 2:0:0  -o libfl.la -rpath /home/anton/Documents/pcap.js/build/install/lib libmain.lo libyywrap.lo  -lm 
+libtool: link: gcc -shared  -fPIC -DPIC  .libs/libmain.o .libs/libyywrap.o   -lm  -g -O2   -Wl,-soname -Wl,libfl.so.2 -o .libs/libfl.so.2.0.0
+libtool: link: (cd ".libs" && rm -f "libfl.so.2" && ln -s "libfl.so.2.0.0" "libfl.so.2")
+libtool: link: (cd ".libs" && rm -f "libfl.so" && ln -s "libfl.so.2.0.0" "libfl.so")
+libtool: link: ar cru .libs/libfl.a  libmain.o libyywrap.o
+libtool: link: ranlib .libs/libfl.a
+libtool: link: ( cd ".libs" && rm -f "libfl.la" && ln -s "../libfl.la" "libfl.la" )
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-buf.o -MD -MP -MF .deps/flex-buf.Tpo -c -o flex-buf.o `test -f 'buf.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`buf.c
+mv -f .deps/flex-buf.Tpo .deps/flex-buf.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-ccl.o -MD -MP -MF .deps/flex-ccl.Tpo -c -o flex-ccl.o `test -f 'ccl.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`ccl.c
+mv -f .deps/flex-ccl.Tpo .deps/flex-ccl.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-dfa.o -MD -MP -MF .deps/flex-dfa.Tpo -c -o flex-dfa.o `test -f 'dfa.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`dfa.c
+mv -f .deps/flex-dfa.Tpo .deps/flex-dfa.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-ecs.o -MD -MP -MF .deps/flex-ecs.Tpo -c -o flex-ecs.o `test -f 'ecs.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`ecs.c
+mv -f .deps/flex-ecs.Tpo .deps/flex-ecs.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-filter.o -MD -MP -MF .deps/flex-filter.Tpo -c -o flex-filter.o `test -f 'filter.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`filter.c
+mv -f .deps/flex-filter.Tpo .deps/flex-filter.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-gen.o -MD -MP -MF .deps/flex-gen.Tpo -c -o flex-gen.o `test -f 'gen.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`gen.c
+mv -f .deps/flex-gen.Tpo .deps/flex-gen.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-main.o -MD -MP -MF .deps/flex-main.Tpo -c -o flex-main.o `test -f 'main.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`main.c
+mv -f .deps/flex-main.Tpo .deps/flex-main.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-misc.o -MD -MP -MF .deps/flex-misc.Tpo -c -o flex-misc.o `test -f 'misc.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`misc.c
+mv -f .deps/flex-misc.Tpo .deps/flex-misc.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-nfa.o -MD -MP -MF .deps/flex-nfa.Tpo -c -o flex-nfa.o `test -f 'nfa.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`nfa.c
+mv -f .deps/flex-nfa.Tpo .deps/flex-nfa.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-options.o -MD -MP -MF .deps/flex-options.Tpo -c -o flex-options.o `test -f 'options.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`options.c
+mv -f .deps/flex-options.Tpo .deps/flex-options.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-parse.o -MD -MP -MF .deps/flex-parse.Tpo -c -o flex-parse.o `test -f 'parse.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`parse.c
+mv -f .deps/flex-parse.Tpo .deps/flex-parse.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-regex.o -MD -MP -MF .deps/flex-regex.Tpo -c -o flex-regex.o `test -f 'regex.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`regex.c
+mv -f .deps/flex-regex.Tpo .deps/flex-regex.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-scanflags.o -MD -MP -MF .deps/flex-scanflags.Tpo -c -o flex-scanflags.o `test -f 'scanflags.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`scanflags.c
+mv -f .deps/flex-scanflags.Tpo .deps/flex-scanflags.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-scanopt.o -MD -MP -MF .deps/flex-scanopt.Tpo -c -o flex-scanopt.o `test -f 'scanopt.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`scanopt.c
+mv -f .deps/flex-scanopt.Tpo .deps/flex-scanopt.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-skel.o -MD -MP -MF .deps/flex-skel.Tpo -c -o flex-skel.o `test -f 'skel.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`skel.c
+mv -f .deps/flex-skel.Tpo .deps/flex-skel.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-sym.o -MD -MP -MF .deps/flex-sym.Tpo -c -o flex-sym.o `test -f 'sym.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`sym.c
+mv -f .deps/flex-sym.Tpo .deps/flex-sym.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-tables.o -MD -MP -MF .deps/flex-tables.Tpo -c -o flex-tables.o `test -f 'tables.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`tables.c
+mv -f .deps/flex-tables.Tpo .deps/flex-tables.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-tables_shared.o -MD -MP -MF .deps/flex-tables_shared.Tpo -c -o flex-tables_shared.o `test -f 'tables_shared.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`tables_shared.c
+mv -f .deps/flex-tables_shared.Tpo .deps/flex-tables_shared.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-tblcmp.o -MD -MP -MF .deps/flex-tblcmp.Tpo -c -o flex-tblcmp.o `test -f 'tblcmp.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`tblcmp.c
+mv -f .deps/flex-tblcmp.Tpo .deps/flex-tblcmp.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-yylex.o -MD -MP -MF .deps/flex-yylex.Tpo -c -o flex-yylex.o `test -f 'yylex.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`yylex.c
+mv -f .deps/flex-yylex.Tpo .deps/flex-yylex.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-scan.o -MD -MP -MF .deps/stage1flex-scan.Tpo -c -o stage1flex-scan.o `test -f 'scan.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`scan.c
+mv -f .deps/stage1flex-scan.Tpo .deps/stage1flex-scan.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-buf.o -MD -MP -MF .deps/stage1flex-buf.Tpo -c -o stage1flex-buf.o `test -f 'buf.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`buf.c
+mv -f .deps/stage1flex-buf.Tpo .deps/stage1flex-buf.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-ccl.o -MD -MP -MF .deps/stage1flex-ccl.Tpo -c -o stage1flex-ccl.o `test -f 'ccl.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`ccl.c
+mv -f .deps/stage1flex-ccl.Tpo .deps/stage1flex-ccl.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-dfa.o -MD -MP -MF .deps/stage1flex-dfa.Tpo -c -o stage1flex-dfa.o `test -f 'dfa.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`dfa.c
+mv -f .deps/stage1flex-dfa.Tpo .deps/stage1flex-dfa.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-ecs.o -MD -MP -MF .deps/stage1flex-ecs.Tpo -c -o stage1flex-ecs.o `test -f 'ecs.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`ecs.c
+mv -f .deps/stage1flex-ecs.Tpo .deps/stage1flex-ecs.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-filter.o -MD -MP -MF .deps/stage1flex-filter.Tpo -c -o stage1flex-filter.o `test -f 'filter.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`filter.c
+mv -f .deps/stage1flex-filter.Tpo .deps/stage1flex-filter.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-gen.o -MD -MP -MF .deps/stage1flex-gen.Tpo -c -o stage1flex-gen.o `test -f 'gen.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`gen.c
+mv -f .deps/stage1flex-gen.Tpo .deps/stage1flex-gen.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-main.o -MD -MP -MF .deps/stage1flex-main.Tpo -c -o stage1flex-main.o `test -f 'main.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`main.c
+mv -f .deps/stage1flex-main.Tpo .deps/stage1flex-main.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-misc.o -MD -MP -MF .deps/stage1flex-misc.Tpo -c -o stage1flex-misc.o `test -f 'misc.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`misc.c
+mv -f .deps/stage1flex-misc.Tpo .deps/stage1flex-misc.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-nfa.o -MD -MP -MF .deps/stage1flex-nfa.Tpo -c -o stage1flex-nfa.o `test -f 'nfa.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`nfa.c
+mv -f .deps/stage1flex-nfa.Tpo .deps/stage1flex-nfa.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-options.o -MD -MP -MF .deps/stage1flex-options.Tpo -c -o stage1flex-options.o `test -f 'options.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`options.c
+mv -f .deps/stage1flex-options.Tpo .deps/stage1flex-options.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-parse.o -MD -MP -MF .deps/stage1flex-parse.Tpo -c -o stage1flex-parse.o `test -f 'parse.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`parse.c
+mv -f .deps/stage1flex-parse.Tpo .deps/stage1flex-parse.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-regex.o -MD -MP -MF .deps/stage1flex-regex.Tpo -c -o stage1flex-regex.o `test -f 'regex.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`regex.c
+mv -f .deps/stage1flex-regex.Tpo .deps/stage1flex-regex.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-scanflags.o -MD -MP -MF .deps/stage1flex-scanflags.Tpo -c -o stage1flex-scanflags.o `test -f 'scanflags.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`scanflags.c
+mv -f .deps/stage1flex-scanflags.Tpo .deps/stage1flex-scanflags.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-scanopt.o -MD -MP -MF .deps/stage1flex-scanopt.Tpo -c -o stage1flex-scanopt.o `test -f 'scanopt.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`scanopt.c
+mv -f .deps/stage1flex-scanopt.Tpo .deps/stage1flex-scanopt.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-skel.o -MD -MP -MF .deps/stage1flex-skel.Tpo -c -o stage1flex-skel.o `test -f 'skel.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`skel.c
+mv -f .deps/stage1flex-skel.Tpo .deps/stage1flex-skel.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-sym.o -MD -MP -MF .deps/stage1flex-sym.Tpo -c -o stage1flex-sym.o `test -f 'sym.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`sym.c
+mv -f .deps/stage1flex-sym.Tpo .deps/stage1flex-sym.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-tables.o -MD -MP -MF .deps/stage1flex-tables.Tpo -c -o stage1flex-tables.o `test -f 'tables.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`tables.c
+mv -f .deps/stage1flex-tables.Tpo .deps/stage1flex-tables.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-tables_shared.o -MD -MP -MF .deps/stage1flex-tables_shared.Tpo -c -o stage1flex-tables_shared.o `test -f 'tables_shared.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`tables_shared.c
+mv -f .deps/stage1flex-tables_shared.Tpo .deps/stage1flex-tables_shared.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-tblcmp.o -MD -MP -MF .deps/stage1flex-tblcmp.Tpo -c -o stage1flex-tblcmp.o `test -f 'tblcmp.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`tblcmp.c
+mv -f .deps/stage1flex-tblcmp.Tpo .deps/stage1flex-tblcmp.Po
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"   -g -O2 -MT stage1flex-yylex.o -MD -MP -MF .deps/stage1flex-yylex.Tpo -c -o stage1flex-yylex.o `test -f 'yylex.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`yylex.c
+mv -f .deps/stage1flex-yylex.Tpo .deps/stage1flex-yylex.Po
+/bin/bash ../libtool  --tag=CC   --mode=link gcc  -g -O2   -o stage1flex stage1flex-scan.o stage1flex-buf.o stage1flex-ccl.o stage1flex-dfa.o stage1flex-ecs.o stage1flex-filter.o stage1flex-gen.o stage1flex-main.o stage1flex-misc.o stage1flex-nfa.o stage1flex-options.o stage1flex-parse.o stage1flex-regex.o stage1flex-scanflags.o stage1flex-scanopt.o stage1flex-skel.o stage1flex-sym.o stage1flex-tables.o stage1flex-tables_shared.o stage1flex-tblcmp.o stage1flex-yylex.o    -lm 
+libtool: link: gcc -g -O2 -o stage1flex stage1flex-scan.o stage1flex-buf.o stage1flex-ccl.o stage1flex-dfa.o stage1flex-ecs.o stage1flex-filter.o stage1flex-gen.o stage1flex-main.o stage1flex-misc.o stage1flex-nfa.o stage1flex-options.o stage1flex-parse.o stage1flex-regex.o stage1flex-scanflags.o stage1flex-scanopt.o stage1flex-skel.o stage1flex-sym.o stage1flex-tables.o stage1flex-tables_shared.o stage1flex-tblcmp.o stage1flex-yylex.o  -lm
+./stage1flex   -o stage1scan.c /home/anton/Documents/pcap.js/build/flex/src/flex/src/scan.l
+gcc -DHAVE_CONFIG_H -I. -I/home/anton/Documents/pcap.js/build/flex/src/flex/src  -DLOCALEDIR=\"/home/anton/Documents/pcap.js/build/install/share/locale\"    -g -O2 -MT flex-stage1scan.o -MD -MP -MF .deps/flex-stage1scan.Tpo -c -o flex-stage1scan.o `test -f 'stage1scan.c' || echo '/home/anton/Documents/pcap.js/build/flex/src/flex/src/'`stage1scan.c
+mv -f .deps/flex-stage1scan.Tpo .deps/flex-stage1scan.Po
+/bin/bash ../libtool  --tag=CC   --mode=link gcc   -g -O2   -o flex flex-buf.o flex-ccl.o flex-dfa.o flex-ecs.o flex-filter.o flex-gen.o flex-main.o flex-misc.o flex-nfa.o flex-options.o flex-parse.o flex-regex.o flex-scanflags.o flex-scanopt.o flex-skel.o flex-sym.o flex-tables.o flex-tables_shared.o flex-tblcmp.o flex-yylex.o flex-stage1scan.o   -lm 
+libtool: link: gcc -g -O2 -o flex flex-buf.o flex-ccl.o flex-dfa.o flex-ecs.o flex-filter.o flex-gen.o flex-main.o flex-misc.o flex-nfa.o flex-options.o flex-parse.o flex-regex.o flex-scanflags.o flex-scanopt.o flex-skel.o flex-sym.o flex-tables.o flex-tables_shared.o flex-tblcmp.o flex-yylex.o flex-stage1scan.o  -lm
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/src'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/src'
+Making all in doc
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/doc'
+gmake[4]: Nothing to be done for 'all'.
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/doc'
+Making all in examples
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples'
+Making all in manual
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/manual'
+gmake[5]: Nothing to be done for 'all'.
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/manual'
+Making all in fastwc
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/fastwc'
+gmake[5]: Nothing to be done for 'all'.
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/fastwc'
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples'
+gmake[5]: Nothing to be done for 'all-am'.
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples'
+Making all in po
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/po'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/po'
+Making all in tests
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tests'
+gmake[4]: Nothing to be done for 'all'.
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tests'
+Making all in tools
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tools'
+gmake[4]: Nothing to be done for 'all'.
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tools'
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+gmake[4]: Nothing to be done for 'all-am'.
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+gmake[3]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+cd /home/anton/Documents/pcap.js/build/flex/src/flex-build && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/flex-build
+[ 19%] Performing install step for 'flex'
+cd /home/anton/Documents/pcap.js/build/flex/src/flex-build && /usr/bin/gmake install
+gmake[3]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+Making install in src
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/src'
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/src'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/lib'
+ /bin/bash ../libtool   --mode=install /usr/bin/install -c   libfl.la '/home/anton/Documents/pcap.js/build/install/lib'
+libtool: install: /usr/bin/install -c .libs/libfl.so.2.0.0 /home/anton/Documents/pcap.js/build/install/lib/libfl.so.2.0.0
+libtool: install: (cd /home/anton/Documents/pcap.js/build/install/lib && { ln -s -f libfl.so.2.0.0 libfl.so.2 || { rm -f libfl.so.2 && ln -s libfl.so.2.0.0 libfl.so.2; }; })
+libtool: install: (cd /home/anton/Documents/pcap.js/build/install/lib && { ln -s -f libfl.so.2.0.0 libfl.so || { rm -f libfl.so && ln -s libfl.so.2.0.0 libfl.so; }; })
+libtool: install: /usr/bin/install -c .libs/libfl.lai /home/anton/Documents/pcap.js/build/install/lib/libfl.la
+libtool: install: /usr/bin/install -c .libs/libfl.a /home/anton/Documents/pcap.js/build/install/lib/libfl.a
+libtool: install: chmod 644 /home/anton/Documents/pcap.js/build/install/lib/libfl.a
+libtool: install: ranlib /home/anton/Documents/pcap.js/build/install/lib/libfl.a
+libtool: finish: PATH="/home/anton/.nvm/versions/node/v14.15.0/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/anton/Documents/pcap.js/node_modules/.bin:/home/anton/miniconda3/bin:/home/anton/miniconda3/condabin:/home/anton/.local/bin:/home/anton/.bun/bin:/home/anton/.nvm/versions/node/v14.15.0/bin:/home/anton/Documents/emsdk:/home/anton/Documents/emsdk/upstream/emscripten:/home/anton/Documents/emsdk/node/14.18.2_64bit/bin:/home/anton/.cargo/bin:/home/anton/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/cuda-11.8/bin:/home/anton/Documents/Geo/OTB/install/bin:/sbin" ldconfig -n /home/anton/Documents/pcap.js/build/install/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /home/anton/Documents/pcap.js/build/install/lib
+
+If you ever happen to want to link against installed libraries
+in a given directory, LIBDIR, you must either use libtool, and
+specify the full pathname of the library, or use the '-LLIBDIR'
+flag during linking and do at least one of the following:
+   - add LIBDIR to the 'LD_LIBRARY_PATH' environment variable
+     during execution
+   - add LIBDIR to the 'LD_RUN_PATH' environment variable
+     during linking
+   - use the '-Wl,-rpath -Wl,LIBDIR' linker flag
+   - have your system administrator add LIBDIR to '/etc/ld.so.conf'
+
+See any operating system documentation about shared libraries for
+more information, such as the ld(1) and ld.so(8) manual pages.
+----------------------------------------------------------------------
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/bin'
+  /bin/bash ../libtool   --mode=install /usr/bin/install -c flex '/home/anton/Documents/pcap.js/build/install/bin'
+libtool: install: /usr/bin/install -c flex /home/anton/Documents/pcap.js/build/install/bin/flex
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/include'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/flex/src/flex/src/FlexLexer.h '/home/anton/Documents/pcap.js/build/install/include'
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/src'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/src'
+Making install in doc
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/doc'
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/doc'
+gmake[5]: Nothing to be done for 'install-exec-am'.
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/info'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/flex/src/flex/doc/flex.info /home/anton/Documents/pcap.js/build/flex/src/flex/doc/flex.info-1 /home/anton/Documents/pcap.js/build/flex/src/flex/doc/flex.info-2 '/home/anton/Documents/pcap.js/build/install/share/info'
+ install-info --info-dir='/home/anton/Documents/pcap.js/build/install/share/info' '/home/anton/Documents/pcap.js/build/install/share/info/flex.info'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/man/man1'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/flex/src/flex/doc/flex.1 '/home/anton/Documents/pcap.js/build/install/share/man/man1'
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/doc'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/doc'
+Making install in examples
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples'
+Making install in manual
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/manual'
+gmake[6]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/manual'
+gmake[6]: Nothing to be done for 'install-exec-am'.
+gmake[6]: Nothing to be done for 'install-data-am'.
+gmake[6]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/manual'
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/manual'
+Making install in fastwc
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/fastwc'
+gmake[6]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/fastwc'
+gmake[6]: Nothing to be done for 'install-exec-am'.
+gmake[6]: Nothing to be done for 'install-data-am'.
+gmake[6]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/fastwc'
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples/fastwc'
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples'
+gmake[6]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples'
+gmake[6]: Nothing to be done for 'install-exec-am'.
+gmake[6]: Nothing to be done for 'install-data-am'.
+gmake[6]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples'
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/examples'
+Making install in po
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/po'
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/ca.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ca/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/da.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/da/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/de.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/de/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/en@quot.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/en@quot/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/en@boldquot.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/en@boldquot/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/eo.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/eo/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/es.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/es/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/fi.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/fi/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/fr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/fr/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/ga.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ga/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/hr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/hr/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/ko.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ko/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/nl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/nl/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/pl.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pl/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/pt_BR.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/pt_BR/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/ro.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ro/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/ru.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/ru/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/sr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sr/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/sv.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/sv/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/tr.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/tr/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/vi.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/vi/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/zh_CN.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/zh_CN/LC_MESSAGES/flex.mo
+installing /home/anton/Documents/pcap.js/build/flex/src/flex/po/zh_TW.gmo as /home/anton/Documents/pcap.js/build/install/share/locale/zh_TW/LC_MESSAGES/flex.mo
+if test "flex" = "gettext-tools"; then \
+  /usr/bin/mkdir -p /home/anton/Documents/pcap.js/build/install/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/flex/src/flex/po/$file \
+		    /home/anton/Documents/pcap.js/build/install/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /home/anton/Documents/pcap.js/build/install/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/po'
+Making install in tests
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tests'
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tests'
+gmake[5]: Nothing to be done for 'install-exec-am'.
+gmake[5]: Nothing to be done for 'install-data-am'.
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tests'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tests'
+Making install in tools
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tools'
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tools'
+gmake[5]: Nothing to be done for 'install-exec-am'.
+gmake[5]: Nothing to be done for 'install-data-am'.
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tools'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build/tools'
+gmake[4]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+gmake[5]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+/usr/bin/gmake  install-exec-hook
+gmake[6]: Entering directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+cd /home/anton/Documents/pcap.js/build/install/bin && \
+	ln -s -f flex flex++
+gmake[6]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+ /usr/bin/mkdir -p '/home/anton/Documents/pcap.js/build/install/share/doc/flex'
+ /usr/bin/install -c -m 644 /home/anton/Documents/pcap.js/build/flex/src/flex/AUTHORS /home/anton/Documents/pcap.js/build/flex/src/flex/COPYING /home/anton/Documents/pcap.js/build/flex/src/flex/NEWS /home/anton/Documents/pcap.js/build/flex/src/flex/ONEWS /home/anton/Documents/pcap.js/build/flex/src/flex/README.md '/home/anton/Documents/pcap.js/build/install/share/doc/flex'
+gmake[5]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+gmake[4]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+gmake[3]: Leaving directory '/home/anton/Documents/pcap.js/build/flex/src/flex-build'
+cd /home/anton/Documents/pcap.js/build/flex/src/flex-build && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/flex-install
+[ 22%] Completed 'flex'
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/CMakeFiles
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/CMakeFiles/flex-complete
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/flex/src/flex-stamp/flex-done
+gmake[2]: Leaving directory '/home/anton/Documents/pcap.js/build'
+[ 22%] Built target flex
+/usr/bin/gmake  -f CMakeFiles/bison.dir/build.make CMakeFiles/bison.dir/depend
+gmake[2]: Entering directory '/home/anton/Documents/pcap.js/build'
+cd /home/anton/Documents/pcap.js/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/anton/Documents/pcap.js /home/anton/Documents/pcap.js /home/anton/Documents/pcap.js/build /home/anton/Documents/pcap.js/build /home/anton/Documents/pcap.js/build/CMakeFiles/bison.dir/DependInfo.cmake --color=
+gmake[2]: Leaving directory '/home/anton/Documents/pcap.js/build'
+/usr/bin/gmake  -f CMakeFiles/bison.dir/build.make CMakeFiles/bison.dir/build
+gmake[2]: Entering directory '/home/anton/Documents/pcap.js/build'
+[ 25%] Creating directories for 'bison'
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/bison/src/bison
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/bison/src/bison-build
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/bison
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/bison/tmp
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/bison/src/bison-stamp
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/bison/src
+/usr/bin/cmake -E make_directory /home/anton/Documents/pcap.js/build/bison/src/bison-stamp
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/bison-mkdir
+[ 27%] Performing download step (download, verify and extract) for 'bison'
+cd /home/anton/Documents/pcap.js/build/bison/src && /usr/bin/cmake -P /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/download-bison.cmake
+-- Downloading...
+   dst='/home/anton/Documents/pcap.js/build/bison/src/bison-3.8.2.tar.gz'
+   timeout='none'
+   inactivity timeout='none'
+-- Using src='https://ftp.gnu.org/gnu/bison/bison-3.8.2.tar.gz'
+-- [download 0% complete]
+-- [download 1% complete]
+-- [download 2% complete]
+-- [download 3% complete]
+-- [download 4% complete]
+-- [download 5% complete]
+-- [download 6% complete]
+-- [download 7% complete]
+-- [download 8% complete]
+-- [download 9% complete]
+-- [download 10% complete]
+-- [download 11% complete]
+-- [download 12% complete]
+-- [download 13% complete]
+-- [download 14% complete]
+-- [download 15% complete]
+-- [download 16% complete]
+-- [download 17% complete]
+-- [download 18% complete]
+-- [download 19% complete]
+-- [download 20% complete]
+-- [download 21% complete]
+-- [download 22% complete]
+-- [download 23% complete]
+-- [download 24% complete]
+-- [download 25% complete]
+-- [download 26% complete]
+-- [download 27% complete]
+-- [download 28% complete]
+-- [download 29% complete]
+-- [download 30% complete]
+-- [download 31% complete]
+-- [download 32% complete]
+-- [download 33% complete]
+-- [download 34% complete]
+-- [download 35% complete]
+-- [download 36% complete]
+-- [download 37% complete]
+-- [download 38% complete]
+-- [download 39% complete]
+-- [download 40% complete]
+-- [download 41% complete]
+-- [download 42% complete]
+-- [download 43% complete]
+-- [download 44% complete]
+-- [download 45% complete]
+-- [download 46% complete]
+-- [download 47% complete]
+-- [download 48% complete]
+-- [download 49% complete]
+-- [download 50% complete]
+-- [download 51% complete]
+-- [download 52% complete]
+-- [download 53% complete]
+-- [download 54% complete]
+-- [download 55% complete]
+-- [download 56% complete]
+-- [download 57% complete]
+-- [download 58% complete]
+-- [download 59% complete]
+-- [download 60% complete]
+-- [download 61% complete]
+-- [download 62% complete]
+-- [download 63% complete]
+-- [download 64% complete]
+-- [download 65% complete]
+-- [download 66% complete]
+-- [download 67% complete]
+-- [download 68% complete]
+-- [download 69% complete]
+-- [download 70% complete]
+-- [download 71% complete]
+-- [download 72% complete]
+-- [download 73% complete]
+-- [download 74% complete]
+-- [download 75% complete]
+-- [download 76% complete]
+-- [download 77% complete]
+-- [download 78% complete]
+-- [download 79% complete]
+-- [download 80% complete]
+-- [download 81% complete]
+-- [download 82% complete]
+-- [download 83% complete]
+-- [download 84% complete]
+-- [download 85% complete]
+-- [download 86% complete]
+-- [download 87% complete]
+-- [download 88% complete]
+-- [download 89% complete]
+-- [download 90% complete]
+-- [download 91% complete]
+-- [download 92% complete]
+-- [download 93% complete]
+-- [download 94% complete]
+-- [download 95% complete]
+-- [download 96% complete]
+-- [download 97% complete]
+-- [download 98% complete]
+-- [download 99% complete]
+-- [download 100% complete]
+-- verifying file...
+       file='/home/anton/Documents/pcap.js/build/bison/src/bison-3.8.2.tar.gz'
+-- Downloading... done
+cd /home/anton/Documents/pcap.js/build/bison/src && /usr/bin/cmake -P /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/verify-bison.cmake
+cd /home/anton/Documents/pcap.js/build/bison/src && /usr/bin/cmake -P /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/extract-bison.cmake
+-- extracting...
+     src='/home/anton/Documents/pcap.js/build/bison/src/bison-3.8.2.tar.gz'
+     dst='/home/anton/Documents/pcap.js/build/bison/src/bison'
+-- extracting... [tar xfz]
+-- extracting... [analysis]
+-- extracting... [rename]
+-- extracting... [clean up]
+-- extracting... done
+cd /home/anton/Documents/pcap.js/build/bison/src && /usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/bison-download
+[ 30%] No update step for 'bison'
+/usr/bin/cmake -E echo_append
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/bison-update
+[ 33%] No patch step for 'bison'
+/usr/bin/cmake -E echo_append
+/usr/bin/cmake -E touch /home/anton/Documents/pcap.js/build/bison/src/bison-stamp/bison-patch
+[ 36%] Performing configure step for 'bison'
+cd /home/anton/Documents/pcap.js/build/bison/src/bison-build && /home/anton/Documents/pcap.js/build/bison/src/bison/configure --prefix=/home/anton/Documents/pcap.js/build/install
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a race-free mkdir -p... /usr/bin/mkdir -p
+checking for gawk... no
+checking for mawk... mawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
+checking whether make supports nested variables... (cached) yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... none needed
+checking whether gcc understands -c and -o together... yes
+checking whether the compiler is clang... no
+checking for compiler option needed when checking for declarations... none
+checking whether make supports the include directive... yes (GNU style)
+checking dependency style of gcc... gcc3
+checking for g++... g++
+checking whether the compiler supports GNU C++... yes
+checking whether g++ accepts -g... yes
+checking for g++ option to enable C++11 features... none needed
+checking dependency style of g++... gcc3
+checking for stdio.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for strings.h... yes
+checking for sys/stat.h... yes
+checking for sys/types.h... yes
+checking for unistd.h... yes
+checking for wchar.h... yes
+checking for minix/config.h... no
+checking for locale.h... yes
+checking for sys/param.h... yes
+checking for sys/socket.h... yes
+checking for stdio_ext.h... yes
+checking for features.h... yes
+checking for getopt.h... yes
+checking for sys/cdefs.h... yes
+checking for sys/time.h... yes
+checking for iconv.h... yes
+checking for limits.h... yes
+checking for crtdefs.h... no
+checking for wctype.h... yes
+checking for threads.h... yes
+checking for math.h... yes
+checking for sys/mman.h... yes
+checking for spawn.h... yes
+checking for sys/ioctl.h... yes
+checking for sys/resource.h... yes
+checking for sys/times.h... yes
+checking for sys/wait.h... yes
+checking for termios.h... yes
+checking for dirent.h... yes
+checking for xlocale.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking whether _XOPEN_SOURCE should be defined... no
+checking build system type... x86_64-pc-linux-gnu
+checking host system type... x86_64-pc-linux-gnu
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for Minix Amsterdam compiler... no
+checking for ar... ar
+checking for ranlib... ranlib
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking 32-bit host C ABI... no
+checking for ELF binary format... yes
+checking for the common suffixes of directories in the library search path... lib,lib,lib64
+checking for libtextstyle... no
+checking for inline... inline
+checking for tcdrain... yes
+checking for canonicalize_file_name... yes
+checking for faccessat... yes
+checking for realpath... yes
+checking for lstat... yes
+checking for readlinkat... yes
+checking for _set_invalid_parameter_handler... no
+checking for fchdir... yes
+checking for fcntl... yes
+checking for symlink... yes
+checking for ffsl... yes
+checking for vasnprintf... no
+checking for snprintf... yes
+checking for fsync... yes
+checking for microuptime... no
+checking for nanouptime... no
+checking for getprogname... no
+checking for getexecname... no
+checking for getrusage... yes
+checking for gettimeofday... yes
+checking for iswcntrl... yes
+checking for iswblank... yes
+checking for mbsinit... yes
+checking for mbrtowc... yes
+checking for isascii... yes
+checking for mprotect... yes
+checking for obstack_printf... yes
+checking for strerror_r... yes
+checking for __xpg_strerror_r... yes
+checking for pipe... yes
+checking for pipe2... yes
+checking for posix_spawn_file_actions_addchdir_np... yes
+checking for posix_spawn_file_actions_addchdir... no
+checking for readlink... yes
+checking for setenv... yes
+checking for link... yes
+checking for sigaction... yes
+checking for sigaltstack... yes
+checking for siginterrupt... yes
+checking for stpncpy... yes
+checking for strndup... yes
+checking for wcwidth... yes
+checking for fdopendir... yes
+checking for mempcpy... yes
+checking for __fseterr... no
+checking for fstatat... yes
+checking for getdelim... yes
+checking for getdtablesize... yes
+checking for openat... yes
+checking for catgets... yes
+checking for setlocale... yes
+checking whether pragma GCC diagnostic push works... yes
+checking whether C++ compiler handles -Werror -Wunknown-warning-option... no
+checking whether C++ compiler handles -fno-exceptions... yes
+checking whether C++ compiler accepts -std=c++98... yes
+checking whether C++ compiler accepts -std=c++03... yes
+checking whether C++ compiler accepts -std=c++11... yes
+checking whether C++ compiler accepts -std=c++14... yes
+checking whether C++ compiler accepts -std=c++17... yes
+checking whether C++ compiler accepts -std=c++20... yes
+checking whether C++ compiler accepts -std=c++2b... yes
+checking whether gcc supports POSIXLY_CORRECT=1... yes
+checking whether g++ builds executables that work... yes
+checking whether g++ supports POSIXLY_CORRECT=1... yes
+checking for dmd... no
+checking for -g... no
+checking for Java compiler... no
+checking for Java virtual machine... java
+checking for flex... flex
+checking whether lex is flex... yes
+checking whether flex supports --header=FILE... yes
+checking lex output file root... lex.yy
+checking lex library... -lfl
+checking whether yytext is a pointer... yes
+checking for bison... bison -y
+checking for ranlib... (cached) ranlib
+checking for GNU M4 that supports accurate traces... /usr/bin/m4
+checking whether /usr/bin/m4 accepts --gnu... yes
+checking how m4 supports trace files... --debugfile
+checking for perl... /usr/bin/perl
+checking for xsltproc... /home/anton/miniconda3/bin/xsltproc
+checking for inline... (cached) inline
+checking for size_t... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking whether malloc is ptrdiff_t safe... yes
+checking whether malloc, realloc, calloc set errno on failure... yes
+checking whether lstat correctly handles trailing slash... yes
+checking whether // is distinct from /... no
+checking whether realpath works... yes
+checking for getcwd... yes
+checking for C/C++ restrict keyword... __restrict__
+checking if environ is properly declared... yes
+checking whether the preprocessor supports include_next... yes
+checking whether source code line length is unlimited... yes
+checking for complete errno.h... yes
+checking for gcc options needed to detect all undeclared functions... none needed
+checking whether strerror_r is declared... yes
+checking whether strerror_r returns char *... yes
+checking for mode_t... yes
+checking for sig_atomic_t... yes
+checking for working fcntl.h... yes
+checking for pid_t... yes
+checking for eaccess... yes
+checking for stdint.h... yes
+checking for inttypes.h... yes
+checking whether printf supports size specifiers as in C99... yes
+checking whether printf supports 'long double' arguments... yes
+checking whether printf supports infinite 'double' arguments... yes
+checking whether byte ordering is bigendian... no
+checking whether long double and double are the same... no
+checking whether printf supports infinite 'long double' arguments... yes
+checking whether printf supports the 'a' and 'A' directives... yes
+checking whether printf supports the 'F' directive... yes
+checking whether printf supports the 'n' directive... no
+checking whether printf supports the 'ls' directive... yes
+checking whether printf supports POSIX/XSI format strings with positions... yes
+checking whether printf supports the grouping flag... yes
+checking whether printf supports the left-adjust flag correctly... yes
+checking whether printf supports the zero flag correctly... yes
+checking whether printf supports large precisions... yes
+checking whether the compiler produces multi-arch binaries... no
+checking whether printf survives out-of-memory conditions... yes
+checking for wchar_t... yes
+checking for wint_t... yes
+checking whether wint_t is large enough... yes
+checking for intmax_t... yes
+checking where to find the exponent in a 'double'... word 1 bit 20
+checking whether snprintf returns a byte count as in C99... yes
+checking whether snprintf truncates the result as in C99... yes
+checking for snprintf... (cached) yes
+checking for strnlen... yes
+checking for wcslen... yes
+checking for wcsnlen... yes
+checking for mbrtowc... (cached) yes
+checking for wcrtomb... yes
+checking whether _snprintf is declared... no
+checking whether frexp() can be used without linking with libm... yes
+checking whether alarm is declared... yes
+checking whether getcwd (NULL, 0) allocates memory for result... yes
+checking for getcwd with POSIX signature... yes
+checking whether getcwd is declared... yes
+checking for d_ino member in directory struct... yes
+checking for arithmetic hrtime_t... no
+checking for getopt.h... (cached) yes
+checking for getopt_long_only... yes
+checking whether getopt is POSIX compatible... yes
+checking for working GNU getopt function... yes
+checking for working GNU getopt_long function... yes
+checking for struct timeval... yes
+checking for wide-enough struct timeval.tv_sec member... yes
+checking for iconv... yes
+checking for working iconv... yes
+checking whether iconv is compatible with its POSIX signature... yes
+checking whether limits.h has WORD_BIT, BOOL_WIDTH etc.... yes
+checking whether stdint.h conforms to C99... yes
+checking whether stdint.h works without ISO C predefines... yes
+checking whether stdint.h has UINTMAX_WIDTH etc.... yes
+checking whether INT32_MAX < INTMAX_MAX... yes
+checking whether INT64_MAX == LONG_MAX... yes
+checking whether UINT32_MAX < UINTMAX_MAX... yes
+checking whether UINT64_MAX == ULONG_MAX... yes
+checking where to find the exponent in a 'float'... word 0 bit 23
+checking whether isnan(float) can be used without linking with libm... yes
+checking whether isnan(float) works... yes
+checking whether isnan(double) can be used without linking with libm... yes
+checking whether isnan(long double) can be used without linking with libm... yes
+checking whether isnanl works... yes
+checking whether iswcntrl works... yes
+checking for towlower... yes
+checking for wctype_t... yes
+checking for wctrans_t... yes
+checking for nl_langinfo and CODESET... yes
+checking for a traditional french locale... none
+checking for a traditional japanese locale... none
+checking for a french Unicode locale... none
+checking for a transitional chinese locale... 
