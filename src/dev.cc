@@ -28,13 +28,12 @@ Napi::Array listDevices(const Napi::CallbackInfo& info) {
   pcap_if_t *alldevsp = nullptr, *device;
   pcap_addr_t *address;
   int i, j, af;
-  Napi::Array devices = Napi::Array::New(env);
   
   if (pcap_findalldevs(&alldevsp, errbuf) != 0) {
-      Napi::Error::New(env, errbuf).ThrowAsJavaScriptException();
-      return devices;
+    throw Napi::Error::New(env, Napi::String::New(env, errbuf));
 	}
 	
+  Napi::Array devices = Napi::Array::New(env);
 	for (i = 0, device = alldevsp; device != nullptr; device = device->next, ++i) {
     Napi::Object devObject = Napi::Object::New(env);
     devObject.Set("name", Napi::String::New(env, device->name));
