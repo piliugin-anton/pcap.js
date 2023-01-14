@@ -37,7 +37,7 @@ Napi::Array listDevices(const Napi::CallbackInfo& info) {
 	for (i = 0, device = alldevsp; device != nullptr; device = device->next, ++i) {
     Napi::Object devObject = Napi::Object::New(env);
     devObject.Set("name", Napi::String::New(env, device->name));
-    devObject.Set("description", Napi::String::New(env, device->description));
+    devObject.Set("description", (device->description != nullptr) ? Napi::String::New(env, device->description) : env.Null());
     devObject.Set("flags", Napi::Number::New(env, (double)device->flags));
 
     Napi::Array addresses = Napi::Array::New(env);

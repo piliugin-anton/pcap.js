@@ -4,9 +4,12 @@
   "description": "Packet manipulation library for Node.js",
   "main": "index.js",
   "scripts": {
-    "configure": "cmake-js configure",
-    "install": "cmake-js compile",
-    "print-configure": "cmake-js print-configure"
+    "preinstall": "cmake-js configure -B Release",
+    "install": "cmake-js build -B Release",
+    "predebug": "cmake-js configure -D",
+    "debug": "cmake-js build -D",
+    "print-configure": "cmake-js print-configure",
+    "print-build": "cmake-js print-build"
   },
   "keywords": [
     "libpcap",

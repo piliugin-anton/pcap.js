@@ -49,10 +49,12 @@ set(LIBPCAP_LIBRARY ${DEPS_LIBS}/libpcap.so)
 
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
 
-set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
-target_compile_options(${PROJECT_NAME} PRIVATE -fexceptions PRIVATE -fvisibility=hidden)
+if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+	target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic)
+endif()
 target_compile_definitions(${PROJECT_NAME} PRIVATE NAPI_CPP_EXCEPTIONS PRIVATE NODE_ADDON_API_DISABLE_DEPRECATED)
 
+set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
 execute_process(COMMAND node -p "require('node-addon-api').include" WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} OUTPUT_VARIABLE NODE_ADDON_API_DIR)
 string(REGEX REPLACE "[\r\n\"]" "" NODE_ADDON_API_DIR ${NODE_ADDON_API_DIR})
 
