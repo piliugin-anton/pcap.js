@@ -5,7 +5,7 @@ Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
     Napi::Function func = DefineClass(env, "PCap", {
         InstanceMethod<&PCap::GetValue>("GetValue", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
         InstanceMethod<&PCap::SetValue>("SetValue", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
-        InstanceMethod<&PCap::listDevices>("listDevices", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
+        InstanceMethod<&PCap::listDevices>("listDevices", napi_default),
         StaticMethod<&PCap::CreateNewItem>("CreateNewItem", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
         //InstanceMethod<&PCap::ipStringHelper>("ipStringHelper", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
     });
