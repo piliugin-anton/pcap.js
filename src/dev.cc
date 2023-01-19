@@ -51,7 +51,6 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   if (pcap_set_buffer_size(this->_pcapHandle, this->_bufferSize) != 0) throw Napi::Error::New(env, "Unable to set buffer size");
   if (pcap_set_timeout(this->_pcapHandle, 1000) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
   pcap_set_immediate_mode(this->_pcapHandle, 1);
-  if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == -1) throw Napi::Error::New(env, Napi::String::New(env, errbuf));
   if (pcap_set_tstamp_type(this->_pcapHandle, PCAP_TSTAMP_HOST) != 0) throw Napi::Error::New(env, "Unable to set timestamp type");
   if (pcap_set_tstamp_precision(this->_pcapHandle, PCAP_TSTAMP_PRECISION_NANO) != 0) throw Napi::Error::New(env, "Unable to set timestamp precision");
   this->_dataLinkType = pcap_datalink(this->_pcapHandle);
@@ -64,7 +63,8 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
 
     pcap_freecode(&fp);
   }
-  if (pcap_activate(this->_pcapHandle) != 0) throw Napi::Error::New(env, Napi::String::New(env, pcap_geterr(this->_pcapHandle)));
+  if (pcap_activate(this->_pcapHandle) < 0) throw Napi::Error::New(env, Napi::String::New(env, pcap_geterr(this->_pcapHandle)));
+  if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == -1) throw Napi::Error::New(env, Napi::String::New(env, errbuf));
   this->_fd = pcap_get_selectable_fd(this->_pcapHandle);
   int r = uv_poll_init(uv_default_loop(), this->_pollHandle, this->_fd);
   if (r != 0) throw Napi::Error::New(env, "Unable to initialize UV polling");
@@ -161,13 +161,13 @@ Napi::Value PCap::findDevice(const Napi::CallbackInfo& info) {
 	
   Napi::Array devices = Napi::Array::New(env);
   Napi::Value searchValue = info[0].As<Napi::Value>();
-  bool isFound = false;
   bool doSearch = searchValue.IsString();
+  Napi::Value found = env.Null();
 	for (i = 0, device = alldevsp; device != nullptr; device = device->next, ++i) {
     Napi::HandleScope scope(env);
     Napi::Object devObject = Napi::Object::New(env);
     devObject.Set("name", Napi::String::New(env, device->name));
-    if (doSearch && devObject.Get("name").StrictEquals(searchValue)) isFound = true;
+    if (doSearch && found.IsNull() && devObject.Get("name").StrictEquals(searchValue)) found = devObject;
     devObject.Set("description", (device->description != nullptr) ? Napi::String::New(env, device->description) : env.Null());
     devObject.Set("flags", Napi::Number::New(env, (double)device->flags));
 
@@ -179,25 +179,20 @@ Napi::Value PCap::findDevice(const Napi::CallbackInfo& info) {
           Napi::Object addressObject = Napi::Object::New(env);
           addressObject.Set("family", Napi::Number::New(env, af));
           ipStringHelper("address", address->addr, &addressObject);
-          if (doSearch && addressObject.Get("address").StrictEquals(searchValue)) isFound = true;
           ipStringHelper("netmask", address->netmask, &addressObject);
           ipStringHelper("broadcastAddress", address->broadaddr, &addressObject);
           ipStringHelper("destinationAddress", address->dstaddr, &addressObject);
           addresses.Set(j++, addressObject);
+          if (doSearch && found.IsNull() && addressObject.Get("address").StrictEquals(searchValue)) found = devObject;
         }
       }
     }
 
 		devObject.Set("addresses", (addresses.Length() != 0) ? addresses : env.Null());
-    if (isFound) {
-      pcap_freealldevs(alldevsp);
-      return devObject;
-    }
     devices.Set(i, devObject);
 	}
 
   pcap_freealldevs(alldevsp);
-  if (doSearch) return env.Null();
 
-  return devices;
+  return doSearch ? found : devices;
 }
