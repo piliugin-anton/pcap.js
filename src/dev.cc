@@ -1,65 +1,129 @@
 #include "dev.h"
+#include <iostream>
 
 Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
-    // This method is used to hook the accessor and method callbacks
-    Napi::Function func = DefineClass(env, "PCap", {
-        InstanceMethod<&PCap::GetValue>("GetValue", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
-        InstanceMethod<&PCap::SetValue>("SetValue", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
-        InstanceMethod<&PCap::listDevices>("listDevices", napi_default),
-        StaticMethod<&PCap::CreateNewItem>("CreateNewItem", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
-        //InstanceMethod<&PCap::ipStringHelper>("ipStringHelper", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
-    });
+  // This method is used to hook the accessor and method callbacks
+  Napi::Function func = DefineClass(env, "PCap", {
+    StaticMethod<&PCap::findDevice>("findDevice", napi_default),
+    InstanceMethod<&PCap::startCapture>("startCapture", napi_default)
+  });
 
-    Napi::FunctionReference* constructor = new Napi::FunctionReference();
+  Napi::FunctionReference* constructor = new Napi::FunctionReference();
 
-    // Create a persistent reference to the class constructor. This will allow
-    // a function called on a class prototype and a function
-    // called on instance of a class to be distinguished from each other.
-    *constructor = Napi::Persistent(func);
-    exports.Set("PCap", func);
+  // Create a persistent reference to the class constructor. This will allow
+  // a function called on a class prototype and a function
+  // called on instance of a class to be distinguished from each other.
+  *constructor = Napi::Persistent(func);
+  exports.Set("PCap", func);
 
-    // Store the constructor as the add-on instance data. This will allow this
-    // add-on to support multiple instances of itself running on multiple worker
-    // threads, as well as multiple instances of itself running in different
-    // contexts on the same thread.
-    //
-    // By default, the value set on the environment here will be destroyed when
-    // the add-on is unloaded using the `delete` operator, but it is also
-    // possible to supply a custom deleter.
-    env.SetInstanceData<Napi::FunctionReference>(constructor);
+  // Store the constructor as the add-on instance data. This will allow this
+  // add-on to support multiple instances of itself running on multiple worker
+  // threads, as well as multiple instances of itself running in different
+  // contexts on the same thread.
+  //
+  // By default, the value set on the environment here will be destroyed when
+  // the add-on is unloaded using the `delete` operator, but it is also
+  // possible to supply a custom deleter.
+  env.SetInstanceData<Napi::FunctionReference>(constructor);
 
-    return exports;
+  return exports;
 }
 
-PCap::PCap(const Napi::CallbackInfo& info) :
-    Napi::ObjectWrap<PCap>(info) {
+PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
   Napi::Env env = info.Env();
-  // ...
-  Napi::Number value = info[0].As<Napi::Number>();
-  this->_value = value.DoubleValue();
+  Napi::Function cb = info[1].As<Napi::Function>();
+  this->_cb = Napi::Persistent(cb);
+  Napi::Value device = findDevice(info).As<Napi::Value>();
+  if (device.IsObject()) {
+    Napi::Object deviceObject = device.As<Napi::Object>();
+    this->_deviceName = deviceObject.Get("name").As<Napi::String>().Utf8Value().data();
+  } else {
+    this->_deviceName = "any";
+  }
 }
 
-Napi::Value PCap::GetValue(const Napi::CallbackInfo& info){
-    Napi::Env env = info.Env();
-    return Napi::Number::New(env, this->_value);
+void PCap::startCapture(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  char errbuf[PCAP_ERRBUF_SIZE];
+  this->_pcapHandle = pcap_create(this->_deviceName, errbuf);
+  if (this->_pcapHandle == nullptr) throw Napi::Error::New(env, Napi::String::New(env, errbuf));
+  if (pcap_set_promisc(this->_pcapHandle, 1) != 0) throw Napi::Error::New(env, "Unable to set promiscuous mode");
+  if (pcap_set_buffer_size(this->_pcapHandle, this->_bufferSize) != 0) throw Napi::Error::New(env, "Unable to set buffer size");
+  if (pcap_set_timeout(this->_pcapHandle, 1000) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
+  pcap_set_immediate_mode(this->_pcapHandle, 1);
+  if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == -1) throw Napi::Error::New(env, Napi::String::New(env, errbuf));
+  if (pcap_set_tstamp_type(this->_pcapHandle, PCAP_TSTAMP_HOST) != 0) throw Napi::Error::New(env, "Unable to set timestamp type");
+  if (pcap_set_tstamp_precision(this->_pcapHandle, PCAP_TSTAMP_PRECISION_NANO) != 0) throw Napi::Error::New(env, "Unable to set timestamp precision");
+  this->_dataLinkType = pcap_datalink(this->_pcapHandle);
+  Napi::Value filter = info[0].As<Napi::Value>();
+  if (filter.IsString()) {
+    const char* filterChar = filter.As<Napi::String>().Utf8Value().data();
+    struct bpf_program fp;
+    if (pcap_compile(this->_pcapHandle, &fp, filterChar, 1, PCAP_NETMASK_UNKNOWN) == -1) throw Napi::Error::New(env, pcap_geterr(this->_pcapHandle));
+    if (pcap_setfilter(this->_pcapHandle, &fp) == -1) throw Napi::Error::New(env, pcap_geterr(this->_pcapHandle));
+
+    pcap_freecode(&fp);
+  }
+  if (pcap_activate(this->_pcapHandle) != 0) throw Napi::Error::New(env, Napi::String::New(env, pcap_geterr(this->_pcapHandle)));
+  this->_fd = pcap_get_selectable_fd(this->_pcapHandle);
+  int r = uv_poll_init(uv_default_loop(), this->_pollHandle, this->_fd);
+  if (r != 0) throw Napi::Error::New(env, "Unable to initialize UV polling");
+  r = uv_poll_start(this->_pollHandle, UV_READABLE, PCap::onPackets);
+  if (r != 0) throw Napi::Error::New(env, "Unable to start UV polling");
+  this->_pollHandle->data = this;
 }
 
-Napi::Value PCap::SetValue(const Napi::CallbackInfo& info){
-    Napi::Env env = info.Env();
-    // ...
-    Napi::Number value = info[0].As<Napi::Number>();
-    this->_value = value.DoubleValue();
-    return this->GetValue(info);
+void PCap::onPackets(uv_poll_t* handle, int status, int events) {
+  std::cout << "onPackets() status: " << status << "\n";
+  if (status != 0) return;
+
+  PCap *obj = static_cast<PCap*>(handle->data);
+  if (!obj->_closing && (events & UV_READABLE)) {
+    obj->_handlingPackets = true;
+    pcap_dispatch(obj->_pcapHandle, 32, PCap::emitPacket, (u_char*)obj);
+    obj->_handlingPackets = false;
+  }
 }
 
-// Create a new item using the constructor stored during Init.
-Napi::Value PCap::CreateNewItem(const Napi::CallbackInfo& info) {
-  // Retrieve the instance data we stored during `Init()`. We only stored the
-  // constructor there, so we retrieve it here to create a new instance of the
-  // JS class the constructor represents.
-  Napi::FunctionReference* constructor =
-      info.Env().GetInstanceData<Napi::FunctionReference>();
-  return constructor->New({ Napi::Number::New(info.Env(), 42) });
+void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_char* pktData) {
+  PCap *obj = (PCap*)user;
+
+  size_t copyLen = pktHdr->caplen;
+  bool truncated = false;
+  if (copyLen > obj->_bufferSize) {
+    copyLen = obj->_bufferSize;
+    truncated = true;
+  }
+
+  std::cout << "emitPacket(), len: " << copyLen << ", truncated: " << truncated << "\n";
+
+  /*Napi::Buffer<char> Napi::Buffer::New(napi_env env, T* data, size_t length);
+  memcpy(obj->_bufferData, pktData, copyLen);
+
+  this->_cb::
+  Local<Value> emit_argv[3] = {
+    Nan::New<String>(packet_symbol),
+    Nan::New<Number>(copy_len),
+    Nan::New<Boolean>(truncated)
+  };
+  obj->async_res.runInAsyncScope(
+    Nan::New<Object>(obj->persistent()),
+    Nan::New<Function>(obj->Emit),
+    3,
+    emit_argv
+  );*/
+}
+
+void PCap::Finalize(Napi::Env env) {
+  if (this->_closing) return;
+
+  this->_closing = true;
+
+  if (this->_pollHandle != nullptr) uv_poll_stop(this->_pollHandle);
+  if (this->_pcapHandle != nullptr) pcap_close(this->_pcapHandle);
+
+  this->_pcapHandle = nullptr;
+  this->_bufferData = nullptr;
 }
 
 void PCap::ipStringHelper(const char* key, sockaddr *addr, Napi::Object *Address) {
@@ -84,7 +148,7 @@ void PCap::ipStringHelper(const char* key, sockaddr *addr, Napi::Object *Address
   }
 }
 
-Napi::Value PCap::listDevices(const Napi::CallbackInfo& info) {
+Napi::Value PCap::findDevice(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   char errbuf[PCAP_ERRBUF_SIZE];
   pcap_if_t *alldevsp = nullptr, *device;
@@ -96,9 +160,14 @@ Napi::Value PCap::listDevices(const Napi::CallbackInfo& info) {
 	}
 	
   Napi::Array devices = Napi::Array::New(env);
+  Napi::Value searchValue = info[0].As<Napi::Value>();
+  bool isFound = false;
+  bool doSearch = searchValue.IsString();
 	for (i = 0, device = alldevsp; device != nullptr; device = device->next, ++i) {
+    Napi::HandleScope scope(env);
     Napi::Object devObject = Napi::Object::New(env);
     devObject.Set("name", Napi::String::New(env, device->name));
+    if (doSearch && devObject.Get("name").StrictEquals(searchValue)) isFound = true;
     devObject.Set("description", (device->description != nullptr) ? Napi::String::New(env, device->description) : env.Null());
     devObject.Set("flags", Napi::Number::New(env, (double)device->flags));
 
@@ -108,7 +177,9 @@ Napi::Value PCap::listDevices(const Napi::CallbackInfo& info) {
         af = address->addr->sa_family;
         if (af == AF_INET || af == AF_INET6) {
           Napi::Object addressObject = Napi::Object::New(env);
+          addressObject.Set("family", Napi::Number::New(env, af));
           ipStringHelper("address", address->addr, &addressObject);
+          if (doSearch && addressObject.Get("address").StrictEquals(searchValue)) isFound = true;
           ipStringHelper("netmask", address->netmask, &addressObject);
           ipStringHelper("broadcastAddress", address->broadaddr, &addressObject);
           ipStringHelper("destinationAddress", address->dstaddr, &addressObject);
@@ -118,8 +189,15 @@ Napi::Value PCap::listDevices(const Napi::CallbackInfo& info) {
     }
 
 		devObject.Set("addresses", (addresses.Length() != 0) ? addresses : env.Null());
+    if (isFound) {
+      pcap_freealldevs(alldevsp);
+      return devObject;
+    }
     devices.Set(i, devObject);
 	}
+
+  pcap_freealldevs(alldevsp);
+  if (doSearch) return env.Null();
 
   return devices;
 }

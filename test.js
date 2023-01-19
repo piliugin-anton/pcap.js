@@ -1,14 +1,9 @@
-const pcapjs = require("./");
-const { PCap } = pcapjs;
-const instance = new PCap(11);
-console.log(instance.listDevices())
-instance.listDevices = null;
-console.log(instance.listDevices())
-/*
+const { PCap } = require("./");
+const instance = new PCap("wlp3s0f0", (...args) => console.log("onPacket", args));
+
 try {
-    const devices = pcapjs.listDevices();
-    console.log(devices);
+    instance.startCapture();
 } catch (ex) {
     console.error(ex);
 }
-*/
+
