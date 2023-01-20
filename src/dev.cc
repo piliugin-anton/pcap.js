@@ -5,7 +5,8 @@ Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
   // This method is used to hook the accessor and method callbacks
   Napi::Function func = DefineClass(env, "PCap", {
     StaticMethod<&PCap::findDevice>("findDevice", napi_default),
-    InstanceMethod<&PCap::startCapture>("startCapture", static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    InstanceMethod<&PCap::startCapture>("startCapture", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
+    InstanceMethod<&PCap::stopCapture>("stopCapture", static_cast<napi_property_attributes>(napi_writable | napi_configurable))
   });
 
   Napi::FunctionReference* constructor = new Napi::FunctionReference();
@@ -30,9 +31,9 @@ Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
 }
 
 PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
+  Napi::Env env = info.Env();
   if (info[0].IsString()) {
     Napi::Value device = findDevice(info).As<Napi::Value>();
-    Napi::Env env = info.Env();
     if (device.IsNull() || !device.IsObject()) throw Napi::Error::New(env, "No device with name " + info[0].As<Napi::String>().Utf8Value() + " found");
     
     this->_deviceName = device.As<Napi::Object>().Get("name").As<Napi::String>().Utf8Value();
@@ -42,9 +43,7 @@ PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
 
   if (info[0].IsFunction() || info[1].IsFunction()) {
     this->_cb = Napi::Persistent(info[info[0].IsFunction() ? 0 : 1].As<Napi::Function>());
-  }
-
-  this->_bufferData = (char*)malloc(sizeof(char) * this->_bufferSize);
+  } else throw Napi::Error::New(env, "Callback function must be set");
 }
 
 void PCap::startCapture(const Napi::CallbackInfo& info) {
@@ -54,7 +53,7 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   if (!this->_pcapHandle) throw Napi::Error::New(env, errbuf);
   if (pcap_set_promisc(this->_pcapHandle, 1) != 0) throw Napi::Error::New(env, "Unable to set promiscuous mode");
   if (pcap_set_buffer_size(this->_pcapHandle, this->_bufferSize) != 0) throw Napi::Error::New(env, "Unable to set buffer size");
-  if (pcap_set_timeout(this->_pcapHandle, this->_bufferTimeout) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
+  //if (pcap_set_timeout(this->_pcapHandle, this->_bufferTimeout) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
   pcap_set_immediate_mode(this->_pcapHandle, 1);
   if (pcap_set_tstamp_type(this->_pcapHandle, PCAP_TSTAMP_HOST) != 0) throw Napi::Error::New(env, "Unable to set timestamp type");
   if (pcap_set_tstamp_precision(this->_pcapHandle, PCAP_TSTAMP_PRECISION_NANO) != 0) throw Napi::Error::New(env, "Unable to set timestamp precision");
@@ -78,52 +77,40 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   if (r != 0) throw Napi::Error::New(env, "Unable to initialize UV polling");
   r = uv_poll_start(&this->_pollHandle, UV_READABLE, PCap::onPackets);
   if (r != 0) throw Napi::Error::New(env, "Unable to start UV polling");
+  this->_closing = false;
   this->_pollHandle.data = this;
 }
 
+void PCap::stopCapture(const Napi::CallbackInfo& info) {
+  if (this->_closing) return;
+
+  this->_closing = true;
+
+  if (&this->_pollHandle) uv_poll_stop(&this->_pollHandle);
+  if (this->_pcapHandle) pcap_close(this->_pcapHandle);
+
+  this->_handlingPackets = false;
+}
+
 void PCap::onPackets(uv_poll_t* handle, int status, int events) {
-  std::cout << "onPackets() status: " << status << ", events: " << events << "\n";
   if (status != 0) return;
 
   PCap *obj = static_cast<PCap*>(handle->data);
   if (!obj->_closing && (events & UV_READABLE)) {
     obj->_handlingPackets = true;
-    pcap_dispatch(obj->_pcapHandle, 32, PCap::emitPacket, (u_char*)obj);
+    pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
     obj->_handlingPackets = false;
   }
 }
 
 void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_char* pktData) {
   PCap *obj = (PCap*)user;
-  Napi::Env env = obj->_cb.Env();
-  Napi::HandleScope scope(env);
 
-  size_t copyLen = pktHdr->caplen;
-  bool truncated = false;
-  if (copyLen > obj->_bufferSize) {
-    copyLen = obj->_bufferSize;
-    truncated = true;
+  if (!obj->_closing) {
+    Napi::Env env = obj->_cb.Env();
+    Napi::HandleScope scope(env);
+    obj->_cb.Call(env.Global(), std::initializer_list<napi_value>{Napi::Buffer<u_char>::Copy(env, pktData, pktHdr->caplen)});
   }
-
-  std::cout << "emitPacket(), len: " << copyLen << ", truncated: " << truncated << "\n";
-  memcpy(obj->_bufferData, pktData, copyLen);
-  
-  obj->_cb.Call({ Napi::Buffer<char>::New(env, obj->_bufferData, copyLen), Napi::Boolean::New(env, truncated) });
-}
-
-void PCap::Finalize(Napi::Env env) {
-  std::cout << "Finalizing...\n";
-  if (this->_closing) return;
-
-  this->_closing = true;
-  if (&this->_pollHandle) {
-    std::cout << "PollHandle is ok...\n";
-    uv_poll_stop(&this->_pollHandle);
-  }
-  if (this->_pcapHandle) pcap_close(this->_pcapHandle);
-
-  this->_pcapHandle = nullptr;
-  this->_bufferData = nullptr;
 }
 
 void PCap::ipStringHelper(const char* key, sockaddr *addr, Napi::Object *Address) {
