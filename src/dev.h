@@ -13,11 +13,12 @@ class PCap : public Napi::ObjectWrap<PCap> {
     void startCapture(const Napi::CallbackInfo& info);
   private:
     pcap_t* _pcapHandle = nullptr;
-    const char* _deviceName;
+    std::string _deviceName;
     int _dataLinkType;
     int _fd;
-    uv_poll_t* _pollHandle = nullptr;
+    uv_poll_t _pollHandle;
     const uint16_t _bufferSize = 65535;
+    const int _bufferTimeout = 1000;
     bool _handlingPackets = false;
     bool _closing = false;
     Napi::FunctionReference _cb;

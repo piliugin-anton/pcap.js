@@ -5,7 +5,7 @@ Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
   // This method is used to hook the accessor and method callbacks
   Napi::Function func = DefineClass(env, "PCap", {
     StaticMethod<&PCap::findDevice>("findDevice", napi_default),
-    InstanceMethod<&PCap::startCapture>("startCapture", napi_default)
+    InstanceMethod<&PCap::startCapture>("startCapture", static_cast<napi_property_attributes>(napi_writable | napi_configurable))
   });
 
   Napi::FunctionReference* constructor = new Napi::FunctionReference();
@@ -30,57 +30,63 @@ Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
 }
 
 PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
-  Napi::Env env = info.Env();
-  Napi::Function cb = info[1].As<Napi::Function>();
-  this->_cb = Napi::Persistent(cb);
-  Napi::Value device = findDevice(info).As<Napi::Value>();
-  if (device.IsObject()) {
-    Napi::Object deviceObject = device.As<Napi::Object>();
-    this->_deviceName = deviceObject.Get("name").As<Napi::String>().Utf8Value().data();
+  if (info[0].IsString()) {
+    Napi::Value device = findDevice(info).As<Napi::Value>();
+    Napi::Env env = info.Env();
+    if (device.IsNull() || !device.IsObject()) throw Napi::Error::New(env, "No device with name " + info[0].As<Napi::String>().Utf8Value() + " found");
+    
+    this->_deviceName = device.As<Napi::Object>().Get("name").As<Napi::String>().Utf8Value();
   } else {
     this->_deviceName = "any";
+  }
+
+  if (info[0].IsFunction() || info[1].IsFunction()) {
+    this->_cb = Napi::Persistent(info[info[0].IsFunction() ? 0 : 1].As<Napi::Function>());
   }
 }
 
 void PCap::startCapture(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   char errbuf[PCAP_ERRBUF_SIZE];
-  this->_pcapHandle = pcap_create(this->_deviceName, errbuf);
-  if (this->_pcapHandle == nullptr) throw Napi::Error::New(env, Napi::String::New(env, errbuf));
+  this->_pcapHandle = pcap_create(this->_deviceName.c_str(), errbuf);
+  if (!this->_pcapHandle) throw Napi::Error::New(env, errbuf);
   if (pcap_set_promisc(this->_pcapHandle, 1) != 0) throw Napi::Error::New(env, "Unable to set promiscuous mode");
   if (pcap_set_buffer_size(this->_pcapHandle, this->_bufferSize) != 0) throw Napi::Error::New(env, "Unable to set buffer size");
-  if (pcap_set_timeout(this->_pcapHandle, 1000) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
+  if (pcap_set_timeout(this->_pcapHandle, this->_bufferTimeout) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
   pcap_set_immediate_mode(this->_pcapHandle, 1);
   if (pcap_set_tstamp_type(this->_pcapHandle, PCAP_TSTAMP_HOST) != 0) throw Napi::Error::New(env, "Unable to set timestamp type");
   if (pcap_set_tstamp_precision(this->_pcapHandle, PCAP_TSTAMP_PRECISION_NANO) != 0) throw Napi::Error::New(env, "Unable to set timestamp precision");
   this->_dataLinkType = pcap_datalink(this->_pcapHandle);
-  Napi::Value filter = info[0].As<Napi::Value>();
-  if (filter.IsString()) {
-    const char* filterChar = filter.As<Napi::String>().Utf8Value().data();
+  if (info[0].IsString()) {
+    Napi::String filter = info[0].As<Napi::String>();
+    const char* filterChar = filter.Utf8Value().data();
     struct bpf_program fp;
-    if (pcap_compile(this->_pcapHandle, &fp, filterChar, 1, PCAP_NETMASK_UNKNOWN) == -1) throw Napi::Error::New(env, pcap_geterr(this->_pcapHandle));
-    if (pcap_setfilter(this->_pcapHandle, &fp) == -1) throw Napi::Error::New(env, pcap_geterr(this->_pcapHandle));
+    int compile = pcap_compile(this->_pcapHandle, &fp, filterChar, 1, PCAP_NETMASK_UNKNOWN);
+    if (compile != 0) throw Napi::Error::New(env, pcap_statustostr(compile));
+    int setFilter = pcap_setfilter(this->_pcapHandle, &fp);
+    if (setFilter != 0) throw Napi::Error::New(env, pcap_statustostr(setFilter));
 
     pcap_freecode(&fp);
   }
-  if (pcap_activate(this->_pcapHandle) < 0) throw Napi::Error::New(env, Napi::String::New(env, pcap_geterr(this->_pcapHandle)));
-  if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == -1) throw Napi::Error::New(env, Napi::String::New(env, errbuf));
+  int activated = pcap_activate(this->_pcapHandle);
+  if (activated < 0) throw Napi::Error::New(env, pcap_statustostr(activated));
+  if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == PCAP_ERROR) throw Napi::Error::New(env, errbuf);
   this->_fd = pcap_get_selectable_fd(this->_pcapHandle);
-  int r = uv_poll_init(uv_default_loop(), this->_pollHandle, this->_fd);
+  int r = uv_poll_init(uv_default_loop(), &this->_pollHandle, this->_fd);
   if (r != 0) throw Napi::Error::New(env, "Unable to initialize UV polling");
-  r = uv_poll_start(this->_pollHandle, UV_READABLE, PCap::onPackets);
+  r = uv_poll_start(&this->_pollHandle, UV_READABLE, PCap::onPackets);
   if (r != 0) throw Napi::Error::New(env, "Unable to start UV polling");
-  this->_pollHandle->data = this;
+  this->_pollHandle.data = this;
 }
 
 void PCap::onPackets(uv_poll_t* handle, int status, int events) {
-  std::cout << "onPackets() status: " << status << "\n";
+  std::cout << "onPackets() status: " << status << ", events: " << events << "\n";
   if (status != 0) return;
 
   PCap *obj = static_cast<PCap*>(handle->data);
   if (!obj->_closing && (events & UV_READABLE)) {
     obj->_handlingPackets = true;
-    pcap_dispatch(obj->_pcapHandle, 32, PCap::emitPacket, (u_char*)obj);
+    pcap_dispatch(obj->_pcapHandle, 1, PCap::emitPacket, (u_char*)obj);
     obj->_handlingPackets = false;
   }
 }
@@ -97,30 +103,21 @@ void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_ch
 
   std::cout << "emitPacket(), len: " << copyLen << ", truncated: " << truncated << "\n";
 
-  /*Napi::Buffer<char> Napi::Buffer::New(napi_env env, T* data, size_t length);
+  //Napi::Env env = obj->_cb.Env();
   memcpy(obj->_bufferData, pktData, copyLen);
-
-  this->_cb::
-  Local<Value> emit_argv[3] = {
-    Nan::New<String>(packet_symbol),
-    Nan::New<Number>(copy_len),
-    Nan::New<Boolean>(truncated)
-  };
-  obj->async_res.runInAsyncScope(
-    Nan::New<Object>(obj->persistent()),
-    Nan::New<Function>(obj->Emit),
-    3,
-    emit_argv
-  );*/
+  //obj->_cb.Call({ Napi::Buffer<char>::New(env, pktData, copyLen), Napi::Boolean::New(env, truncated) });
 }
 
 void PCap::Finalize(Napi::Env env) {
+  std::cout << "Finalizing...\n";
   if (this->_closing) return;
 
   this->_closing = true;
-
-  if (this->_pollHandle != nullptr) uv_poll_stop(this->_pollHandle);
-  if (this->_pcapHandle != nullptr) pcap_close(this->_pcapHandle);
+  if (&this->_pollHandle) {
+    std::cout << "PollHandle is ok...\n";
+    uv_poll_stop(&this->_pollHandle);
+  }
+  if (this->_pcapHandle) pcap_close(this->_pcapHandle);
 
   this->_pcapHandle = nullptr;
   this->_bufferData = nullptr;
@@ -156,7 +153,7 @@ Napi::Value PCap::findDevice(const Napi::CallbackInfo& info) {
   int i, j, af;
   
   if (pcap_findalldevs(&alldevsp, errbuf) != 0) {
-    throw Napi::Error::New(env, Napi::String::New(env, errbuf));
+    throw Napi::Error::New(env, errbuf);
 	}
 	
   Napi::Array devices = Napi::Array::New(env);
@@ -164,10 +161,10 @@ Napi::Value PCap::findDevice(const Napi::CallbackInfo& info) {
   bool doSearch = searchValue.IsString();
   Napi::Value found = env.Null();
 	for (i = 0, device = alldevsp; device != nullptr; device = device->next, ++i) {
-    Napi::HandleScope scope(env);
     Napi::Object devObject = Napi::Object::New(env);
-    devObject.Set("name", Napi::String::New(env, device->name));
-    if (doSearch && found.IsNull() && devObject.Get("name").StrictEquals(searchValue)) found = devObject;
+    Napi::String name = Napi::String::New(env, device->name);
+    devObject.Set("name", name);
+    if (doSearch && found.IsNull() && searchValue.StrictEquals(name)) found = devObject;
     devObject.Set("description", (device->description != nullptr) ? Napi::String::New(env, device->description) : env.Null());
     devObject.Set("flags", Napi::Number::New(env, (double)device->flags));
 
@@ -183,7 +180,7 @@ Napi::Value PCap::findDevice(const Napi::CallbackInfo& info) {
           ipStringHelper("broadcastAddress", address->broadaddr, &addressObject);
           ipStringHelper("destinationAddress", address->dstaddr, &addressObject);
           addresses.Set(j++, addressObject);
-          if (doSearch && found.IsNull() && addressObject.Get("address").StrictEquals(searchValue)) found = devObject;
+          if (doSearch && found.IsNull() && searchValue.StrictEquals(addressObject.Get("address"))) found = devObject;
         }
       }
     }
