@@ -5,8 +5,8 @@ Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
   // This method is used to hook the accessor and method callbacks
   Napi::Function func = DefineClass(env, "PCap", {
     StaticMethod<&PCap::findDevice>("findDevice", napi_default),
-    InstanceMethod<&PCap::startCapture>("startCapture", static_cast<napi_property_attributes>(napi_writable | napi_configurable)),
-    InstanceMethod<&PCap::stopCapture>("stopCapture", static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    InstanceMethod<&PCap::startCapture>("startCapture", napi_default),
+    InstanceMethod<&PCap::stopCapture>("stopCapture", napi_default)
   });
 
   Napi::FunctionReference* constructor = new Napi::FunctionReference();
@@ -81,15 +81,17 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   this->_pollHandle.data = this;
 }
 
-void PCap::stopCapture(const Napi::CallbackInfo& info) {
-  if (this->_closing) return;
+Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
+  if (this->_closing) return Napi::Boolean::New(info.Env(), false);
 
   this->_closing = true;
 
-  if (&this->_pollHandle) uv_poll_stop(&this->_pollHandle);
+  if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
   if (this->_pcapHandle) pcap_close(this->_pcapHandle);
 
   this->_handlingPackets = false;
+
+  return Napi::Boolean::New(info.Env(), true);
 }
 
 void PCap::onPackets(uv_poll_t* handle, int status, int events) {

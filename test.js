@@ -2,6 +2,7 @@
 //SegfaultHandler.registerHandler('crash.log');
 
 const { PCap } = require("./build/Debug/pcapjs.node");
+console.log(PCap.findDevice())
 const instance = new PCap("wlp3s0f0", (buffer) => console.log("[JS_onPacket]", buffer));
 try {
     //instance.startCapture();

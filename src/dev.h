@@ -10,7 +10,7 @@ class PCap : public Napi::ObjectWrap<PCap> {
     static Napi::Value findDevice(const Napi::CallbackInfo& info);
     static void ipStringHelper(const char* key, sockaddr *addr, Napi::Object *Address);
     void startCapture(const Napi::CallbackInfo& info);
-    void stopCapture(const Napi::CallbackInfo& info);
+    Napi::Value stopCapture(const Napi::CallbackInfo& info);
   private:
     pcap_t* _pcapHandle = nullptr;
     std::string _deviceName;
