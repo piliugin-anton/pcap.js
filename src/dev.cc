@@ -43,6 +43,8 @@ PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
   if (info[0].IsFunction() || info[1].IsFunction()) {
     this->_cb = Napi::Persistent(info[info[0].IsFunction() ? 0 : 1].As<Napi::Function>());
   }
+
+  this->_bufferData = (char*)malloc(sizeof(char) * this->_bufferSize);
 }
 
 void PCap::startCapture(const Napi::CallbackInfo& info) {
@@ -86,13 +88,15 @@ void PCap::onPackets(uv_poll_t* handle, int status, int events) {
   PCap *obj = static_cast<PCap*>(handle->data);
   if (!obj->_closing && (events & UV_READABLE)) {
     obj->_handlingPackets = true;
-    pcap_dispatch(obj->_pcapHandle, 1, PCap::emitPacket, (u_char*)obj);
+    pcap_dispatch(obj->_pcapHandle, 32, PCap::emitPacket, (u_char*)obj);
     obj->_handlingPackets = false;
   }
 }
 
 void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_char* pktData) {
   PCap *obj = (PCap*)user;
+  Napi::Env env = obj->_cb.Env();
+  Napi::HandleScope scope(env);
 
   size_t copyLen = pktHdr->caplen;
   bool truncated = false;
@@ -102,10 +106,9 @@ void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_ch
   }
 
   std::cout << "emitPacket(), len: " << copyLen << ", truncated: " << truncated << "\n";
-
-  //Napi::Env env = obj->_cb.Env();
   memcpy(obj->_bufferData, pktData, copyLen);
-  //obj->_cb.Call({ Napi::Buffer<char>::New(env, pktData, copyLen), Napi::Boolean::New(env, truncated) });
+  
+  obj->_cb.Call({ Napi::Buffer<char>::New(env, obj->_bufferData, copyLen), Napi::Boolean::New(env, truncated) });
 }
 
 void PCap::Finalize(Napi::Env env) {

@@ -22,7 +22,7 @@ class PCap : public Napi::ObjectWrap<PCap> {
     bool _handlingPackets = false;
     bool _closing = false;
     Napi::FunctionReference _cb;
-    char* _bufferData;
+    char* _bufferData = nullptr;
     static void onPackets(uv_poll_t* handle, int status, int events);
     static void emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_char* pktData);
 };
