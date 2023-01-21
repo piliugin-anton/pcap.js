@@ -44,9 +44,8 @@ PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
   if (info[0].IsFunction() || info[1].IsFunction()) {
     // Create a new context set to the receiver (ie, `this`) of the function call
     Context *context = new Napi::Reference<Napi::Value>(Napi::Persistent(info.This()));
-
     Napi::Function fn = info[info[0].IsFunction() ? 0 : 1].As<Napi::Function>();
-    this->_cb = Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS>::New(
+    this->_onPacketTSFN = Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS>::New(
       env,
       fn, // JavaScript function called asynchronously
       "PacketCallback", // Name
@@ -62,8 +61,10 @@ void PCap::Finalize(Napi::Env env) {
 }
 
 void PCap::startCapture(const Napi::CallbackInfo& info) {
+  if (this->_capturing) return;
+
   Napi::Env env = info.Env();
-  Napi::HandleScope scope(env);
+  //Napi::HandleScope scope(env);
   char errbuf[PCAP_ERRBUF_SIZE];
   this->_pcapHandle = pcap_create(this->_deviceName.c_str(), errbuf);
   if (!this->_pcapHandle) throw Napi::Error::New(env, errbuf);
@@ -93,19 +94,24 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   if (r != 0) throw Napi::Error::New(env, "Unable to initialize UV polling");
   r = uv_poll_start(&this->_pollHandle, UV_READABLE, PCap::onPackets);
   if (r != 0) throw Napi::Error::New(env, "Unable to start UV polling");
+
   this->_closing = false;
   this->_pollHandle.data = this;
+  this->_capturing = true;
+  this->_captured = true;
 }
 
 Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
-  if (this->_closing) return Napi::Boolean::New(info.Env(), false);
+  if (this->_closing || !this->_capturing) return Napi::Boolean::New(info.Env(), false);
 
   this->_closing = true;
 
+  if (this->_captured) this->_onPacketTSFN.Release();
   if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
   if (this->_pcapHandle) pcap_close(this->_pcapHandle);
 
   this->_handlingPackets = false;
+  this->_capturing = false;
 
   return Napi::Boolean::New(info.Env(), true);
 }
@@ -126,7 +132,7 @@ void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_ch
 
   if (!obj->_closing) {
     Packet *packet = new Packet(pktHdr, pktData);
-    obj->_cb.NonBlockingCall(packet);
+    obj->_onPacketTSFN.NonBlockingCall(packet);
   }
 }
 
