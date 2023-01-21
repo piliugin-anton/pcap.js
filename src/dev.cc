@@ -90,6 +90,10 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   if (activated < 0) throw Napi::Error::New(env, pcap_statustostr(activated));
   if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == PCAP_ERROR) throw Napi::Error::New(env, errbuf);
   this->_fd = pcap_get_selectable_fd(this->_pcapHandle);
+  if (this->_captured) {
+    napi_status status = this->_onPacketTSFN.Acquire();
+    std::cout << "Acquiring: " << status << "\n";
+  }
   int r = uv_poll_init(uv_default_loop(), &this->_pollHandle, this->_fd);
   if (r != 0) throw Napi::Error::New(env, "Unable to initialize UV polling");
   r = uv_poll_start(&this->_pollHandle, UV_READABLE, PCap::onPackets);
