@@ -4,6 +4,7 @@ const instance = new PCap("wlp3s0f0", (buffer, isTruncated, timestamp) => consol
 try {
     instance.startCapture();
     //setInterval(() => console.log(Date.now()), 1000);
+    setTimeout(() => instance.stopCapture(), 10000);
 } catch (ex) {
     console.error(ex);
 }

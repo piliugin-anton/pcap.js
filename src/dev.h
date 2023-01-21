@@ -28,6 +28,7 @@ class PCap : public Napi::ObjectWrap<PCap> {
     static void ipStringHelper(const char* key, sockaddr *addr, Napi::Object *Address);
     void startCapture(const Napi::CallbackInfo& info);
     Napi::Value stopCapture(const Napi::CallbackInfo& info);
+    void Finalize(Napi::Env env);
   private:
     pcap_t* _pcapHandle = nullptr;
     std::string _deviceName;
@@ -35,6 +36,7 @@ class PCap : public Napi::ObjectWrap<PCap> {
     int _fd;
     uv_poll_t _pollHandle;
     const uint16_t _bufferSize = 65535;
+    const int _bufferTimeout = 1000;
     bool _handlingPackets = false;
     bool _closing = false;
     static void packetCallbackJS(Napi::Env env, Napi::Function callback, Context *context, Packet *data);

@@ -57,6 +57,10 @@ PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
   } else throw Napi::Error::New(env, "Callback function must be set");
 }
 
+void PCap::Finalize(Napi::Env env) {
+  std::cout << "Finalizing!!!\n";
+}
+
 void PCap::startCapture(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
@@ -110,9 +114,9 @@ void PCap::onPackets(uv_poll_t* handle, int status, int events) {
   if (status != 0) return;
 
   PCap *obj = static_cast<PCap*>(handle->data);
-  if (!obj->_closing && (events & UV_READABLE)) {
+  if (!obj->_closing && !obj->_handlingPackets && (events & UV_READABLE)) {
     obj->_handlingPackets = true;
-    pcap_dispatch(obj->_pcapHandle, 1, PCap::emitPacket, (u_char*)obj);
+    pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
     obj->_handlingPackets = false;
   }
 }
