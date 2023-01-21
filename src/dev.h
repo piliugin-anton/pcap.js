@@ -4,10 +4,10 @@
 #include "util.h"
 
 struct Packet {
-  const pcap_pkthdr* header;
+  pcap_pkthdr header;
   u_char* data;
   Packet(const pcap_pkthdr* pktHdr, const u_char* pktData) {
-    header = pktHdr;
+    header = *pktHdr;
     data = (u_char*)pktData;
   }
 };

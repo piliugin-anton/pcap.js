@@ -131,7 +131,11 @@ void PCap::packetCallbackJS(Napi::Env env, Napi::Function callback, Context *con
     // On Node-API 5+, the `callback` parameter is optional; however, this example
     // does ensure a callback is provided.
     if (callback != nullptr)
-      callback.Call(context->Value(), {Napi::Buffer<u_char>::New(env, packet->data, packet->header->caplen), Napi::Boolean::New(env, packet->header->caplen < packet->header->len), Napi::Number::New(env, packet->header->ts.tv_usec)});
+      callback.Call(context->Value(), {
+        Napi::Buffer<u_char>::Copy(env, packet->data, packet->header.caplen), 
+        Napi::Boolean::New(env, packet->header.caplen < packet->header.len),
+        Napi::Number::New(env, packet->header.ts.tv_usec)
+      });
   }
   // We're finished with the data.
   if (packet != nullptr) delete packet;
