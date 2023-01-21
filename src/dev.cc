@@ -133,7 +133,7 @@ void PCap::packetCallbackJS(Napi::Env env, Napi::Function callback, Context *con
     if (callback != nullptr)
       callback.Call(context->Value(), {
         Napi::Buffer<u_char>::Copy(env, packet->data, packet->header.caplen), 
-        Napi::Boolean::New(env, packet->header.caplen < packet->header.len),
+        Napi::Boolean::New(env, packet->truncated),
         Napi::Number::New(env, packet->header.ts.tv_usec)
       });
   }

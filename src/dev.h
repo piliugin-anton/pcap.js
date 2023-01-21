@@ -4,11 +4,13 @@
 #include "util.h"
 
 struct Packet {
-  pcap_pkthdr header;
+  struct pcap_pkthdr header;
   u_char* data;
-  Packet(const pcap_pkthdr* pktHdr, const u_char* pktData) {
+  bool truncated;
+  Packet(const struct pcap_pkthdr* pktHdr, const u_char* pktData) {
     header = *pktHdr;
     data = (u_char*)pktData;
+    truncated = header.caplen < header.len;
   }
 };
 
