@@ -112,7 +112,7 @@ void PCap::onPackets(uv_poll_t* handle, int status, int events) {
   PCap *obj = static_cast<PCap*>(handle->data);
   if (!obj->_closing && (events & UV_READABLE)) {
     obj->_handlingPackets = true;
-    pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
+    pcap_dispatch(obj->_pcapHandle, 1, PCap::emitPacket, (u_char*)obj);
     obj->_handlingPackets = false;
   }
 }
