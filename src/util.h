@@ -5,7 +5,5 @@
 #include <uv.h>
 #include <pcap/pcap.h>
 #include <arpa/inet.h>
-#include <netinet/in.h>
-#include <net/ethernet.h>
 
 #endif
