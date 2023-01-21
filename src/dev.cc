@@ -132,9 +132,9 @@ void PCap::packetCallbackJS(Napi::Env env, Napi::Function callback, Context *con
     // does ensure a callback is provided.
     if (callback != nullptr)
       callback.Call(context->Value(), {
-        Napi::Buffer<u_char>::Copy(env, packet->data, packet->header.caplen), 
+        Napi::Buffer<u_char>::Copy(env, packet->data, packet->capLen), 
         Napi::Boolean::New(env, packet->truncated),
-        Napi::Number::New(env, packet->header.ts.tv_usec)
+        Napi::Number::New(env, packet->timestamp)
       });
   }
   // We're finished with the data.

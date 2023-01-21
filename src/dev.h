@@ -4,13 +4,17 @@
 #include "util.h"
 
 struct Packet {
-  struct pcap_pkthdr header;
+  bpf_u_int32 len;
+  bpf_u_int32 capLen;
   u_char* data;
   bool truncated;
+  double timestamp;
   Packet(const struct pcap_pkthdr* pktHdr, const u_char* pktData) {
-    header = *pktHdr;
+    len = pktHdr->len;
+    capLen = pktHdr->caplen;
     data = (u_char*)pktData;
-    truncated = header.caplen < header.len;
+    truncated = capLen < len;
+    timestamp = (pktHdr->ts.tv_sec + (1.0/1000000000) * pktHdr->ts.tv_usec) * 1000.0;
   }
 };
 
