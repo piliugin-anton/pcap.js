@@ -3,6 +3,17 @@
 
 #include "util.h"
 
+struct Packet {
+  const pcap_pkthdr* header;
+  u_char* data;
+  Packet(const pcap_pkthdr* pktHdr, const u_char* pktData) {
+    header = pktHdr;
+    data = (u_char*)pktData;
+  }
+};
+
+using Context = Napi::Reference<Napi::Value>;
+
 class PCap : public Napi::ObjectWrap<PCap> {
   public:
     static Napi::Object Init(Napi::Env env, Napi::Object exports);
@@ -20,7 +31,8 @@ class PCap : public Napi::ObjectWrap<PCap> {
     const uint16_t _bufferSize = 65535;
     bool _handlingPackets = false;
     bool _closing = false;
-    Napi::FunctionReference _cb;
+    static void packetCallbackJS(Napi::Env env, Napi::Function callback, Context *context, Packet *data);
+    Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS> _cb;
     static void onPackets(uv_poll_t* handle, int status, int events);
     static void emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_char* pktData);
 };

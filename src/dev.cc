@@ -42,12 +42,24 @@ PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
   }
 
   if (info[0].IsFunction() || info[1].IsFunction()) {
-    this->_cb = Napi::Persistent(info[info[0].IsFunction() ? 0 : 1].As<Napi::Function>());
+    // Create a new context set to the receiver (ie, `this`) of the function call
+    Context *context = new Napi::Reference<Napi::Value>(Napi::Persistent(info.This()));
+
+    Napi::Function fn = info[info[0].IsFunction() ? 0 : 1].As<Napi::Function>();
+    this->_cb = Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS>::New(
+      env,
+      fn, // JavaScript function called asynchronously
+      "PacketCallback", // Name
+      0, // Unlimited queue
+      1, // Only one thread will use this initially
+      context
+    );
   } else throw Napi::Error::New(env, "Callback function must be set");
 }
 
 void PCap::startCapture(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
   char errbuf[PCAP_ERRBUF_SIZE];
   this->_pcapHandle = pcap_create(this->_deviceName.c_str(), errbuf);
   if (!this->_pcapHandle) throw Napi::Error::New(env, errbuf);
@@ -109,10 +121,20 @@ void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_ch
   PCap *obj = (PCap*)user;
 
   if (!obj->_closing) {
-    Napi::Env env = obj->_cb.Env();
-    Napi::HandleScope scope(env);
-    obj->_cb.Call(env.Global(), std::initializer_list<napi_value>{Napi::Buffer<u_char>::Copy(env, pktData, pktHdr->caplen)});
+    Packet *packet = new Packet(pktHdr, pktData);
+    obj->_cb.NonBlockingCall(packet);
   }
+}
+
+void PCap::packetCallbackJS(Napi::Env env, Napi::Function callback, Context *context, Packet *packet) {
+  if (env != nullptr) {
+    // On Node-API 5+, the `callback` parameter is optional; however, this example
+    // does ensure a callback is provided.
+    if (callback != nullptr)
+      callback.Call(context->Value(), {Napi::Buffer<u_char>::New(env, packet->data, packet->header->caplen), Napi::Boolean::New(env, packet->header->caplen < packet->header->len), Napi::Number::New(env, packet->header->ts.tv_usec)});
+  }
+  // We're finished with the data.
+  if (packet != nullptr) delete packet;
 }
 
 void PCap::ipStringHelper(const char* key, sockaddr *addr, Napi::Object *Address) {
