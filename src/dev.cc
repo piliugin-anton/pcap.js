@@ -5,6 +5,7 @@ Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
   // This method is used to hook the accessor and method callbacks
   Napi::Function func = DefineClass(env, "PCap", {
     StaticMethod<&PCap::findDevice>("findDevice", napi_default),
+    InstanceMethod<&PCap::setFilter>("setFilter", napi_default),
     InstanceMethod<&PCap::startCapture>("startCapture", napi_default),
     InstanceMethod<&PCap::stopCapture>("stopCapture", napi_default)
   });
@@ -52,6 +53,20 @@ void PCap::Finalize(Napi::Env env) {
   if (this->_context) delete this->_context;
 }
 
+void PCap::setFilter(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  if (!this->_pcapHandle) throw Napi::Error::New(env, "Capturing device is not created");
+
+  const char* filterChar = info[0].IsString() ? info[0].As<Napi::String>().Utf8Value().data() : "";
+  struct bpf_program fp;
+  int compile = pcap_compile(this->_pcapHandle, &fp, filterChar, 1, PCAP_NETMASK_UNKNOWN);
+  if (compile != 0) throw Napi::Error::New(env, pcap_statustostr(compile));
+  int setFilter = pcap_setfilter(this->_pcapHandle, &fp);
+  if (setFilter != 0) throw Napi::Error::New(env, pcap_statustostr(setFilter));
+
+  pcap_freecode(&fp);
+}
+
 void PCap::startCapture(const Napi::CallbackInfo& info) {
   if (this->_capturing) return;
 
@@ -61,22 +76,11 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   if (!this->_pcapHandle) throw Napi::Error::New(env, errbuf);
   if (pcap_set_promisc(this->_pcapHandle, 1) != 0) throw Napi::Error::New(env, "Unable to set promiscuous mode");
   if (pcap_set_buffer_size(this->_pcapHandle, this->_bufferSize) != 0) throw Napi::Error::New(env, "Unable to set buffer size");
-  //if (pcap_set_timeout(this->_pcapHandle, this->_bufferTimeout) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
+  if (pcap_set_timeout(this->_pcapHandle, this->_bufferTimeout) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
   pcap_set_immediate_mode(this->_pcapHandle, 1);
   if (pcap_set_tstamp_type(this->_pcapHandle, PCAP_TSTAMP_HOST) != 0) throw Napi::Error::New(env, "Unable to set timestamp type");
   if (pcap_set_tstamp_precision(this->_pcapHandle, PCAP_TSTAMP_PRECISION_NANO) != 0) throw Napi::Error::New(env, "Unable to set timestamp precision");
   this->_dataLinkType = pcap_datalink(this->_pcapHandle);
-  if (info[0].IsString()) {
-    Napi::String filter = info[0].As<Napi::String>();
-    const char* filterChar = filter.Utf8Value().data();
-    struct bpf_program fp;
-    int compile = pcap_compile(this->_pcapHandle, &fp, filterChar, 1, PCAP_NETMASK_UNKNOWN);
-    if (compile != 0) throw Napi::Error::New(env, pcap_statustostr(compile));
-    int setFilter = pcap_setfilter(this->_pcapHandle, &fp);
-    if (setFilter != 0) throw Napi::Error::New(env, pcap_statustostr(setFilter));
-
-    pcap_freecode(&fp);
-  }
   int activated = pcap_activate(this->_pcapHandle);
   if (activated < 0) throw Napi::Error::New(env, pcap_statustostr(activated));
   if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == PCAP_ERROR) throw Napi::Error::New(env, errbuf);

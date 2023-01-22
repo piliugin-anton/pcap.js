@@ -26,6 +26,7 @@ class PCap : public Napi::ObjectWrap<PCap> {
     PCap(const Napi::CallbackInfo& info);
     static Napi::Value findDevice(const Napi::CallbackInfo& info);
     static void ipStringHelper(const char* key, sockaddr *addr, Napi::Object *Address);
+    void setFilter(const Napi::CallbackInfo& info);
     void startCapture(const Napi::CallbackInfo& info);
     Napi::Value stopCapture(const Napi::CallbackInfo& info);
     void Finalize(Napi::Env env);
