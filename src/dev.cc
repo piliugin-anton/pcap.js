@@ -108,7 +108,9 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
 }
 
 Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
-  if (this->_closing || !this->_capturing) return Napi::Boolean::New(info.Env(), false);
+  Napi::Env env = info.Env();
+
+  if (this->_closing || !this->_capturing) return Napi::Boolean::New(env, false);
 
   this->_closing = true;
 
@@ -119,7 +121,7 @@ Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
   this->_handlingPackets = false;
   this->_capturing = false;
 
-  return Napi::Boolean::New(info.Env(), true);
+  return Napi::Boolean::New(env, true);
 }
 
 Napi::Value PCap::getStats(const Napi::CallbackInfo& info) {
@@ -161,7 +163,7 @@ void PCap::packetCallbackJS(Napi::Env env, Napi::Function callback, Context *con
     // does ensure a callback is provided.
     if (callback != nullptr)
       callback.Call(context->Value(), {
-        Napi::Buffer<u_char>::New(env, packet->data, packet->capLen), 
+        Napi::ArrayBuffer::New(env, packet->data, packet->capLen), 
         Napi::Boolean::New(env, packet->truncated),
         Napi::Number::New(env, packet->timestamp)
       });
