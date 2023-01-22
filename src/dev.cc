@@ -53,11 +53,9 @@ void PCap::Finalize(Napi::Env env) {
 }
 
 void PCap::startCapture(const Napi::CallbackInfo& info) {
-  Napi::Env env = info.Env();
-  Napi::HandleScope scope(env);
-
   if (this->_capturing) return;
 
+  Napi::Env env = info.Env();
   char errbuf[PCAP_ERRBUF_SIZE];
   this->_pcapHandle = pcap_create(this->_deviceName.c_str(), errbuf);
   if (!this->_pcapHandle) throw Napi::Error::New(env, errbuf);
