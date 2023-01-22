@@ -10,14 +10,14 @@ try {
         instance.stopCapture()
     }, 10000);
     setTimeout(() => {
-        console.log("Clearing interval...")
-        clearInterval(interval)
+        console.log("Starting capture...")
+        instance.startCapture()
     }, 20000);
-    /*setTimeout(() => {
+    setTimeout(() => {
         console.log("Stopping capture... Clearing interval...")
         instance.stopCapture()
         clearInterval(interval)
-    }, 30000);*/
+    }, 30000);
 } catch (ex) {
     console.error(ex);
 }

@@ -43,28 +43,21 @@ PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
 
   if (info[0].IsFunction() || info[1].IsFunction()) {
     // Create a new context set to the receiver (ie, `this`) of the function call
-    Context *context = new Napi::Reference<Napi::Value>(Napi::Persistent(info.This()));
-    Napi::Function fn = info[info[0].IsFunction() ? 0 : 1].As<Napi::Function>();
-    this->_onPacketTSFN = Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS>::New(
-      env,
-      fn, // JavaScript function called asynchronously
-      "PacketCallback", // Name
-      0, // Unlimited queue
-      1, // Only one thread will use this initially
-      context
-    );
+    this->_context = new Napi::Reference<Napi::Value>(Napi::Persistent(info.This()));
+    this->_onPacketFNREF = Napi::Persistent(info[info[0].IsFunction() ? 0 : 1].As<Napi::Function>());
   } else throw Napi::Error::New(env, "Callback function must be set");
 }
 
 void PCap::Finalize(Napi::Env env) {
-  std::cout << "Finalizing!!!\n";
+  if (this->_context) delete this->_context;
 }
 
 void PCap::startCapture(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  Napi::HandleScope scope(env);
+
   if (this->_capturing) return;
 
-  Napi::Env env = info.Env();
-  //Napi::HandleScope scope(env);
   char errbuf[PCAP_ERRBUF_SIZE];
   this->_pcapHandle = pcap_create(this->_deviceName.c_str(), errbuf);
   if (!this->_pcapHandle) throw Napi::Error::New(env, errbuf);
@@ -90,14 +83,19 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   if (activated < 0) throw Napi::Error::New(env, pcap_statustostr(activated));
   if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == PCAP_ERROR) throw Napi::Error::New(env, errbuf);
   this->_fd = pcap_get_selectable_fd(this->_pcapHandle);
-  if (this->_captured) {
-    napi_status status = this->_onPacketTSFN.Acquire();
-    std::cout << "Acquiring: " << status << "\n";
-  }
   int r = uv_poll_init(uv_default_loop(), &this->_pollHandle, this->_fd);
   if (r != 0) throw Napi::Error::New(env, "Unable to initialize UV polling");
   r = uv_poll_start(&this->_pollHandle, UV_READABLE, PCap::onPackets);
   if (r != 0) throw Napi::Error::New(env, "Unable to start UV polling");
+
+  this->_onPacketTSFN = Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS>::New(
+    env,
+    this->_onPacketFNREF.Value(), // JavaScript function called asynchronously
+    "PacketCallback", // Name
+    0, // Unlimited queue
+    1, // Only one thread will use this initially
+    this->_context
+  );
 
   this->_closing = false;
   this->_pollHandle.data = this;

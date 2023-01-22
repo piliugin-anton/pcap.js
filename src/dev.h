@@ -42,6 +42,8 @@ class PCap : public Napi::ObjectWrap<PCap> {
     bool _handlingPackets = false;
     bool _closing = false;
     static void packetCallbackJS(Napi::Env env, Napi::Function callback, Context *context, Packet *data);
+    Context* _context;
+    Napi::FunctionReference _onPacketFNREF;
     Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS> _onPacketTSFN;
     static void onPackets(uv_poll_t* handle, int status, int events);
     static void emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_char* pktData);
