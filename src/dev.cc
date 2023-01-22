@@ -100,7 +100,6 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   this->_closing = false;
   this->_pollHandle.data = this;
   this->_capturing = true;
-  this->_captured = true;
 }
 
 Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
@@ -108,9 +107,9 @@ Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
 
   this->_closing = true;
 
-  if (this->_captured) this->_onPacketTSFN.Release();
   if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
   if (this->_pcapHandle) pcap_close(this->_pcapHandle);
+  this->_onPacketTSFN.Release();
 
   this->_handlingPackets = false;
   this->_capturing = false;

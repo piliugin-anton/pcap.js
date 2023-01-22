@@ -38,7 +38,6 @@ class PCap : public Napi::ObjectWrap<PCap> {
     const uint16_t _bufferSize = 65535;
     const int _bufferTimeout = 1000;
     bool _capturing = false;
-    bool _captured = false;
     bool _handlingPackets = false;
     bool _closing = false;
     static void packetCallbackJS(Napi::Env env, Napi::Function callback, Context *context, Packet *data);
