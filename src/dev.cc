@@ -55,14 +55,10 @@ void PCap::Finalize(Napi::Env env) {
   if (this->_context) delete this->_context;
 }
 
-void PCap::checkDevCreated(Napi::Env env) {
-  if (!this->_pcapHandle) throw Napi::Error::New(env, "Capturing device is not created");
-}
-
 void PCap::setFilter(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
 
-  this->checkDevCreated(env);
+  if (!this->_pcapHandle) throw Napi::Error::New(env, "Capturing device is not created");
 
   const char* filterChar = info[0].IsString() ? info[0].As<Napi::String>().Utf8Value().data() : "";
   struct bpf_program fp;
@@ -129,8 +125,7 @@ Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
 Napi::Value PCap::getStats(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
 
-  this->checkDevCreated(env);
-  pcap_stats(this->_pcapHandle, &this->_stat);
+  if (this->_pcapHandle) pcap_stats(this->_pcapHandle, &this->_stat);
 
   Napi::Object stats = Napi::Object::New(env);
   stats.Set("recieved", Napi::Number::New(env, this->_stat.ps_recv));

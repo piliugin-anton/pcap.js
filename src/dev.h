@@ -43,7 +43,6 @@ class PCap : public Napi::ObjectWrap<PCap> {
     bool _handlingPackets = false;
     bool _closing = false;
     struct pcap_stat _stat;
-    void checkDevCreated(Napi::Env env);
     static void packetCallbackJS(Napi::Env env, Napi::Function callback, Context *context, Packet *data);
     Context* _context;
     Napi::FunctionReference _onPacketFNREF;
