@@ -1,11 +1,10 @@
 const { PCap } = require("./build/Debug/pcapjs.node");
 
-const instance = new PCap("wlp3s0f0", (buffer, isTruncated, timestamp) => console.log("[JS_onPacket]", buffer, isTruncated, timestamp));
+const instance = new PCap("any", (buffer, isTruncated, timestamp) => console.log("[JS_onPacket]", buffer, isTruncated, timestamp, instance.getStats()));
 try {
     console.log("Starting capture...")
     instance.startCapture();
-    /*const interval = setInterval(() => console.log("TS", Date.now()), 1000);
-    setTimeout(() => {
+    /*setTimeout(() => {
         console.log("Stopping capture...")
         instance.stopCapture()
     }, 10000);
