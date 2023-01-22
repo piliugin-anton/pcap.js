@@ -12,7 +12,8 @@ struct Packet {
   Packet(const struct pcap_pkthdr* pktHdr, const u_char* pktData) {
     len = pktHdr->len;
     capLen = pktHdr->caplen;
-    data = (u_char*)pktData;
+    data = (u_char*)malloc(capLen);
+    memcpy(data, pktData, capLen);
     truncated = capLen < len;
     timestamp = (pktHdr->ts.tv_sec + (1.0/1000000000) * pktHdr->ts.tv_usec) * 1000.0;
   }
