@@ -96,7 +96,7 @@ void PCap::createDevice(Napi::Env env) {
 }
 
 void PCap::captureThreaded() {
-	while (this->_capturing.load()) pcap_dispatch(this->_pcapHandle, -1, PCap::emitPacket, (u_char*)this);
+	while (this->_capturing.load(std::memory_order_relaxed)) pcap_dispatch(this->_pcapHandle, -1, PCap::emitPacket, (u_char*)this);
 }
 
 void PCap::startEventLoop(Napi::Env env) {
@@ -124,7 +124,7 @@ void PCap::setFilter(const Napi::CallbackInfo& info) {
 }
 
 void PCap::startCapture(const Napi::CallbackInfo& info) {
-  if (this->_capturing) return;
+  if (this->_capturing.load()) return;
 
   Napi::Env env = info.Env();
 
@@ -152,7 +152,7 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
     this->startEventLoop(env);
   }
 
-  this->_capturing = true;
+  this->_capturing.store(true);
 }
 
 Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
