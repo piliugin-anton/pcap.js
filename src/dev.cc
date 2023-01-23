@@ -162,9 +162,8 @@ Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
 
   this->_capturing.store(false);
 
-  if (this->_threaded) {
-    this->_onPacketTSFN.Abort();
-  } else if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
+  this->_onPacketTSFN.Abort();
+  if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
   if (this->_pcapHandle) pcap_close(this->_pcapHandle);
   
   this->_onPacketTSFN.Release();
@@ -176,16 +175,14 @@ void PCap::onPackets(uv_poll_t* handle, int status, int events) {
   if (status != 0) return;
 
   PCap *obj = static_cast<PCap*>(handle->data);
-  if (obj->_capturing.load() && (events & UV_READABLE)) pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
+  if (events & UV_READABLE) pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
 }
 
 void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_char* pktData) {
   PCap *obj = (PCap*)user;
 
-  if (obj->_capturing.load()) {
-    Packet *packet = new Packet(pktHdr, pktData);
-    obj->_onPacketTSFN.NonBlockingCall(packet);
-  }
+  Packet *packet = new Packet(pktHdr, pktData);
+  obj->_onPacketTSFN.NonBlockingCall(packet);
 }
 
 void PCap::packetCallbackJS(Napi::Env env, Napi::Function callback, Context *context, Packet *packet) {
