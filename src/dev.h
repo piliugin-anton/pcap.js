@@ -45,8 +45,8 @@ class PCap : public Napi::ObjectWrap<PCap> {
     const int _bufferTimeout = 250;
     const int _snapshotLength = 262144;
     bool _capturing = false;
-    bool _closing = false;
-    bool _threaded = false;
+    std::atomic<bool> _closing{false};
+    bool _threaded = true;
     void setMTU();
     void captureThreaded();
     void startEventLoop(Napi::Env env);

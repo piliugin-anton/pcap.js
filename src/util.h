@@ -8,5 +8,7 @@
 #include <sys/ioctl.h>
 #include <net/if.h>
 #include <thread>
+#include <atomic>
+#include <functional>
 
 #endif
