@@ -59,6 +59,21 @@ void PCap::Finalize(Napi::Env env) {
   if (this->_context) delete this->_context;
 }
 
+void PCap::setMTU() {
+  struct ifreq ifr;
+
+	memset(&ifr, 0, sizeof(ifr));
+	strncpy(ifr.ifr_name, this->_deviceName.c_str(), sizeof(ifr.ifr_name) - 1);
+
+	int socketfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
+	if (ioctl(socketfd, SIOCGIFMTU, &ifr) == -1) {
+		this->_mtu = 0;
+		return;
+	}
+
+	this->_mtu = ifr.ifr_mtu;
+}
+
 void PCap::createDevice(Napi::Env env) {
   if (this->_pcapHandle) return;
 
@@ -76,12 +91,21 @@ void PCap::createDevice(Napi::Env env) {
   int activated = pcap_activate(this->_pcapHandle);
   if (activated < 0) throw Napi::Error::New(env, pcap_statustostr(activated));
   if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == PCAP_ERROR) throw Napi::Error::New(env, errbuf);
+
+  this->setMTU();
+}
+
+void PCap::captureThreaded() {
+  if (this->_capturing) return;
+
+	while (!this->_closing) pcap_dispatch(this->_pcapHandle, -1, this->emitPacket, (u_char*)this);
 }
 
 void PCap::startEventLoop(Napi::Env env) {
   this->_fd = pcap_get_selectable_fd(this->_pcapHandle);
   int r = uv_poll_init(uv_default_loop(), &this->_pollHandle, this->_fd);
   if (r != 0) throw Napi::Error::New(env, "Unable to initialize UV polling");
+  this->_pollHandle.data = this;
   r = uv_poll_start(&this->_pollHandle, UV_READABLE, PCap::onPackets);
   if (r != 0) throw Napi::Error::New(env, "Unable to start UV polling");
 }
@@ -113,8 +137,6 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
 	  int status = pcap_setdirection(this->_pcapHandle, direction);
 	  if (status != 0) throw Napi::Error::New(env, pcap_statustostr(status));
   }
-  
-  this->startEventLoop(env);
 
   this->_onPacketTSFN = Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS>::New(
     env,
@@ -125,8 +147,13 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
     this->_context
   );
 
+  if (this->_threaded) {
+    this->_thread = std::thread(&PCap::captureThreaded, this);
+  } else {
+    this->startEventLoop(env);
+  }
+
   this->_closing = false;
-  this->_pollHandle.data = this;
   this->_capturing = true;
 }
 
@@ -137,37 +164,17 @@ Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
 
   this->_closing = true;
 
-  if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
-  if (this->_pcapHandle) pcap_close(this->_pcapHandle);
+  if (this->_threaded) {
+    this->_thread.join();
+  } else {
+    if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
+    if (this->_pcapHandle) pcap_close(this->_pcapHandle);
+  }
+  
   this->_onPacketTSFN.Release();
 
   this->_handlingPackets = false;
   this->_capturing = false;
-
-  return Napi::Boolean::New(env, true);
-}
-
-Napi::Value PCap::getStats(const Napi::CallbackInfo& info) {
-  Napi::Env env = info.Env();
-
-  if (this->_pcapHandle) pcap_stats(this->_pcapHandle, &this->_stat);
-
-  Napi::Object stats = Napi::Object::New(env);
-  stats.Set("received", Napi::Number::New(env, this->_stat.ps_recv));
-  stats.Set("dropped", Napi::Number::New(env, this->_stat.ps_drop));
-  stats.Set("ifdropped", Napi::Number::New(env, this->_stat.ps_ifdrop));
-
-  return stats;
-}
-
-Napi::Value PCap::sendPacket(const Napi::CallbackInfo& info) {
-  Napi::Env env = info.Env();
-
-  if (!info[0].IsBuffer()) return Napi::Boolean::New(env, false);
-
-  Napi::Buffer<u_char> buffer = info[0].As<Napi::Buffer<u_char>>();
-  int status = pcap_sendpacket(this->_pcapHandle, buffer.Data(), buffer.Length());
-  if (status != 0) throw Napi::Error::New(env, pcap_statustostr(status));
 
   return Napi::Boolean::New(env, true);
 }
@@ -207,6 +214,31 @@ void PCap::packetCallbackJS(Napi::Env env, Napi::Function callback, Context *con
   }
   // We're finished with the data.
   if (packet != nullptr) delete packet;
+}
+
+Napi::Value PCap::getStats(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  if (this->_pcapHandle) pcap_stats(this->_pcapHandle, &this->_stat);
+
+  Napi::Object stats = Napi::Object::New(env);
+  stats.Set("received", Napi::Number::New(env, this->_stat.ps_recv));
+  stats.Set("dropped", Napi::Number::New(env, this->_stat.ps_drop));
+  stats.Set("ifdropped", Napi::Number::New(env, this->_stat.ps_ifdrop));
+
+  return stats;
+}
+
+Napi::Value PCap::sendPacket(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  if (!info[0].IsBuffer()) return Napi::Boolean::New(env, false);
+
+  Napi::Buffer<u_char> buffer = info[0].As<Napi::Buffer<u_char>>();
+  int status = pcap_sendpacket(this->_pcapHandle, buffer.Data(), buffer.Length());
+  if (status != 0) throw Napi::Error::New(env, pcap_statustostr(status));
+
+  return Napi::Boolean::New(env, true);
 }
 
 void PCap::ipStringHelper(const char* key, sockaddr *addr, Napi::Object *Address) {

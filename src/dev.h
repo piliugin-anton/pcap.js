@@ -36,6 +36,8 @@ class PCap : public Napi::ObjectWrap<PCap> {
   private:
     pcap_t* _pcapHandle = nullptr;
     std::string _deviceName;
+    std::thread _thread;
+    int _mtu = 0;
     int _dataLinkType;
     int _fd;
     uv_poll_t _pollHandle;
@@ -45,6 +47,9 @@ class PCap : public Napi::ObjectWrap<PCap> {
     bool _capturing = false;
     bool _handlingPackets = false;
     bool _closing = false;
+    bool _threaded = true;
+    void setMTU();
+    void captureThreaded();
     void startEventLoop(Napi::Env env);
     void createDevice(Napi::Env env);
     struct pcap_stat _stat;

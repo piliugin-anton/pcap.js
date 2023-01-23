@@ -5,5 +5,8 @@
 #include <uv.h>
 #include <pcap/pcap.h>
 #include <arpa/inet.h>
+#include <sys/ioctl.h>
+#include <net/if.h>
+#include <thread>
 
 #endif
