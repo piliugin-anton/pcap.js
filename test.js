@@ -1,23 +1,21 @@
 const { PCap } = require("./build/Debug/pcapjs.node");
 
-const instance = new PCap("any", (buffer, isTruncated, timestamp) => console.log("[JS_onPacket]", buffer, isTruncated, timestamp, instance.getStats()));
+const instance = new PCap("lo", (buffer, isTruncated, timestamp) => {
+    const currentDate = Date.now();
+    if (currentDate - date >= 1000) {
+        const currentStats = instance.getStats();
+        const dropped = (currentStats.dropped - stats.dropped);
+        const pps = (currentStats.received - stats.received) - dropped;
+        console.log("[JS_onPacket]", `${pps}/sec, dropped: ${dropped}`)
+        stats = currentStats;
+        date = currentDate;
+    }
+    
+});
+let stats = instance.getStats();
+let date = Date.now();
 try {
-    const interval = setInterval(() => console.log(Date.now()), 1000)
-    console.log("Starting capture...")
     instance.startCapture();
-    setTimeout(() => {
-        console.log("Stopping capture...")
-        instance.stopCapture()
-    }, 10000);
-    setTimeout(() => {
-        console.log("Starting capture...")
-        instance.startCapture()
-    }, 20000);
-    setTimeout(() => {
-        console.log("Stopping capture... Clearing interval...")
-        instance.stopCapture()
-        clearInterval(interval)
-    }, 30000);
 } catch (ex) {
     console.error(ex);
 }

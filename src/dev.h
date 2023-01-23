@@ -30,6 +30,7 @@ class PCap : public Napi::ObjectWrap<PCap> {
     void setFilter(const Napi::CallbackInfo& info);
     void startCapture(const Napi::CallbackInfo& info);
     Napi::Value stopCapture(const Napi::CallbackInfo& info);
+    Napi::Value sendPacket(const Napi::CallbackInfo& info);
     Napi::Value getStats(const Napi::CallbackInfo& info);
     void Finalize(Napi::Env env);
   private:
@@ -38,11 +39,14 @@ class PCap : public Napi::ObjectWrap<PCap> {
     int _dataLinkType;
     int _fd;
     uv_poll_t _pollHandle;
-    const int _bufferSize = 134217728;
-    const int _bufferTimeout = 1;
+    const int _bufferSize = 536870912;
+    const int _bufferTimeout = 10;
+    const int _snapshotLength = 65535;
     bool _capturing = false;
     bool _handlingPackets = false;
     bool _closing = false;
+    void startEventLoop(Napi::Env env);
+    void createDevice(Napi::Env env);
     struct pcap_stat _stat;
     static void packetCallbackJS(Napi::Env env, Napi::Function callback, Context *context, Packet *data);
     Context* _context;

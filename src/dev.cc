@@ -8,6 +8,7 @@ Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
     InstanceMethod<&PCap::setFilter>("setFilter", napi_default),
     InstanceMethod<&PCap::startCapture>("startCapture", napi_default),
     InstanceMethod<&PCap::stopCapture>("stopCapture", napi_default),
+    InstanceMethod<&PCap::sendPacket>("sendPacket", napi_default),
     InstanceMethod<&PCap::getStats>("getStats", napi_default)
   });
 
@@ -48,11 +49,40 @@ PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
     this->_context = new Napi::Reference<Napi::Value>(Napi::Persistent(info.This()));
     this->_onPacketFNREF = Napi::Persistent(info[info[0].IsFunction() ? 0 : 1].As<Napi::Function>());
   } else throw Napi::Error::New(env, "Callback function must be set");
+
+  this->createDevice(env);
 }
 
 void PCap::Finalize(Napi::Env env) {
   std::cout << "Finalize...\n";
   if (this->_context) delete this->_context;
+}
+
+void PCap::createDevice(Napi::Env env) {
+  if (this->_pcapHandle) return;
+
+  char errbuf[PCAP_ERRBUF_SIZE];
+  this->_pcapHandle = pcap_create(this->_deviceName.c_str(), errbuf);
+  if (!this->_pcapHandle) throw Napi::Error::New(env, errbuf);
+  if (pcap_set_promisc(this->_pcapHandle, 1) != 0) throw Napi::Error::New(env, "Unable to set promiscuous mode");
+  if (pcap_set_buffer_size(this->_pcapHandle, this->_bufferSize) != 0) throw Napi::Error::New(env, "Unable to set buffer size");
+  if (pcap_set_timeout(this->_pcapHandle, this->_bufferTimeout) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
+  if (pcap_set_snaplen(this->_pcapHandle, this->_snapshotLength) != 0) throw Napi::Error::New(env, "Unable to set snapshot length");
+  pcap_set_immediate_mode(this->_pcapHandle, 1);
+  if (pcap_set_tstamp_type(this->_pcapHandle, PCAP_TSTAMP_HOST) != 0) throw Napi::Error::New(env, "Unable to set timestamp type");
+  if (pcap_set_tstamp_precision(this->_pcapHandle, PCAP_TSTAMP_PRECISION_NANO) != 0) throw Napi::Error::New(env, "Unable to set timestamp precision");
+  this->_dataLinkType = pcap_datalink(this->_pcapHandle);
+  int activated = pcap_activate(this->_pcapHandle);
+  if (activated < 0) throw Napi::Error::New(env, pcap_statustostr(activated));
+  if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == PCAP_ERROR) throw Napi::Error::New(env, errbuf);
+}
+
+void PCap::startEventLoop(Napi::Env env) {
+  this->_fd = pcap_get_selectable_fd(this->_pcapHandle);
+  int r = uv_poll_init(uv_default_loop(), &this->_pollHandle, this->_fd);
+  if (r != 0) throw Napi::Error::New(env, "Unable to initialize UV polling");
+  r = uv_poll_start(&this->_pollHandle, UV_READABLE, PCap::onPackets);
+  if (r != 0) throw Napi::Error::New(env, "Unable to start UV polling");
 }
 
 void PCap::setFilter(const Napi::CallbackInfo& info) {
@@ -74,24 +104,9 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   if (this->_capturing) return;
 
   Napi::Env env = info.Env();
-  char errbuf[PCAP_ERRBUF_SIZE];
-  this->_pcapHandle = pcap_create(this->_deviceName.c_str(), errbuf);
-  if (!this->_pcapHandle) throw Napi::Error::New(env, errbuf);
-  if (pcap_set_promisc(this->_pcapHandle, 1) != 0) throw Napi::Error::New(env, "Unable to set promiscuous mode");
-  if (pcap_set_buffer_size(this->_pcapHandle, this->_bufferSize) != 0) throw Napi::Error::New(env, "Unable to set buffer size");
-  if (pcap_set_timeout(this->_pcapHandle, this->_bufferTimeout) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
-  pcap_set_immediate_mode(this->_pcapHandle, 1);
-  if (pcap_set_tstamp_type(this->_pcapHandle, PCAP_TSTAMP_HOST) != 0) throw Napi::Error::New(env, "Unable to set timestamp type");
-  if (pcap_set_tstamp_precision(this->_pcapHandle, PCAP_TSTAMP_PRECISION_NANO) != 0) throw Napi::Error::New(env, "Unable to set timestamp precision");
-  this->_dataLinkType = pcap_datalink(this->_pcapHandle);
-  int activated = pcap_activate(this->_pcapHandle);
-  if (activated < 0) throw Napi::Error::New(env, pcap_statustostr(activated));
-  if (pcap_setnonblock(this->_pcapHandle, 1, errbuf) == PCAP_ERROR) throw Napi::Error::New(env, errbuf);
-  this->_fd = pcap_get_selectable_fd(this->_pcapHandle);
-  int r = uv_poll_init(uv_default_loop(), &this->_pollHandle, this->_fd);
-  if (r != 0) throw Napi::Error::New(env, "Unable to initialize UV polling");
-  r = uv_poll_start(&this->_pollHandle, UV_READABLE, PCap::onPackets);
-  if (r != 0) throw Napi::Error::New(env, "Unable to start UV polling");
+
+  this->createDevice(env);
+  this->startEventLoop(env);
 
   this->_onPacketTSFN = Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS>::New(
     env,
@@ -130,11 +145,23 @@ Napi::Value PCap::getStats(const Napi::CallbackInfo& info) {
   if (this->_pcapHandle) pcap_stats(this->_pcapHandle, &this->_stat);
 
   Napi::Object stats = Napi::Object::New(env);
-  stats.Set("recieved", Napi::Number::New(env, this->_stat.ps_recv));
+  stats.Set("received", Napi::Number::New(env, this->_stat.ps_recv));
   stats.Set("dropped", Napi::Number::New(env, this->_stat.ps_drop));
   stats.Set("ifdropped", Napi::Number::New(env, this->_stat.ps_ifdrop));
 
   return stats;
+}
+
+Napi::Value PCap::sendPacket(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  if (!info[0].IsBuffer()) return Napi::Boolean::New(env, false);
+
+  Napi::Buffer<u_char> buffer = info[0].As<Napi::Buffer<u_char>>();
+  int status = pcap_sendpacket(this->_pcapHandle, buffer.Data(), buffer.Length());
+  if (status != 0) throw Napi::Error::New(env, pcap_statustostr(status));
+
+  return Napi::Boolean::New(env, true);
 }
 
 void PCap::onPackets(uv_poll_t* handle, int status, int events) {
@@ -165,7 +192,7 @@ void PCap::packetCallbackJS(Napi::Env env, Napi::Function callback, Context *con
       callback.Call(context->Value(), {
         Napi::Buffer<u_char>::New(env, packet->data, packet->capLen, [](Napi::Env /*env*/, u_char* finalizeData) {
           free(finalizeData);
-        }), 
+        }),
         Napi::Boolean::New(env, packet->truncated),
         Napi::Number::New(env, packet->timestamp)
       });
