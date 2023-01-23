@@ -169,12 +169,12 @@ Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
     this->_thread.join();
   } else {
     if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
-    if (this->_pcapHandle) pcap_close(this->_pcapHandle);
   }
+
+  if (this->_pcapHandle) pcap_close(this->_pcapHandle);
   
   this->_onPacketTSFN.Release();
 
-  this->_handlingPackets = false;
   this->_capturing = false;
 
   return Napi::Boolean::New(env, true);
@@ -184,11 +184,7 @@ void PCap::onPackets(uv_poll_t* handle, int status, int events) {
   if (status != 0) return;
 
   PCap *obj = static_cast<PCap*>(handle->data);
-  if (!obj->_closing && !obj->_handlingPackets && (events & UV_READABLE)) {
-    obj->_handlingPackets = true;
-    pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
-    obj->_handlingPackets = false;
-  }
+  if (!obj->_closing && (events & UV_READABLE)) pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
 }
 
 void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_char* pktData) {
