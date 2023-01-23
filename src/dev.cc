@@ -95,10 +95,6 @@ void PCap::createDevice(Napi::Env env) {
   this->setMTU();
 }
 
-void PCap::captureThreaded() {
-	while (this->_capturing.load(std::memory_order_relaxed)) pcap_dispatch(this->_pcapHandle, -1, PCap::emitPacket, (u_char*)this);
-}
-
 void PCap::startEventLoop(Napi::Env env) {
   this->_fd = pcap_get_selectable_fd(this->_pcapHandle);
   int r = uv_poll_init(uv_default_loop(), &this->_pollHandle, this->_fd);
@@ -124,7 +120,7 @@ void PCap::setFilter(const Napi::CallbackInfo& info) {
 }
 
 void PCap::startCapture(const Napi::CallbackInfo& info) {
-  if (this->_capturing.load()) return;
+  if (this->_capturing) return;
 
   Napi::Env env = info.Env();
 
@@ -145,22 +141,15 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
     this->_context
   );
 
-  if (this->_threaded) {
-    this->_thread = std::thread(&PCap::captureThreaded, this);
-    this->_thread.detach();
-  } else {
-    this->startEventLoop(env);
-  }
+  this->startEventLoop(env);
 
-  this->_capturing.store(true);
+  this->_capturing = true;
 }
 
 Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
 
-  if (!this->_capturing.load()) return Napi::Boolean::New(env, false);
-
-  this->_capturing.store(false);
+  if (!this->_capturing) return Napi::Boolean::New(env, false);
 
   this->_onPacketTSFN.Abort();
   if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
@@ -168,13 +157,14 @@ Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
   
   this->_onPacketTSFN.Release();
 
+  this->_capturing = false;
+
   return Napi::Boolean::New(env, true);
 }
 
 void PCap::onPackets(uv_poll_t* handle, int status, int events) {
-  if (status != 0) return;
-
   PCap *obj = static_cast<PCap*>(handle->data);
+
   if (events & UV_READABLE) pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
 }
 

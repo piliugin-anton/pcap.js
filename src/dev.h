@@ -36,7 +36,6 @@ class PCap : public Napi::ObjectWrap<PCap> {
   private:
     pcap_t* _pcapHandle = nullptr;
     std::string _deviceName;
-    std::thread _thread;
     int _mtu = 0;
     int _dataLinkType;
     int _fd;
@@ -44,10 +43,8 @@ class PCap : public Napi::ObjectWrap<PCap> {
     const int _bufferSize = 536870912;
     const int _bufferTimeout = 250;
     const int _snapshotLength = 262144;
-    std::atomic<bool> _capturing{false};
-    bool _threaded = false;
+    bool _capturing = false;
     void setMTU();
-    void captureThreaded();
     void startEventLoop(Napi::Env env);
     void createDevice(Napi::Env env);
     struct pcap_stat _stat;
