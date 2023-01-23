@@ -163,6 +163,8 @@ Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
 }
 
 void PCap::onPackets(uv_poll_t* handle, int status, int events) {
+  if (status != 0) return;
+
   PCap *obj = static_cast<PCap*>(handle->data);
 
   if (events & UV_READABLE) pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
