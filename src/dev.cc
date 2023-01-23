@@ -68,7 +68,7 @@ void PCap::createDevice(Napi::Env env) {
   if (pcap_set_buffer_size(this->_pcapHandle, this->_bufferSize) != 0) throw Napi::Error::New(env, "Unable to set buffer size");
   if (pcap_set_timeout(this->_pcapHandle, this->_bufferTimeout) != 0) throw Napi::Error::New(env, "Unable to set read timeout");
   if (pcap_set_snaplen(this->_pcapHandle, this->_snapshotLength) != 0) throw Napi::Error::New(env, "Unable to set snapshot length");
-  pcap_set_immediate_mode(this->_pcapHandle, 1);
+  //pcap_set_immediate_mode(this->_pcapHandle, 1);
   if (pcap_set_tstamp_type(this->_pcapHandle, PCAP_TSTAMP_HOST) != 0) throw Napi::Error::New(env, "Unable to set timestamp type");
   if (pcap_set_tstamp_precision(this->_pcapHandle, PCAP_TSTAMP_PRECISION_NANO) != 0) throw Napi::Error::New(env, "Unable to set timestamp precision");
   this->_dataLinkType = pcap_datalink(this->_pcapHandle);
