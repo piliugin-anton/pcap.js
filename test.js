@@ -1,4 +1,4 @@
-const { PCap } = require("./build/Debug/pcapjs.node");
+const { PCap, CONSTANTS } = require("./build/Debug/pcapjs.node");
 
 const instance = new PCap("lo", (buffer, isTruncated, timestamp) => {
     const currentDate = Date.now();
@@ -15,7 +15,7 @@ const instance = new PCap("lo", (buffer, isTruncated, timestamp) => {
 let stats = instance.getStats();
 let date = Date.now();
 try {
-    instance.startCapture();
+    instance.startCapture(CONSTANTS.DIRECTION.OUT);
 } catch (ex) {
     console.error(ex);
 }

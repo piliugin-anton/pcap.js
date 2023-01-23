@@ -1,4 +1,5 @@
 #include "dev.h"
+#include "enums.h"
 #include <iostream>
 
 Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
@@ -106,6 +107,13 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
 
   this->createDevice(env);
+
+  if (info[0].IsNumber()) {
+    pcap_direction_t direction = PCapEnums::directionTypeMap(info[0].As<Napi::Number>().Int32Value());
+	  int status = pcap_setdirection(this->_pcapHandle, direction);
+	  if (status != 0) throw Napi::Error::New(env, pcap_statustostr(status));
+  }
+  
   this->startEventLoop(env);
 
   this->_onPacketTSFN = Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS>::New(
@@ -120,14 +128,6 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   this->_closing = false;
   this->_pollHandle.data = this;
   this->_capturing = true;
-}
-
-pcap_direction_t directionTypeMap(PcapLiveDevice::PcapDirection direction) {
-	switch (direction) {
-		case PcapLiveDevice::PCPP_IN:    return PCAP_D_IN;
-		case PcapLiveDevice::PCPP_OUT:   return PCAP_D_OUT;
-		case PcapLiveDevice::PCPP_INOUT: return PCAP_D_INOUT;
-	}
 }
 
 Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
