@@ -36,20 +36,36 @@ Napi::Object PCap::Init(Napi::Env env, Napi::Object exports) {
 
 PCap::PCap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<PCap>(info) {
   Napi::Env env = info.Env();
-  if (info[0].IsString()) {
-    Napi::Value device = findDevice(info).As<Napi::Value>();
-    if (device.IsNull() || !device.IsObject()) throw Napi::Error::New(env, "No device with name " + info[0].As<Napi::String>().Utf8Value() + " found");
+  this->_context = new Napi::Reference<Napi::Value>(Napi::Persistent(info.This()));
+
+  if (info[0].IsObject()) {
+    Napi::Object options = info[0].As<Napi::Object>();
+    Napi::Value devName = options.Get("device");
+    if (devName.IsString()) {
+      Napi::Value device = this->findDevice(info);
     
-    this->_deviceName = device.As<Napi::Object>().Get("name").As<Napi::String>().Utf8Value();
+      if (device.IsNull() || !device.IsObject()) throw Napi::Error::New(env, "No device with name " + devName.As<Napi::String>().Utf8Value() + " found");
+
+      this->_deviceName = device.As<Napi::Object>().Get("name").As<Napi::String>().Utf8Value();
+    }
+
+    Napi::Value bufferSize = options.Get("bufferSize");
+    if (bufferSize.IsNumber()) this->_bufferSize = bufferSize.As<Napi::Number>().Int32Value();
+
+    Napi::Value bufferTimeout = options.Get("bufferTimeout");
+    if (bufferTimeout.IsNumber()) this->_bufferTimeout = bufferTimeout.As<Napi::Number>().Int32Value();
+
+    Napi::Value snapshotLength = options.Get("snapshotLength");
+    if (snapshotLength.IsNumber()) this->_snapshotLength = snapshotLength.As<Napi::Number>().Int32Value();
+
+    Napi::Value callbackFn = options.Get("callback");
+    if (callbackFn.IsFunction()) this->_onPacketFnRef = Napi::Persistent(callbackFn.As<Napi::Function>());
   } else {
-    this->_deviceName = "any";
+    if (info[0].IsString()) this->_deviceName = info[0].As<Napi::String>().Utf8Value();
+    if (info[1].IsFunction()) this->_onPacketFnRef = Napi::Persistent(info[1].As<Napi::Function>());
   }
 
-  if (info[0].IsFunction() || info[1].IsFunction()) {
-    // Create a new context set to the receiver (ie, `this`) of the function call
-    this->_context = new Napi::Reference<Napi::Value>(Napi::Persistent(info.This()));
-    this->_onPacketFNREF = Napi::Persistent(info[info[0].IsFunction() ? 0 : 1].As<Napi::Function>());
-  } else throw Napi::Error::New(env, "Callback function must be set");
+  if (!this->_onPacketFnRef) throw Napi::Error::New(env, "Callback function must be set");
 
   this->createDevice(env);
 }
@@ -132,9 +148,9 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
 	  if (status != 0) throw Napi::Error::New(env, pcap_statustostr(status));
   }
 
-  this->_onPacketTSFN = Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS>::New(
+  this->_onPacketTSFn = Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS>::New(
     env,
-    this->_onPacketFNREF.Value(), // JavaScript function called asynchronously
+    this->_onPacketFnRef.Value(), // JavaScript function called asynchronously
     "PacketCallback", // Name
     0, // Unlimited queue
     1, // Only one thread will use this initially
@@ -151,11 +167,11 @@ Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
 
   if (!this->_capturing) return Napi::Boolean::New(env, false);
 
-  this->_onPacketTSFN.Abort();
+  this->_onPacketTSFn.Abort();
   if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
   if (this->_pcapHandle) pcap_close(this->_pcapHandle);
   
-  this->_onPacketTSFN.Release();
+  this->_onPacketTSFn.Release();
 
   this->_capturing = false;
 
@@ -178,7 +194,7 @@ void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_ch
   PCap *obj = (PCap*)user;
 
   Packet *packet = new Packet(pktHdr, pktData);
-  obj->_onPacketTSFN.NonBlockingCall(packet);
+  obj->_onPacketTSFn.NonBlockingCall(packet);
 }
 
 void PCap::packetCallbackJS(Napi::Env env, Napi::Function callback, Context *context, Packet *packet) {
@@ -257,7 +273,7 @@ Napi::Value PCap::findDevice(const Napi::CallbackInfo& info) {
 	}
 	
   Napi::Array devices = Napi::Array::New(env);
-  Napi::Value searchValue = info[0].As<Napi::Value>();
+  Napi::Value searchValue = info[0].IsString() ? info[0] : info[0].As<Napi::Object>().Get("device");
   bool doSearch = searchValue.IsString();
   Napi::Value found = env.Null();
 	for (i = 0, device = alldevsp; device != nullptr; device = device->next, ++i) {

@@ -35,14 +35,14 @@ class PCap : public Napi::ObjectWrap<PCap> {
     void Finalize(Napi::Env env);
   private:
     pcap_t* _pcapHandle = nullptr;
-    std::string _deviceName;
+    std::string _deviceName = "any";
     int _mtu = 0;
     int _dataLinkType;
     int _fd;
     uv_poll_t _pollHandle;
-    const int _bufferSize = 536870912;
-    const int _bufferTimeout = 250;
-    const int _snapshotLength = 262144;
+    int _bufferSize = 536870912;
+    int _bufferTimeout = 256;
+    int _snapshotLength = 262144;
     bool _capturing = false;
     bool _handlingPackets = false;
     void setMTU();
@@ -51,8 +51,8 @@ class PCap : public Napi::ObjectWrap<PCap> {
     struct pcap_stat _stat;
     static void packetCallbackJS(Napi::Env env, Napi::Function callback, Context *context, Packet *data);
     Context* _context;
-    Napi::FunctionReference _onPacketFNREF;
-    Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS> _onPacketTSFN;
+    Napi::FunctionReference _onPacketFnRef;
+    Napi::TypedThreadSafeFunction<Context, Packet, PCap::packetCallbackJS> _onPacketTSFn;
     static void onPackets(uv_poll_t* handle, int status, int events);
     static void emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_char* pktData);
 };
