@@ -44,6 +44,7 @@ class PCap : public Napi::ObjectWrap<PCap> {
     const int _bufferTimeout = 250;
     const int _snapshotLength = 262144;
     bool _capturing = false;
+    bool _handlingPackets = false;
     void setMTU();
     void startEventLoop(Napi::Env env);
     void createDevice(Napi::Env env);
