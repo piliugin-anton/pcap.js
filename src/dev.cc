@@ -96,7 +96,7 @@ void PCap::createDevice(Napi::Env env) {
 }
 
 void PCap::captureThreaded() {
-	while (!this->_closing.load()) pcap_dispatch(this->_pcapHandle, -1, PCap::emitPacket, (u_char*)this);
+	while (this->_capturing.load()) pcap_dispatch(this->_pcapHandle, -1, PCap::emitPacket, (u_char*)this);
 }
 
 void PCap::startEventLoop(Napi::Env env) {
@@ -148,7 +148,6 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   if (this->_threaded) {
     this->_thread = std::thread(&PCap::captureThreaded, this);
     this->_thread.detach();
-    std::cout << "Thread started...\n";
   } else {
     this->startEventLoop(env);
   }
@@ -159,17 +158,16 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
 Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
 
-  if (this->_closing.load() || !this->_capturing) return Napi::Boolean::New(env, false);
+  if (!this->_capturing.load()) return Napi::Boolean::New(env, false);
 
-  this->_closing.store(true);
+  this->_capturing.store(false);
 
-  if (!this->_threaded && uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
+  if (this->_threaded) {
+    this->_onPacketTSFN.Abort();
+  } else if (uv_is_active((const uv_handle_t*)&this->_pollHandle) != 0) uv_poll_stop(&this->_pollHandle);
   if (this->_pcapHandle) pcap_close(this->_pcapHandle);
   
   this->_onPacketTSFN.Release();
-
-  this->_capturing = false;
-  this->_closing.store(false);
 
   return Napi::Boolean::New(env, true);
 }
@@ -178,13 +176,13 @@ void PCap::onPackets(uv_poll_t* handle, int status, int events) {
   if (status != 0) return;
 
   PCap *obj = static_cast<PCap*>(handle->data);
-  if (!obj->_closing.load() && (events & UV_READABLE)) pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
+  if (obj->_capturing.load() && (events & UV_READABLE)) pcap_dispatch(obj->_pcapHandle, -1, PCap::emitPacket, (u_char*)obj);
 }
 
 void PCap::emitPacket(u_char* user, const struct pcap_pkthdr* pktHdr, const u_char* pktData) {
   PCap *obj = (PCap*)user;
 
-  if (!obj->_closing.load()) {
+  if (obj->_capturing.load()) {
     Packet *packet = new Packet(pktHdr, pktData);
     obj->_onPacketTSFN.NonBlockingCall(packet);
   }

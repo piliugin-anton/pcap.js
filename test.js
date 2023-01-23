@@ -16,6 +16,7 @@ let stats = instance.getStats();
 let date = Date.now();
 try {
     instance.startCapture();
+    setTimeout(() => instance.stopCapture(), 10000)
 } catch (ex) {
     console.error(ex);
 }
