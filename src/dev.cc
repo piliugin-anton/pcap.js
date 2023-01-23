@@ -98,7 +98,7 @@ void PCap::createDevice(Napi::Env env) {
 void PCap::captureThreaded() {
   if (this->_capturing) return;
 
-	while (!this->_closing) pcap_dispatch(this->_pcapHandle, -1, this->emitPacket, (u_char*)this);
+	while (!this->_closing) pcap_dispatch(this->_pcapHandle, 32, PCap::emitPacket, (u_char*)this);
 }
 
 void PCap::startEventLoop(Napi::Env env) {
@@ -149,6 +149,7 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
 
   if (this->_threaded) {
     this->_thread = std::thread(&PCap::captureThreaded, this);
+    std::cout << "Thread started...\n";
   } else {
     this->startEventLoop(env);
   }

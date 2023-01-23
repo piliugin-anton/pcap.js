@@ -15,7 +15,7 @@ const instance = new PCap("lo", (buffer, isTruncated, timestamp) => {
 let stats = instance.getStats();
 let date = Date.now();
 try {
-    instance.startCapture(CONSTANTS.DIRECTION.OUT);
+    instance.startCapture();
 } catch (ex) {
     console.error(ex);
 }
