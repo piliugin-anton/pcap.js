@@ -122,6 +122,14 @@ void PCap::startCapture(const Napi::CallbackInfo& info) {
   this->_capturing = true;
 }
 
+pcap_direction_t directionTypeMap(PcapLiveDevice::PcapDirection direction) {
+	switch (direction) {
+		case PcapLiveDevice::PCPP_IN:    return PCAP_D_IN;
+		case PcapLiveDevice::PCPP_OUT:   return PCAP_D_OUT;
+		case PcapLiveDevice::PCPP_INOUT: return PCAP_D_INOUT;
+	}
+}
+
 Napi::Value PCap::stopCapture(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
 

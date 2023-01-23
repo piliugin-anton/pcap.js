@@ -41,7 +41,7 @@ class PCap : public Napi::ObjectWrap<PCap> {
     uv_poll_t _pollHandle;
     const int _bufferSize = 536870912;
     const int _bufferTimeout = 250;
-    const int _snapshotLength = 65535;
+    const int _snapshotLength = 262144;
     bool _capturing = false;
     bool _handlingPackets = false;
     bool _closing = false;
