@@ -1,4 +1,4 @@
-const { PCap, CONSTANTS } = require("./build/Debug/pcapjs.node");
+const { PCap, CONSTANTS } = require("./");
 
 const instance = new PCap({
   device: "lo",

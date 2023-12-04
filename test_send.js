@@ -1,4 +1,4 @@
-const { PCap } = require("./build/Debug/pcapjs.node");
+const { PCap } = require("./");
 
 const instance = new PCap("lo", () => {});
 try {

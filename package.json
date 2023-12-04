@@ -4,7 +4,7 @@
   "description": "Packet manipulation library for Node.js",
   "main": "index.js",
   "scripts": {
-    "preinstall": "cmake-js configure -B Release",
+    "preinstall": "cmake-js configure -B Release --prefer-make",
     "install": "cmake-js build -B Release",
     "predebug": "cmake-js configure -D",
     "debug": "cmake-js build -D",
@@ -21,8 +21,8 @@
   "license": "GPL-3.0-only",
   "dependencies": {
     "bindings": "^1.5.0",
-    "cmake-js": "^7.1.1",
-    "node-addon-api": "^5.1.0"
+    "cmake-js": "^7.2.1",
+    "node-addon-api": "^7.0.0"
   },
   "devDependencies": {}
 }

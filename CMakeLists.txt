@@ -30,8 +30,8 @@ ExternalProject_Add(bison
 
 ExternalProject_Add(libnl
     PREFIX libnl
-	URL https://github.com/thom311/libnl/releases/download/libnl3_7_0/libnl-3.7.0.tar.gz
-	URL_MD5 b381405afd14e466e35d29a112480333
+	URL https://github.com/thom311/libnl/releases/download/libnl3_9_0/libnl-3.9.0.tar.gz
+	URL_MD5 27bffaccbb22ab9d8cff377b320f6014
 	CONFIGURE_COMMAND ${CMAKE_COMMAND} -E env PATH=${DEPS_BIN}:$ENV{PATH} <SOURCE_DIR>/configure --prefix=${DEPS_INSTALL_DIR}
 	BUILD_COMMAND ${CMAKE_COMMAND} -E env PATH=${DEPS_BIN}:$ENV{PATH} $(MAKE)
 )
@@ -39,8 +39,8 @@ ExternalProject_Add_StepDependencies(libnl install flex bison)
 
 ExternalProject_Add(libpcap
     PREFIX libpcap
-	URL https://github.com/the-tcpdump-group/libpcap/archive/refs/tags/libpcap-1.10.2.tar.gz
-	URL_MD5 248498d9f46deae82ed14315d3e2922e
+	URL https://github.com/the-tcpdump-group/libpcap/archive/refs/tags/libpcap-1.10.4.tar.gz
+	URL_MD5 5e8af7a468d9bfb26b8e73dfd46cbd6c
     CONFIGURE_COMMAND ${CMAKE_COMMAND} -E env PATH=${DEPS_BIN}:$ENV{PATH} <SOURCE_DIR>/configure --prefix=${DEPS_INSTALL_DIR} --with-libnl=yes "LDFLAGS=-Wl,-rpath,${DEPS_LIBS}" "PKG_CONFIG_PATH=${DEPS_LIBS}/pkgconfig"
 	BUILD_COMMAND ${CMAKE_COMMAND} -E env PATH=${DEPS_BIN}:$ENV{PATH} $(MAKE)
 )
